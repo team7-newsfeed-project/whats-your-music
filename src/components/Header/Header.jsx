@@ -2,21 +2,29 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
+import { setCategory } from "store/modules/category";
+import logoImage from "assets/logoImage.png";
 
 const Header = () => {
     const activeCategory = useSelector((state) => state.category);
+    const dispatch = useDispatch();
+
+    const onActiveCategory = (e) => {
+        if (e.target === e.target.currentTarget) return;
+        dispatch(setCategory(e.target.textContent));
+    };
 
     return (
         <HeaderWrapper>
             <div>
-                <p>What's Your Music?</p>
-                {/*<img src="assets\logoImage.png" alt="logoImage" /> */}
+                <img src={logoImage} width={300} />
+                {/* <img src="src/assets/logoImage.png" alt="logoImage" /> */}
             </div>
             <MainNav>
-                <TabWrapper>
-                    <Tab>팝</Tab>
-                    <Tab>클래식/재즈</Tab>
-                </TabWrapper>
+                <TabsWrapper onClick={onActiveCategory}>
+                    <Tab $isActive={activeCategory}>팝</Tab>
+                    <Tab $isActive={activeCategory}>클래식 / 재즈</Tab>
+                </TabsWrapper>
                 <LinkWrapper>
                     <NewPostLink to={`detail/1`}>글쓰기</NewPostLink>
                     {/* to={`detail/${id}`} */}
@@ -33,8 +41,9 @@ const HeaderWrapper = styled.div`
     background-color: var(--mainColor);
     display: flex;
     justify-content: space-around;
+    align-items: center;
     width: 100%;
-    height: 70px;
+    height: 100px;
     margin: 20px;
     border-radius: 20px;
 `;
@@ -46,7 +55,7 @@ const MainNav = styled.nav`
     /* gap: 50px; */
 `;
 
-const TabWrapper = styled.ul`
+const TabsWrapper = styled.ul`
     display: flex;
     gap: 70px;
     /* justify-content: space-between; */
@@ -60,6 +69,9 @@ const Tab = styled.li`
     height: 50px;
     border: 1px solid var(--subColor1);
     border-radius: 20px;
+    background-color: ${(props) =>
+        props.$isActive === props.children ? "var(--subColor1)" : "none"};
+    color: ${(props) => (props.$isActive === props.children ? "var(--mainColor)" : "none")};
 `;
 
 const LinkWrapper = styled.div`
@@ -76,6 +88,10 @@ const NewPostLink = styled(Link)`
     text-decoration: none;
     border: 1px solid var(--subColor1);
     border-radius: 20px;
+    &:hover {
+        background-color: var(--subColor1);
+        color: var(--mainColor);
+    }
 `;
 
 const LoginLink = styled(Link)`
@@ -88,4 +104,8 @@ const LoginLink = styled(Link)`
     text-decoration: none;
     border: 1px solid var(--subColor2);
     border-radius: 20px;
+    &:hover {
+        background-color: var(--subColor2);
+        color: var(--mainColor);
+    }
 `;
