@@ -1,8 +1,34 @@
 import React from "react";
+import styled from "styled-components";
+import MainPostItem from "./MainPostItem";
+import { dummyData } from "shared/postsDummyData";
 
 const Main = () => {
     // 홈 페이지의 메인 영역
-    return <div>Main</div>;
+    return (
+        <MainWrapper>
+            <p>오늘의 음악을 추천해주세요!</p>
+            <MainPostList>
+                {dummyData.map((post, idx) => (
+                    <p key={idx}>{post.id}</p>
+                ))}
+                <MainPostItem></MainPostItem>
+                <MainPostItem></MainPostItem>
+            </MainPostList>
+        </MainWrapper>
+    );
 };
 
 export default Main;
+
+const MainWrapper = styled.div`
+    background-color: var(--mainColor);
+    width: 100%;
+    min-height: 500px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+`;
+
+const MainPostList = styled.ul`
+    gap: 20px;
+`;

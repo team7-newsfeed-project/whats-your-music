@@ -1,5 +1,4 @@
 import GlobalStyle from "GlobalStyle";
-import Layout from "components/layout/Layout";
 import Router from "shared/Router";
 import { app, auth } from "database/firebase";
 
@@ -9,9 +8,7 @@ function App() {
     return (
         <>
             <GlobalStyle />
-            <Layout>
-                <Router />
-            </Layout>
+            <Router />
         </>
     );
 }
