@@ -92,6 +92,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--subColor3);
   color: white;
+  font-family: "Pretandard-Regular",
 }
 `;
 
