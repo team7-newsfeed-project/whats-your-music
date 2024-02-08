@@ -6,7 +6,7 @@ const MainPostItem = () => {
         <MainArticleWrapper>
             <MainArticle>
                 {/* <img src="/" alt="" width="100px"></img> */}
-                <img></img>
+                {/* <img></img> */}
                 <div>
                     <p>title</p>
                     <p>content</p>

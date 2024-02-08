@@ -17,7 +17,7 @@ const Header = () => {
     return (
         <HeaderWrapper>
             <div>
-                <img src={logoImage} width={300} />
+                <img src={logoImage} width={300} alt="logo" />
             </div>
             <MainNav>
                 <TabsWrapper onClick={onActiveCategory}>
@@ -25,7 +25,7 @@ const Header = () => {
                     <Tab $isActive={activeCategory}>클래식 / 재즈</Tab>
                 </TabsWrapper>
                 <LinkWrapper>
-                    <NewPostLink to="detail/:id">글쓰기</NewPostLink>
+                    <NewPostLink to={`postform`}>글쓰기</NewPostLink>
                     {/* to={`detail/${id}`} */}
                     <LoginLink to="login">로그인</LoginLink>
                 </LinkWrapper>
