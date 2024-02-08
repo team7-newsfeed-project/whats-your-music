@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import thumbnailImg from "assets/thumbnailExImg.png";
 
 const MainPostItem = ({ post }) => {
-    const { writer, title, content, date } = post;
+    const { id, writer, title, content, date } = post;
     return (
         <MainArticleWrapper>
-            <MainArticle>
-                {/* <img src="/" alt="" width="100px"></img> */}
-                {/*<img></img>*/}
+            <MainArticle key={id}>
+                <ThumbImg />
                 <div>
                     <p>{title}</p>
                     <p>{content}</p>
@@ -25,8 +25,20 @@ const MainArticleWrapper = styled.li`
 `;
 
 const MainArticle = styled.article`
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
     background-color: var(--subColor3);
-    width: 400px;
-    height: 150px;
+    width: 550px;
+    height: 200px;
     border-radius: 20px;
+`;
+
+const ThumbImg = styled.img.attrs({
+    alt: "thumbnailImg",
+    src: `${thumbnailImg}`,
+})`
+    width: 260px;
+    height: 150px;
 `;
