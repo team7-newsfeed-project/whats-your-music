@@ -1,7 +1,6 @@
-import Header from "components/main/Header";
-import Footer from "components/Footer/Footer";
-import { LayoutStyle } from "components/styles/LayoutStyle";
 import React from "react";
+import { LayoutStyle } from "components/styles/LayoutStyle";
+import Footer from "components/Footer/Footer";
 
 const Layout = ({ children }) => {
     return (
