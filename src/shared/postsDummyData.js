@@ -1,6 +1,7 @@
 export const dummyData = [
     {
         id: "1",
+        category: "pop",
         writer: "해리",
         title: "음악 추천합니다",
         content: "들어보세요!",
@@ -9,6 +10,7 @@ export const dummyData = [
     },
     {
         id: "2",
+        category: "classicAjazz",
         writer: "지민",
         title: "음악",
         content: "들어보세요!",
@@ -16,6 +18,7 @@ export const dummyData = [
     },
     {
         id: "3",
+        category: "pop",
         writer: "명환",
         title: "음악 추천",
         content: "들어보세요!",
@@ -23,6 +26,7 @@ export const dummyData = [
     },
     {
         id: "4",
+        category: "classicAjazz",
         writer: "혜련",
         title: "음악 추천합니다",
         content: "들어봐!",
@@ -30,6 +34,7 @@ export const dummyData = [
     },
     {
         id: "5",
+        category: "pop",
         writer: "해리2",
         title: "음악 추천합니다",
         content: "들어보세요!",
@@ -37,6 +42,39 @@ export const dummyData = [
     },
     {
         id: "6",
+        category: "classicAjazz",
+        writer: "혜련2",
+        title: "음악 추천합니다",
+        content: "들어보세요!",
+        date: "2024-01-03",
+    },
+    {
+        id: "7",
+        category: "pop",
+        writer: "혜련2",
+        title: "음악 추천합니다",
+        content: "들어보세요!",
+        date: "2024-01-03",
+    },
+    {
+        id: "8",
+        category: "classicAjazz",
+        writer: "혜련2",
+        title: "음악 추천합니다",
+        content: "들어보세요!",
+        date: "2024-01-03",
+    },
+    {
+        id: "9",
+        category: "pop",
+        writer: "혜련2",
+        title: "음악 추천합니다",
+        content: "들어보세요!",
+        date: "2024-01-03",
+    },
+    {
+        id: "10",
+        category: "classicAjazz",
         writer: "혜련2",
         title: "음악 추천합니다",
         content: "들어보세요!",
