@@ -16,7 +16,7 @@ const Header = () => {
             </nav>
             <NewPostLink to={`/`}>글쓰기</NewPostLink>
             <LoginLink>로그인</LoginLink>
-        </HeaderWrapper>
+        </HeaderWrapper> //
     );
 };
 
