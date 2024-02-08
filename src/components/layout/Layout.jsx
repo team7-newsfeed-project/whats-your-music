@@ -1,4 +1,4 @@
-import Header from "components/Header/Header";
+import Header from "components/main/Header";
 import Footer from "components/Footer/Footer";
 import { LayoutStyle } from "components/styles/LayoutStyle";
 import React from "react";
