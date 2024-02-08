@@ -18,7 +18,6 @@ const Header = () => {
         <HeaderWrapper>
             <div>
                 <img src={logoImage} width={300} />
-                {/* <img src="src/assets/logoImage.png" alt="logoImage" /> */}
             </div>
             <MainNav>
                 <TabsWrapper onClick={onActiveCategory}>
@@ -26,9 +25,9 @@ const Header = () => {
                     <Tab $isActive={activeCategory}>클래식 / 재즈</Tab>
                 </TabsWrapper>
                 <LinkWrapper>
-                    <NewPostLink to={`detail/1`}>글쓰기</NewPostLink>
-                    {/* to={`detail/${id}`} */}
-                    <LoginLink to={`log_in`}>로그인</LoginLink>
+                    {/* <NewPostLink to={`detail/1`}>글쓰기</NewPostLink>
+                    {/* to={`detail/${id}`} * /}
+                    <LoginLink to={`log_in`}>로그인</LoginLink> */}
                 </LinkWrapper>
             </MainNav>
         </HeaderWrapper> //
@@ -37,7 +36,7 @@ const Header = () => {
 
 export default Header;
 
-const HeaderWrapper = styled.div`
+const HeaderWrapper = styled.header`
     background-color: var(--mainColor);
     display: flex;
     justify-content: space-around;

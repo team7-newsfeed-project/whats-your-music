@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import MainPostItem from "./MainPostItem";
+import { dummyData } from "shared/postsDummyData";
 
 const Main = () => {
     // 홈 페이지의 메인 영역
@@ -8,6 +9,9 @@ const Main = () => {
         <MainWrapper>
             <p>오늘의 음악을 추천해주세요!</p>
             <MainPostList>
+                {dummyData.map((post) => (
+                    <p>{post.id}</p>
+                ))}
                 <MainPostItem></MainPostItem>
                 <MainPostItem></MainPostItem>
             </MainPostList>
