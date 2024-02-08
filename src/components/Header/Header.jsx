@@ -25,9 +25,9 @@ const Header = () => {
                     <Tab $isActive={activeCategory}>클래식 / 재즈</Tab>
                 </TabsWrapper>
                 <LinkWrapper>
-                    {/* <NewPostLink to={`detail/1`}>글쓰기</NewPostLink>
-                    {/* to={`detail/${id}`} * /}
-                    <LoginLink to={`log_in`}>로그인</LoginLink> */}
+                    <NewPostLink to="detail/:id">글쓰기</NewPostLink>
+                    {/* to={`detail/${id}`} */}
+                    <LoginLink to="login">로그인</LoginLink>
                 </LinkWrapper>
             </MainNav>
         </HeaderWrapper> //

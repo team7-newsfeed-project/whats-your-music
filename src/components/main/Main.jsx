@@ -9,8 +9,8 @@ const Main = () => {
         <MainWrapper>
             <p>오늘의 음악을 추천해주세요!</p>
             <MainPostList>
-                {dummyData.map((post) => (
-                    <p>{post.id}</p>
+                {dummyData.map((post, idx) => (
+                    <p key={idx}>{post.id}</p>
                 ))}
                 <MainPostItem></MainPostItem>
                 <MainPostItem></MainPostItem>

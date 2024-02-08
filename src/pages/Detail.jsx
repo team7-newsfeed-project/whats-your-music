@@ -1,7 +1,8 @@
+import { LayoutStyle } from "components/styles/LayoutStyle";
 import React from "react";
 
 const Detail = () => {
-  return <div>Detail</div>;
+    return <LayoutStyle>Detail</LayoutStyle>;
 };
 
 export default Detail;
