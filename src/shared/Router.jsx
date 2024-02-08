@@ -1,3 +1,4 @@
+import MyPage from "pages/MyPage";
 import Detail from "pages/Detail";
 import Home from "pages/Home";
 import LogIn from "pages/LogIn";
@@ -15,6 +16,7 @@ const Router = () => {
                 <Route path="postform" element={<PostForm />} />
                 <Route path="log_in" element={<LogIn />} />
                 <Route path="register" element={<Register />} />
+                <Route path="MyPage" element={<MyPage />} />
                 <Route path="*" element={<Navigate replace to="/" />} />
             </Routes>
         </BrowserRouter>
