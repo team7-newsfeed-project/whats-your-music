@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-const MainPostItem = ({ writer, title, content, date }) => {
+const MainPostItem = ({ post }) => {
+    const { writer, title, content, date } = post;
     return (
         <MainArticleWrapper>
             <MainArticle>
