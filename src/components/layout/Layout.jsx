@@ -6,7 +6,6 @@ import React from "react";
 const Layout = ({ children }) => {
     return (
         <LayoutStyle>
-            <Header />
             {children}
             <Footer />
         </LayoutStyle>

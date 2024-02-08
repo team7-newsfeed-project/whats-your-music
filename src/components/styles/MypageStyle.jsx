@@ -1,12 +1,24 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const MyPageWapper = styled.section`
+export const MyPageSection = styled.section`
     min-width: 320px;
     max-width: 1060px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 `;
 
-export const ProfileWrapDiv = styled.div``;
+export const MyPageheadDiv = styled.div`
+    background-color: var(--mainColor);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+`;
 
 export const HomeLink = styled(Link)`
     width: 123px;

@@ -14,18 +14,21 @@ const dummyData = {
 const MyPage = () => {
     const data = dummyData;
     return (
-        <>
-            <S.MyPageWapper>
-                <S.ProfileWrapDiv>
-                    <h3>
-                        <S.HeaderLogo src={logoImage} alt="logo" />
-                        <S.HomeLink to="/">← HOME</S.HomeLink>
-                    </h3>
-                    <h4>마이페이지</h4>
-                </S.ProfileWrapDiv>
-            </S.MyPageWapper>
-            <Footer />
-        </>
+        <Layout>
+            <S.MyPageSection>
+                <S.MyPageheadDiv>
+                    <div>
+                        <div>
+                            <S.HomeLink to="/">← HOME</S.HomeLink>
+                            <h3>
+                                <S.HeaderLogo src={logoImage} alt="logo" />
+                            </h3>
+                            <h4>마이페이지</h4>
+                        </div>
+                    </div>
+                </S.MyPageheadDiv>
+            </S.MyPageSection>
+        </Layout>
     );
 };
 
