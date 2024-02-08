@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { setId as setReduxId } from "store/modules/userId";
 
@@ -50,9 +50,9 @@ const LogIn = () => {
                 ></input>
                 <button type="submit">로그인</button>
                 <button onClick={onGoogleLogIn}>google 로그인</button>
-                <span>
-                    회원이 아니신가요?<Link to="register">회원가입</Link>
-                </span>
+                <p>
+                    회원이 아니신가요?<span onClick={() => navigate("/register")}>회원가입</span>
+                </p>
             </LogInForm>
         </>
     );
