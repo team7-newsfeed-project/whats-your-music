@@ -1,15 +1,12 @@
 import React from "react";
-import Header from "components/Header/Header";
 import Main from "components/main/Main";
-import Footer from "components/Footer/Footer";
+import Layout from "components/layout/Layout";
 
 const Home = () => {
     return (
-        <>
-            <Header />
+        <Layout>
             <Main />
-            <Footer />
-        </>
+        </Layout>
     );
 };
 

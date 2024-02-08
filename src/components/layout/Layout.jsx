@@ -1,8 +1,16 @@
+import Header from "components/Header/Header";
+import Footer from "components/Footer/Footer";
 import { LayoutStyle } from "components/styles/LayoutStyle";
 import React from "react";
 
 const Layout = ({ children }) => {
-    return <LayoutStyle>{children}</LayoutStyle>;
+    return (
+        <LayoutStyle>
+            <Header />
+            {children}
+            <Footer />
+        </LayoutStyle>
+    );
 };
 
 export default Layout;
