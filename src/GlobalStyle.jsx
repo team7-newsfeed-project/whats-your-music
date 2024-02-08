@@ -30,6 +30,13 @@ const GlobalStyle = createGlobalStyle`
     font-style: normal;
 }
 
+:root {
+  --mainColor : #0F0F0F;
+  --subColor1 : #D3ADFC;
+  --subColor2: #C9F254;
+  --subColor3 : #2B2827;
+}
+
     html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
