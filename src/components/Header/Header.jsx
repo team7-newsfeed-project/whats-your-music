@@ -18,7 +18,7 @@ const Header = () => {
                     <Tab>클래식/재즈</Tab>
                 </TabWrapper>
                 <LinkWrapper>
-                    <NewPostLink to={`detail/1`}>글쓰기</NewPostLink>
+                    <NewPostLink to={`postform`}>글쓰기</NewPostLink>
                     {/* to={`detail/${id}`} */}
                     <LoginLink to={`log_in`}>로그인</LoginLink>
                 </LinkWrapper>
