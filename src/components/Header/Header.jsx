@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
 const Header = () => {
+    const activeCategory = useSelector((state) => state.category);
+
     return (
         <HeaderWrapper>
             <div>
@@ -15,7 +18,7 @@ const Header = () => {
                     <Tab>클래식/재즈</Tab>
                 </TabWrapper>
                 <LinkWrapper>
-                    <NewPostLink to={`detail/11`}>글쓰기</NewPostLink>
+                    <NewPostLink to={`detail/1`}>글쓰기</NewPostLink>
                     {/* to={`detail/${id}`} */}
                     <LoginLink to={`log_in`}>로그인</LoginLink>
                 </LinkWrapper>
