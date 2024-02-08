@@ -16,7 +16,7 @@ const Router = () => {
                 <Route path="postform" element={<PostForm />} />
                 <Route path="log_in" element={<LogIn />} />
                 <Route path="register" element={<Register />} />
-                <Route path="MyPage" element={<MyPage />} />
+                <Route path="mypage" element={<MyPage />} />
                 <Route path="*" element={<Navigate replace to="/" />} />
             </Routes>
         </BrowserRouter>
