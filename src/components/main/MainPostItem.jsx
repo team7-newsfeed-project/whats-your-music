@@ -1,16 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
-const MainPostItem = () => {
+const MainPostItem = ({ post }) => {
+    const { writer, title, content, date } = post;
     return (
         <MainArticleWrapper>
             <MainArticle>
                 {/* <img src="/" alt="" width="100px"></img> */}
                 {/*<img></img>*/}
                 <div>
-                    <p>title</p>
-                    <p>content</p>
-                    <p>writer</p>
+                    <p>{title}</p>
+                    <p>{content}</p>
+                    <p>{writer}</p>
                 </div>
             </MainArticle>
         </MainArticleWrapper>

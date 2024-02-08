@@ -27,7 +27,7 @@ const Header = () => {
                 <LinkWrapper>
                     <NewPostLink to={`postform`}>글쓰기</NewPostLink>
                     {/* to={`detail/${id}`} */}
-                    <LoginLink to="login">로그인</LoginLink>
+                    <LoginLink to="log_in">로그인</LoginLink>
                 </LinkWrapper>
             </MainNav>
         </HeaderWrapper> //

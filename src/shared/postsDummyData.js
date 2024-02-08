@@ -5,18 +5,19 @@ export const dummyData = [
         title: "음악 추천합니다",
         content: "들어보세요!",
         date: "2024-01-01",
+        // 이미지? 영상 섬네일 - 주소도 필요
     },
     {
         id: "2",
         writer: "지민",
-        title: "음악 추천합니다",
+        title: "음악",
         content: "들어보세요!",
         date: "2024-01-01",
     },
     {
         id: "3",
         writer: "명환",
-        title: "음악 추천합니다",
+        title: "음악 추천",
         content: "들어보세요!",
         date: "2024-01-01",
     },
@@ -24,8 +25,8 @@ export const dummyData = [
         id: "4",
         writer: "혜련",
         title: "음악 추천합니다",
-        content: "들어보세요!",
-        date: "2024-01-01",
+        content: "들어봐!",
+        date: "2024-01-02",
     },
     {
         id: "5",
@@ -39,6 +40,6 @@ export const dummyData = [
         writer: "혜련2",
         title: "음악 추천합니다",
         content: "들어보세요!",
-        date: "2024-01-01",
+        date: "2024-01-03",
     },
 ];
