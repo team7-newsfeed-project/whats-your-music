@@ -30,7 +30,7 @@ const LogIn = () => {
         <>
             <LogInForm onSubmit={(event) => onLogIn(event)}>
                 <button onClick={() => navigate("/")}>home</button>
-                <p>WHAT"S YOUR MUSIC?</p>
+                <p>WHAT'S YOUR MUSIC?</p>
                 <p>LOGIN</p>
                 <input
                     type="text"
