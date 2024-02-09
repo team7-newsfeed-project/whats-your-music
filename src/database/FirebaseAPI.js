@@ -7,11 +7,12 @@ export const register = async (newAccount) => {
     const docRef = await addDoc(collectionRef, newAccount);
     const accountRef = doc(db, "accounts", docRef.id);
 
-    await updateDoc(accountRef, { ...newAccount, id: docRef.id });
+    await updateDoc(accountRef, { ...newAccount, firebaseId: docRef.id });
 };
 
 export const getUserInfo = async (email, dispatch) => {
     //firebase에서 계정정보를 가져와서 redux에 저장
+    console.log("email", email);
     const q = query(collection(db, "accounts"), where("email", "==", email));
     const querySnapshot = await getDocs(q);
     let user;
@@ -20,7 +21,6 @@ export const getUserInfo = async (email, dispatch) => {
         user = doc.data();
         user.firebaseId = doc.id;
     });
-
     dispatch(setAccount(user));
 
     return user;
@@ -29,7 +29,6 @@ export const getUserInfo = async (email, dispatch) => {
 export const setUserInfo = async (reduxUser, newAccount, dispatch) => {
     //계정 정보 변경해서 firebase와 redux에 저장
 
-    // const id = "t88aScOycVaKaYNYy1IJ";
     // reduxUser : 기존 값, newAccount : 새로운 값
     // reduxUser, newAccount : 객체
     const userId = reduxUser.firebaseId;
@@ -40,9 +39,8 @@ export const setUserInfo = async (reduxUser, newAccount, dispatch) => {
     dispatch(setAccount(newAccount));
 };
 
-export const googleLogIn = async ({ email, nickname }, dispatch) => {
+export const do3rdPartyLogIn = async ({ email, nickname }, dispatch) => {
     const user = await getUserInfo(email, dispatch);
-
     if (user) {
         return;
     } else {
