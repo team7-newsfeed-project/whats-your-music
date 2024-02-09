@@ -4,14 +4,22 @@ import { auth, db, storage } from "database/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { UploadBtn } from "components/styles/Profile";
 import { useDispatch, useSelector } from "react-redux";
-import * as M from "components/styles/MypageStyle";
 import { onAuthStateChanged } from "firebase/auth";
 import { setUser } from "store/modules/userImage";
+import { collection, getDocs } from "firebase/firestore";
+import * as M from "components/styles/MypageStyle";
 
 const ProfileImage = () => {
-    const user = useSelector((store) => store.userImage.user);
     const dispatch = useDispatch();
+    const user = useSelector((store) => store.userImage.user);
+    const defaultImage = useSelector((store) => store.userImage.fileImage);
     const [isEdit, setEdit] = useState(false);
+    // 이미지 추가 (일반)
+    const [imgUpFile, setImgUpFile] = useState("");
+    const imgThumnailRef = useRef(defaultImage);
+    // 이미지 추가 (파이어베이스)
+    // 1. 이미지 선택
+    const [selectFile, setSelectFile] = useState(defaultImage);
     console.log(user);
     useEffect(() => {
         const userState = onAuthStateChanged(auth, (user) => {
@@ -20,21 +28,22 @@ const ProfileImage = () => {
         });
 
         return userState;
-    }, [user]);
+    }, []);
 
-    const defaultImage = useSelector((store) => store.userImage.fileImage);
+    useEffect(async () => {
+        const querySnapshot = async () => {
+            try {
+                const query = await getDocs(collection(db, "account"));
+                query.forEach((doc) => {
+                    console.log(doc.id, doc.data());
+                });
+            } catch (error) {
+                console.error("정보를 받아오지 못하고 있습니다.", error);
+            }
+        };
+        querySnapshot();
+    }, []);
 
-    // 이미지 추가 (일반)
-    const [isPhotoEdit, setIsPhotoEdit] = useState(false);
-    const [imgUpFile, setImgUpFile] = useState("");
-    const [thumbnailUrl, setThumnailUrl] = useState(defaultImage);
-    const imgThumnailRef = useRef(defaultImage);
-    // 이미지 추가 (파이어베이스)
-    // 1. 이미지 선택
-    const [selectFile, setSelectFile] = useState(defaultImage);
-    // const addFileSelect = (e) => {
-    //     setSelectFile(e.target.files[0]);
-    // };
     const userUid = user ? user.uid : null;
     const handleUpload = async () => {
         const currUser = auth.currentUser;
@@ -52,10 +61,11 @@ const ProfileImage = () => {
         const imageRef = ref(storage, `${userUid}/${selectFile.name}`);
         try {
             await uploadBytes(imageRef, selectFile);
-            setThumnailUrl(imgThumnailRef);
             // 파일 url 가져오기
             const downloadURL = await getDownloadURL(imageRef);
             console.log(downloadURL);
+
+            setImgUpFile(downloadURL);
             return downloadURL;
         } catch (error) {
             console.error("이미지가 업로드되지 않았어용", error);
@@ -68,6 +78,7 @@ const ProfileImage = () => {
     const addImgFile = (e) => {
         const imgFile = e.target.files[0];
         if (imgFile) {
+            setSelectFile(imgFile);
             const reader = new FileReader();
             reader.readAsDataURL(imgFile); //url 뽑아서
 
@@ -79,7 +90,7 @@ const ProfileImage = () => {
 
     return (
         <M.UserImage>
-            <M.ProfileThumbnailImg src={imgUpFile || defaultImage} alt="" />
+            <M.ProfileThumbnailImg src={imgUpFile ? imgUpFile : defaultImage} alt="이미지" />
             <M.ProfileUpLoadBtnLabel htmlFor="ImgfileChoice">등록</M.ProfileUpLoadBtnLabel>
             <button>삭제</button>
             <M.ProfileUpLoad
@@ -102,6 +113,8 @@ const ProfileImage = () => {
 
 export default ProfileImage;
 
+// const [thumbnailUrl, setThumnailUrl] = useState(defaultImage);
+
 // 이미지 업로드 (파이어베이스)
 
 //  const handleUpload = async () => {
@@ -123,6 +136,9 @@ export default ProfileImage;
 
 //      // 파이어베이스 해당 콜렉션에 있는 문서 가져오기
 //  };
+
+// const fileName = downloadURL.split("/").pop().split("?")[0].split("%2F").pop();
+// console.log(fileName);
 
 ///
 
