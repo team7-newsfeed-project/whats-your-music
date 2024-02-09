@@ -2,23 +2,25 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { auth } from "database/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+
+// 아이디는 이메일로 대체, displayname이 닉네임을 참조, updateprofile catch문 수정 필요, 안내무구 친절하게 요자 쓰기
 
 const Register = () => {
     const navigate = useNavigate();
-    const [id, setId] = useState("");
+    const [email, setEmail] = useState("");
     const [pw, setPw] = useState("");
     const [checkPw, setCheckPw] = useState("");
     const [nickname, setNickname] = useState("");
-    const [email, setEmail] = useState("");
 
     const onRegister = async (event) => {
         event.preventDefault();
 
-        if (id === "") {
-            alert("id를 입력하십시오.");
+        if (email === "") {
+            alert("이메일을 입력하십시오.");
             return;
         }
+
         if (pw === "") {
             alert("비밀번호를 입력하십시오.");
             return;
@@ -34,35 +36,41 @@ const Register = () => {
             return;
         }
 
-        if (email === "") {
-            alert("이메일을 입력하십시오.");
-            return;
+        try {
+            await createUserWithEmailAndPassword(auth, email, pw);
+        } catch (error) {
+            switch (error.code) {
+                case "auth/email-already-in-use":
+                    alert("입력하신 이메일로 가입하신 계정이 이미 존재합니다.");
+                    return;
+                case "auth/invalid-email":
+                    alert("입력하신 이메일은 유효하지 않은 이메일입니다.");
+                    return;
+                case "auth/operation-not-allowed":
+                    alert("회원가입 시스템이 닫혔습니다. 관리자에게 문의하십시오.");
+                    return;
+                case "auth/weak-password":
+                    alert("비밀번호를 6자리 이상으로 입력하십시오.");
+                    return;
+                default:
+                    alert("회원가입에 실패했습니다.");
+                    return;
+            }
         }
 
         try {
-            const userCredential = await createUserWithEmailAndPassword(auth, email, pw);
-            const user = userCredential.user; //user 정보 들어옴
-        } catch (firebaseError) {
-            switch (firebaseError.code) {
-                case "auth/email-already-in-use":
-                    alert("입력하신 이메일로 가입하신 아이디가 이미 존재합니다.");
-                    break;
-                case "auth/invalid-email":
-                    alert("입력하신 이메일은 유효하지 않은 이메일입니다.");
-                    break;
-                case "auth/operation-not-allowed":
-                    alert("회원가입 시스템이 닫혔습니다. 관리자에게 문의하십시오.");
-                    break;
-                case "auth/weak-password":
-                    alert("비밀번호가 너무 단순합니다. 좀 더 복잡한 비밀번호를 입력하십시오.");
-                    break;
-                default:
-                    alert("회원가입에 실패했습니다.");
-                    break;
-            }
+            updateProfile(auth.currentUser, {
+                displayName: nickname, // displayName을 닉네임으로 설정
+            });
+        } catch (error) {
+            //alert(error.code + " : " + error.message);
+            alert("닉네임 설정에 실패했습니다.");
+            return;
         }
-        alert("회원가입 완료");
-        //navigate("/");
+        //console.log(auth.currentUser);
+        alert("회원가입이 완료되었습니다.");
+
+        navigate("/");
     };
 
     return (
@@ -71,14 +79,14 @@ const Register = () => {
                 <button onClick={() => navigate("/")}>home</button>
                 <p>회원가입</p>
                 <div>
-                    <label>아이디</label>
+                    <label>이메일</label>
                     <input
-                        type="text"
-                        value={id}
+                        type="email"
+                        value={email}
                         onChange={(event) => {
-                            setId(event.target.value);
+                            setEmail(event.target.value);
                         }}
-                        placeholder="아이디를 적어주세요."
+                        placeholder="이메일을 적어주세요."
                     ></input>
                 </div>
                 <div>
@@ -112,17 +120,6 @@ const Register = () => {
                             setNickname(event.target.value);
                         }}
                         placeholder="닉네임을 적어주세요."
-                    ></input>
-                </div>
-                <div>
-                    <label>이메일</label>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(event) => {
-                            setEmail(event.target.value);
-                        }}
-                        placeholder="이메일을 적어주세요."
                     ></input>
                 </div>
                 <button type="submit">회원가입</button>

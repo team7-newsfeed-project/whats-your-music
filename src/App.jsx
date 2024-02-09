@@ -1,4 +1,5 @@
 import GlobalStyle from "GlobalStyle";
+//import FirebaseAPI from "database/FirebaseAPI";
 import Router from "shared/Router";
 import { app, auth } from "database/firebase";
 
@@ -8,6 +9,8 @@ function App() {
     return (
         <>
             <GlobalStyle />
+
+            {/*<FirebaseAPI />*/}
             <Router />
         </>
     );
