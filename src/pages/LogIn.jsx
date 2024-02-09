@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+    signInWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithPopup,
+    GithubAuthProvider,
+} from "firebase/auth";
 import { auth } from "database/firebase";
-import { getUserInfo, googleLogIn } from "../database/FirebaseAPI";
+import { getUserInfo, do3rdPartyLogIn, setUserInfo } from "../database/FirebaseAPI";
 import { useDispatch, useSelector } from "react-redux";
+import store from "store/config/configStore";
+import Button from "components/common/Button";
 
 const LogIn = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [pw, setPw] = useState("");
-    const reduxUser = useSelector((state) => state.userAccount);
+    let reduxUser = useSelector((state) => state.userAccount); //FIXME - const로 고쳐야함
     const dispatch = useDispatch();
 
     const onLogIn = async (event) => {
@@ -20,6 +27,10 @@ const LogIn = () => {
             return;
         } else if (pw === "") {
             alert("비밀번호를 입력해주세요.");
+            return;
+        } else if (reduxUser.isLoggedIn === true) {
+            //FIXME - 이것도 무의미함 예전 redux 값을 참조하고 있음
+            alert("이미 로그인되어 있습니다.");
             return;
         }
         try {
@@ -49,56 +60,86 @@ const LogIn = () => {
                     return;
             }
         }
-        getUserInfo(email, dispatch);
+        await getUserInfo(email, dispatch);
+        reduxUser = store.getState().userAccount; //FIXME - 이거 고쳐야함
+        await setUserInfo(reduxUser, { isLoggedIn: true }, dispatch); //reduxUser가 빈 값으로 들어감
         alert("로그인이 되었습니다.");
+        navigate("/");
     };
 
-    const onGoogleLogIn = async (event) => {
+    const on3rdPartyLogIn = async (event) => {
         event.preventDefault();
-        const provider = new GoogleAuthProvider();
+        const providerName = event.target.textContent.split(" ")[0];
+        let provider;
+        let email;
+
+        if (providerName === "GitHub") {
+            provider = new GithubAuthProvider();
+        } else if (providerName === "Google") {
+            provider = new GoogleAuthProvider();
+            provider.addScope("https://www.googleapis.com/auth/userinfo.email");
+        }
+
         let user;
 
-        provider.addScope("https://www.googleapis.com/auth/userinfo.email");
         try {
             const result = await signInWithPopup(auth, provider);
             user = result.user;
+            const additionalUserInfo = result.additionalUserInfo;
+            email = additionalUserInfo?.profile?.email || user.email;
         } catch (error) {
             alert(error.code + " : " + error.message);
             return;
         }
-
-        googleLogIn({ email: user.email, nickname: user.displayName }, dispatch);
+        //console.log(user.reloadUserInfo.screenName);
+        console.log("email", email);
+        // await do3rdPartyLogIn({ email: user.email, nickname: user.displayName }, dispatch);
+        await getUserInfo(user.email, dispatch);
+        reduxUser = store.getState().userAccount; //FIXME - 이거 고쳐야함
+        await setUserInfo(reduxUser, { isLoggedIn: true }, dispatch); //reduxUser에 빈 값이 들어감
+        alert("로그인이 되었습니다.");
+        navigate("/");
     };
 
     return (
         <>
+            <HomeBtn onClick={() => navigate("/")}>&larr;home</HomeBtn>
             <LogInForm onSubmit={(event) => onLogIn(event)}>
-                <button onClick={() => navigate("/")}>home</button>
-                <p>WHAT'S YOUR MUSIC?</p>
-                <p>LOGIN</p>
-                <input
+                <Logo>WHAT'S YOUR MUSIC?</Logo>
+                <Title>LOGIN</Title>
+                <InputFiled
                     type="email"
                     value={email}
                     onChange={(event) => {
                         setEmail(event.target.value);
                     }}
                     placeholder="이메일을 적어주세요."
-                ></input>
-                <input
+                />
+                <InputFiled
                     type="password"
                     value={pw}
                     onChange={(event) => {
                         setPw(event.target.value);
                     }}
                     placeholder="비밀번호를 적어주세요."
-                ></input>
-                <button type="submit">로그인</button>
-                <button type="submit" onClick={onGoogleLogIn}>
-                    google 로그인
-                </button>
-                <p>
-                    회원이 아니신가요?<span onClick={() => navigate("/register")}>회원가입</span>
-                </p>
+                />
+                <Button type="submit" name="로그인" bgc="var(--subColor1)" color="black" />
+                <Button
+                    name="Google 로그인"
+                    bgc="var(--subColor1)"
+                    color="black"
+                    onClick={(event) => on3rdPartyLogIn(event)}
+                />
+                <Button
+                    name="GitHub 로그인"
+                    bgc="var(--subColor1)"
+                    color="black"
+                    onClick={(event) => on3rdPartyLogIn(event)}
+                />
+                <LogInInfo>
+                    회원이 아니신가요?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <RegisterText onClick={() => navigate("/register")}>회원가입</RegisterText>
+                </LogInInfo>
             </LogInForm>
         </>
     );
@@ -109,5 +150,55 @@ export default LogIn;
 const LogInForm = styled.form`
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    margin: auto;
+    gap: 20px;
+    width: 500px;
+`;
+
+const HomeBtn = styled.button`
+    font-size: 20px;
+    border: 1px solid var(--subColor2);
+    background-color: var(--subColor3);
+    color: var(--subColor2);
+    border-radius: 15px;
+    width: 90px;
+    padding: 5px;
+    margin-top: 10px;
+    margin-left: 10px;
+`;
+
+const Logo = styled.p`
+    text-align: center;
+    font-size: 20px;
+    border: 1px solid var(--subColor1);
+    color: var(--subColor1);
+    height: 100%;
+    line-height: 100px;
+    border-radius: 10px;
+    vertical-align: middle;
+`;
+
+const Title = styled.p`
+    font-size: 20px;
+    color: var(--subColor1);
+    width: 200px;
+    margin: 0 auto;
+    text-align: center;
+`;
+
+const InputFiled = styled.input`
+    text-align: center;
+    border-radius: 10px;
+    height: 50px;
+`;
+
+const LogInInfo = styled.p`
+    text-align: center;
+`;
+
+const RegisterText = styled.span`
+    color: var(--subColor1);
+    & {
+        cursor: pointer;
+    }
 `;
