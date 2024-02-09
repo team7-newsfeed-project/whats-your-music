@@ -76,9 +76,8 @@ const Tab = styled.li`
     height: 50px;
     border: 1px solid var(--subColor1);
     border-radius: 20px;
-    background-color: ${(props) =>
-        props.$isActive === props.children ? "var(--subColor1)" : "none"};
-    color: ${(props) => (props.$isActive === props.children ? "var(--mainColor)" : "none")};
+    background-color: ${(props) => (props.$isActive === props.id ? "var(--subColor1)" : "none")};
+    color: ${(props) => (props.$isActive === props.id ? "var(--mainColor)" : "none")};
 `;
 
 const LinkWrapper = styled.div`
