@@ -12,7 +12,7 @@ const Header = () => {
 
     const onActiveCategory = (e) => {
         if (e.target === e.target.currentTarget) return;
-        dispatch(setCategory(e.target.textContent));
+        dispatch(setCategory(e.target.id));
     };
 
     return (
@@ -22,8 +22,12 @@ const Header = () => {
             </div>
             <MainNav>
                 <TabsWrapper onClick={onActiveCategory}>
-                    <Tab $isActive={activeCategory}>팝</Tab>
-                    <Tab $isActive={activeCategory}>클래식 / 재즈</Tab>
+                    <Tab id="팝" $isActive={activeCategory}>
+                        팝
+                    </Tab>
+                    <Tab id="클래식및재즈" $isActive={activeCategory}>
+                        클래식 / 재즈
+                    </Tab>
                 </TabsWrapper>
                 <LinkWrapper>
                     <NewPostLink to={`postform`}>글쓰기</NewPostLink>

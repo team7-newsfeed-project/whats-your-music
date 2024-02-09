@@ -2,15 +2,20 @@ import React from "react";
 import styled from "styled-components";
 import MainPostItem from "./MainPostItem";
 import { dummyData } from "shared/postsDummyData";
+import { useDispatch, useSelector } from "react-redux";
 
 const Main = () => {
     // 홈 페이지의 메인 영역
+    const activeCategory = useSelector((state) => state.category);
+    // const filteredPosts = posts.filter(post)
+    const filteredPosts = dummyData.filter((post) => post.category === activeCategory);
+
     return (
         <MainWrapper>
             <MainText>오늘의 음악을 추천해주세요!</MainText>
             <MainPostList>
-                {dummyData.map((post) => (
-                    <MainPostItem post={post}></MainPostItem>
+                {filteredPosts.map((post) => (
+                    <MainPostItem key={post.id} post={post}></MainPostItem>
                 ))}
             </MainPostList>
         </MainWrapper>

@@ -3,10 +3,10 @@ import styled from "styled-components";
 import thumbnailImg from "assets/thumbnailExImg.png";
 
 const MainPostItem = ({ post }) => {
-    const { id, writer, title, content, date } = post;
+    const { writer, title, content, date } = post;
     return (
         <MainArticleWrapper>
-            <MainArticle key={id}>
+            <MainArticle>
                 <ThumbImg />
                 <div>
                     <p>{title}</p>
