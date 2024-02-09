@@ -31,14 +31,15 @@ const Header = () => {
                 </TabsWrapper>
                 <LinkWrapper>
                     <NewPostLink to={`postform`}>글쓰기</NewPostLink>
-                    {/* to={`detail/${id}`} */}
+                    {/* 유저 로그인상태? 마이페이지이동,이미지 : 로그인버튼 */}
                     <LoginLink to="log_in">로그인</LoginLink>
-                    <Link to="/">
+                    <Link to="mypage">
+                        {/*유저프로필이미지 (없으면 기본이미지인) 가져오기 */}
                         <UserImg />
                     </Link>
                 </LinkWrapper>
             </MainNav>
-        </HeaderWrapper> //
+        </HeaderWrapper>
     );
 };
 
@@ -76,9 +77,8 @@ const Tab = styled.li`
     height: 50px;
     border: 1px solid var(--subColor1);
     border-radius: 20px;
-    background-color: ${(props) =>
-        props.$isActive === props.children ? "var(--subColor1)" : "none"};
-    color: ${(props) => (props.$isActive === props.children ? "var(--mainColor)" : "none")};
+    background-color: ${(props) => (props.$isActive === props.id ? "var(--subColor1)" : "none")};
+    color: ${(props) => (props.$isActive === props.id ? "var(--mainColor)" : "none")};
 `;
 
 const LinkWrapper = styled.div`
