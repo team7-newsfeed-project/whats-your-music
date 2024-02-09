@@ -34,6 +34,7 @@ const Header = () => {
                     {/* 유저 로그인상태? 마이페이지이동,이미지 : 로그인버튼 */}
                     <LoginLink to="log_in">로그인</LoginLink>
                     <Link to="mypage">
+                        {/*유저프로필이미지 (없으면 기본이미지인) 가져오기 */}
                         <UserImg />
                     </Link>
                 </LinkWrapper>
