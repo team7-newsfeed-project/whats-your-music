@@ -3,6 +3,7 @@ import ProfileImage from "./ProfileImage";
 
 const ProfileContents = ({ defaultImage }) => {
     const [isEdit, setIsEdit] = useState(false);
+
     const dummyDB = [
         {
             dbId: 1,
