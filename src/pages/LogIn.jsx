@@ -67,34 +67,50 @@ const LogIn = () => {
         navigate("/");
     };
 
-    const on3rdPartyLogIn = async (event) => {
+    const onGoogleLogIn = async (event) => {
         event.preventDefault();
         const providerName = event.target.textContent.split(" ")[0];
-        let provider;
-        let email;
-
-        if (providerName === "GitHub") {
-            provider = new GithubAuthProvider();
-        } else if (providerName === "Google") {
-            provider = new GoogleAuthProvider();
-            provider.addScope("https://www.googleapis.com/auth/userinfo.email");
-        }
-
+        let provider = new GoogleAuthProvider();
         let user;
+
+        provider.addScope("https://www.googleapis.com/auth/userinfo.email");
 
         try {
             const result = await signInWithPopup(auth, provider);
             user = result.user;
-            const additionalUserInfo = result.additionalUserInfo;
-            email = additionalUserInfo?.profile?.email || user.email;
         } catch (error) {
             alert(error.code + " : " + error.message);
             return;
         }
-        //console.log(user.reloadUserInfo.screenName);
-        console.log("email", email);
-        // await do3rdPartyLogIn({ email: user.email, nickname: user.displayName }, dispatch);
+
+        await do3rdPartyLogIn({ email: user.email, nickname: user.displayName }, dispatch);
         await getUserInfo(user.email, dispatch);
+        reduxUser = store.getState().userAccount; //FIXME - 이거 고쳐야함
+        await setUserInfo(reduxUser, { isLoggedIn: true }, dispatch); //reduxUser에 빈 값이 들어감
+        alert("로그인이 되었습니다.");
+        navigate("/");
+    };
+    const onGitHubLogIn = async (event) => {
+        event.preventDefault();
+        let provider = new GithubAuthProvider();
+        let user;
+        let email;
+        let nickname;
+
+        provider.addScope("read:user");
+
+        try {
+            const result = await signInWithPopup(auth, provider);
+            user = result.user;
+        } catch (error) {
+            alert(error.code + " : " + error.message);
+            return;
+        }
+
+        email = user.reloadUserInfo.providerUserInfo[0].email;
+        nickname = user.reloadUserInfo.providerUserInfo[0].screenName;
+        await do3rdPartyLogIn({ email, nickname }, dispatch);
+        await getUserInfo(email, dispatch);
         reduxUser = store.getState().userAccount; //FIXME - 이거 고쳐야함
         await setUserInfo(reduxUser, { isLoggedIn: true }, dispatch); //reduxUser에 빈 값이 들어감
         alert("로그인이 되었습니다.");
@@ -128,13 +144,13 @@ const LogIn = () => {
                     name="Google 로그인"
                     bgc="var(--subColor1)"
                     color="black"
-                    onClick={(event) => on3rdPartyLogIn(event)}
+                    onClick={(event) => onGoogleLogIn(event)}
                 />
                 <Button
                     name="GitHub 로그인"
                     bgc="var(--subColor1)"
                     color="black"
-                    onClick={(event) => on3rdPartyLogIn(event)}
+                    onClick={(event) => onGitHubLogIn(event)}
                 />
                 <LogInInfo>
                     회원이 아니신가요?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
