@@ -31,14 +31,14 @@ const Header = () => {
                 </TabsWrapper>
                 <LinkWrapper>
                     <NewPostLink to={`postform`}>글쓰기</NewPostLink>
-                    {/* to={`detail/${id}`} */}
+                    {/* 유저 로그인상태? 마이페이지이동,이미지 : 로그인버튼 */}
                     <LoginLink to="log_in">로그인</LoginLink>
-                    <Link to="/">
+                    <Link to="mypage">
                         <UserImg />
                     </Link>
                 </LinkWrapper>
             </MainNav>
-        </HeaderWrapper> //
+        </HeaderWrapper>
     );
 };
 
