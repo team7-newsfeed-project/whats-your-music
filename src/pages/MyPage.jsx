@@ -1,18 +1,37 @@
 import React, { useRef, useState } from "react";
+import { collection, getDocs, query, ref } from "firebase/firestore";
+import { db } from "database/firebase";
 import Layout from "components/layout/Layout";
 import defaultImage from "assets/defaultImage.png";
 import logoImage from "assets/logoImage.png";
 import * as S from "components/styles/MypageStyle";
-const dummyData = {
-    userId: crypto.randomUUID(),
-    nickname: "보라돌이",
-    image: `${defaultImage}`,
-    hiComment: "난 재즈가 좋아",
-};
+
+// 파이어베이스 해당 콜렉션에 있는 문서 가져오기
+const q = query(collection(db, "todos"));
+const querySnapshot = await getDocs(q);
+
+// console.log(querySnapshot);
+
+const dummyData = [
+    {
+        userId: crypto.randomUUID(),
+        nickname: "해리1",
+        image: `${defaultImage}`,
+        hiComment: "난 재즈가 좋아",
+    },
+    {
+        userId: crypto.randomUUID(),
+        nickname: "해리2",
+        image: `${defaultImage}`,
+        hiComment: "난 재즈가 좋아",
+    },
+];
 
 const MyPage = () => {
+    // const storage = getStorage();
     const [imgUpFile, setImgUpFile] = useState("");
     const imgRef = useRef();
+
     const addImgFile = () => {
         const imgFile = imgRef.current.files[0];
         const reader = new FileReader();
