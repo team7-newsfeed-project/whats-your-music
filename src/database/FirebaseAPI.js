@@ -1,7 +1,5 @@
-//import React, { useEffect, useState } from "react";
 import { db } from "database/firebase";
 import { addDoc, collection, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
-//import { useDispatch, useSelector } from "react-redux";
 import { setAccount } from "store/modules/userAccount";
 
 export const register = async (newAccount) => {
@@ -30,8 +28,7 @@ export const getUserInfo = async (email, dispatch) => {
 
 export const setUserInfo = async (reduxUser, newAccount, dispatch) => {
     //계정 정보 변경해서 firebase와 redux에 저장
-    const id = "t88aScOycVaKaYNYy1IJ";
-    const accountRef = doc(db, "accounts", id);
+    const accountRef = doc(db, "accounts", reduxUser.id);
 
     await updateDoc(accountRef, { ...reduxUser, ...newAccount });
 
@@ -47,17 +44,3 @@ export const googleLogIn = async ({ email, nickname }, dispatch) => {
         register({ email, nickname });
     }
 };
-
-// const FirebaseAPI = () => {
-//     const reduxUser = useSelector((state) => state.userAccount);
-//     const dispatch = useDispatch();
-
-//     console.log(reduxUser);
-//     useEffect(() => {
-//         const newAccount = { email: "asd7973@gmail.com" };
-//         googleLogIn(newAccount, dispatch);
-//     }, [dispatch]);
-//     return <div>FirebaseAPI</div>;
-// };
-
-//export default FirebaseAPI;

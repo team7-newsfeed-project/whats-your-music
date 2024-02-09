@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { auth } from "database/firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { register } from "../database/FirebaseAPI";
 
 // 아이디는 이메일로 대체, displayname이 닉네임을 참조, updateprofile catch문 수정 필요, 안내무구 친절하게 요자 쓰기
 
@@ -58,16 +59,7 @@ const Register = () => {
             }
         }
 
-        try {
-            updateProfile(auth.currentUser, {
-                displayName: nickname, // displayName을 닉네임으로 설정
-            });
-        } catch (error) {
-            //alert(error.code + " : " + error.message);
-            alert("닉네임 설정에 실패했습니다.");
-            return;
-        }
-        //console.log(auth.currentUser);
+        register({ email, nickname });
         alert("회원가입이 완료되었습니다.");
 
         navigate("/");
