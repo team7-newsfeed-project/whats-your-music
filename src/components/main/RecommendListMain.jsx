@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import MainPostItem from "./MainPostItem";
+import MainPostItem from "./RecommendPostItem";
 import { dummyData } from "shared/postsDummyData";
 import { useDispatch, useSelector } from "react-redux";
 
-const Main = () => {
+const RecommendListMain = () => {
     // 홈 페이지의 메인 영역
     const activeCategory = useSelector((state) => state.category);
     // const filteredPosts = posts.filter(post)
@@ -22,9 +22,9 @@ const Main = () => {
     );
 };
 
-export default Main;
+export default RecommendListMain;
 
-const MainWrapper = styled.div`
+const MainWrapper = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;

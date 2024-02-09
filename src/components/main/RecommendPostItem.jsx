@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import thumbnailImg from "assets/thumbnailExImg.png";
 
-const MainPostItem = ({ post }) => {
+const RecommendPostItem = ({ post }) => {
     const { writer, title, content, date } = post;
     return (
         <MainArticleWrapper>
@@ -18,7 +18,7 @@ const MainPostItem = ({ post }) => {
     );
 };
 
-export default MainPostItem;
+export default RecommendPostItem;
 
 const MainArticleWrapper = styled.li`
     list-style: none;
