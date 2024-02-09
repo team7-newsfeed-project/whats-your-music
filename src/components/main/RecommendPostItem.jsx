@@ -1,12 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import thumbnailImg from "assets/thumbnailExImg.png";
+import { Navigate, useNavigate } from "react-router-dom";
 
-const MainPostItem = ({ post }) => {
-    const { writer, title, content, date } = post;
+const RecommendPostItem = ({ post }) => {
+    const { id, writer, title, content, date } = post;
+
+    const navigate = useNavigate();
+
+    const onPostItemClick = (id) => {
+        navigate(`detail/${id}`);
+    };
+
     return (
         <MainArticleWrapper>
-            <MainArticle>
+            <MainArticle onClick={() => onPostItemClick(id)}>
                 <ThumbImg />
                 <div>
                     <p>{title}</p>
@@ -18,7 +26,7 @@ const MainPostItem = ({ post }) => {
     );
 };
 
-export default MainPostItem;
+export default RecommendPostItem;
 
 const MainArticleWrapper = styled.li`
     list-style: none;
