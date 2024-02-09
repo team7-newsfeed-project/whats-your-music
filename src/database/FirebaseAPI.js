@@ -28,7 +28,12 @@ export const getUserInfo = async (email, dispatch) => {
 
 export const setUserInfo = async (reduxUser, newAccount, dispatch) => {
     //계정 정보 변경해서 firebase와 redux에 저장
-    const accountRef = doc(db, "accounts", reduxUser.id);
+
+    // const id = "t88aScOycVaKaYNYy1IJ";
+    // reduxUser : 기존 값, newAccount : 새로운 값
+    // reduxUser, newAccount : 객체
+    const userId = reduxUser.firebaseId;
+    const accountRef = doc(db, "accounts", userId);
 
     await updateDoc(accountRef, { ...reduxUser, ...newAccount });
 
