@@ -3,22 +3,25 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { setCategory } from "store/modules/category";
-import logoImg from "assets/logoImage.png";
-import defaultUserImg from "assets/defaultImage.png";
+import logoImg from "assets/whatsyourmusicLogo.png";
 
 const Header = () => {
     const dispatch = useDispatch();
     const activeCategory = useSelector((state) => state.category);
     const userSetAccount = useSelector((state) => state.userAccount);
-    const { userLogin, isLogin } = useSelector((store) => store.userLogin);
-    // const isUserLoggedIn = userSetAccount.isLoggedIn;
-    const defaultImage = useSelector((store) => store.userImage.fileImage);
-    const userSetImg = userSetAccount.image;
-    const imgUpFile = useSelector((store) => store.userImage.imgUpFile); // 올린 이미지 주소?
+    const isUserLoggedIn = userSetAccount.isLoggedIn;
+    const userSetImg = userSetAccount.userLoginState.image;
+    // 테스트용 userSetImg -https://cdn.imweb.me/upload/S20221129c3c04fdc67a8b/09e904cb8f26f.png
+    // const userSetImg = userSetAccount.image;
 
-    console.log("userLogin:", userLogin);
-    console.log("isLogin:", isLogin);
-    console.log(defaultImage);
+    const defaultImage = useSelector((store) => store.userImage.selectFile);
+    // 이변수를 그냥 스타일컴포넌트에서 그대로 쓸 수 없다. props로 주기
+
+    // const imgUpFile = useSelector((store) => store.userImage.imgUpFile); // 올린 이미지 주소?
+
+    console.log("isLogin:", isUserLoggedIn);
+    console.log("defaultImage: ", defaultImage);
+    console.log("userSetImg", userSetImg);
 
     const onActiveCategory = (e) => {
         // if (e.target === e.target.currentTarget) return;
@@ -42,10 +45,19 @@ const Header = () => {
                 <LinkWrapper>
                     <NewPostLink to={`postform`}>글쓰기</NewPostLink>
                     {/* 유저 로그인상태 ? (O)유저이미지뜨게하고 클릭 시 마이페이지 이동가능 : (X)로그인버튼 */}
-                    {isLogin ? (
+                    {isUserLoggedIn ? (
                         <Link to="mypage">
-                            <UserImg $isImgSet={userSetImg} />
+                            {userSetImg ? (
+                                <img src={userSetImg} width={50} borderRadius={10} />
+                            ) : (
+                                // borderRadius={10} 등 다 적용안됨.. ㅠ  여튼 나중에 가져와서 보자
+                                <img src={defaultImage} width={50} />
+                            )}
+                            {/* userAccount.js에서 useerLoginState - image 주소 문자열 넣어보면 잘 뜸 
+                            auth설정해서 더 해보고 이미지border-radius등 조절하기 */}
+                            {/* <UserImg $isImgSet={userSetImg} $defaultImage={defaultImage} /> */}
                             {/*유저프로필이미지 (없으면 기본이미지인) 가져오기 */}
+                            {/* <UserProfileImgBox $defaultImage={defaultImage}></UserProfileImgBox> */}
                         </Link>
                     ) : (
                         <LoginLink to="log_in">로그인</LoginLink>
@@ -145,8 +157,16 @@ const UserImg = styled.img.attrs({
     //`{userSetImg}`
     // 프로필등록된이미지 있으면 (true) 등록된 이미지 가져오기
     // 아래 ${} 안에서 안뜸}  :뒤부분 `{defaultUserImg}`,혹은 ``만, 혹은 `${}`,  {} 했지만 다 안뜸
-    src: `${(props) => (props.$isImgSet ? "none" : { defaultUserImg })}`,
+    // src: `${(props) => props.$defaultImage}`,
+    // src: `{defaultImage}`, 이렇게 하면 에러없이뜨긴하는데 이미지는 안뜸
+    // src: `${defaultImage}`,
 })`
     width: 50px;
     height: 50px;
+`;
+
+const UserProfileImgBox = styled.div`
+    width: 50px;
+    height: 50px;
+    background-image: ${(props) => props.$defaultImage}; // 안뜸.  url() 넣고 해도 안뜸
 `;
