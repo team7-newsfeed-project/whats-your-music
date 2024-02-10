@@ -103,6 +103,7 @@ const PostForm = () => {
                     <DateTime>{currentDateTime}</DateTime>
                     <CategoryDropdown onChange={handleGenreChange} value={selectedCategory} />
                     <SubmitBtn onClick={handlePostSubmit}>등록</SubmitBtn>
+                    {/* dd */}
                 </div>
             </MainWrapper>
             <Footer />
