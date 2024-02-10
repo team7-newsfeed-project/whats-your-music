@@ -5,30 +5,29 @@ import DangerButton from "components/common/DangerButton";
 import { useSelector } from "react-redux";
 
 const ProfileContents = () => {
-    const userInfo = useSelector((store) => store.userContents.dbUserInfo);
-    const currUser = {
-        dbId: 1,
+    const { userUid } = useSelector((store) => store.userAccount.userLoginState);
+    const { nickname, comment } = useSelector((store) => store.userContents.initUserInfo);
+    const [isEdit, setIsEdit] = useState(false);
+    const [editValue, setEditValue] = useState({
         nickname: "",
         comment: "",
-    };
-    const myPageData = userInfo.find((userId) => userId.dbId === currUser.dbId);
-    const { dbId, nickname, comment } = myPageData;
-    const [isEdit, setIsEdit] = useState(false);
-    const [contentsValue, setContentsValue] = useState(currUser);
-    const contentsValueNickname = contentsValue.nickname;
-    const contentsValueComment = contentsValue.comment;
-
+    });
+    const editValueNickname = editValue.nickname;
+    const editValueComment = editValue.comment;
     const onEditValueChange = (e) => {
+        e.preventDefault();
         const { name, value } = e.target;
-        setContentsValue({ ...contentsValue, [name]: value });
+        setEditValue({ ...editValue, [name]: value });
     };
-    const onEditContents = () => {
-        setContentsValue(true);
+    const onEditContents = (e) => {
+        e.preventDefault();
+        console.log(1);
+        setIsEdit(true);
+        setEditValue({ nickname, comment });
     };
-    const onEditCancel = () => {
-        setContentsValue(false);
-    };
+
     const onEditSave = () => {
+        e.preventDefault();
         //유효성
         const editSaveCheck = window.confirm("수정내용을 저장하시겠습니까?");
         if (
@@ -47,71 +46,55 @@ const ProfileContents = () => {
         console.log(editValue);
         setEditValue((prevInfo) => {
             console.log(prevInfo);
-            // alert("내용을 수정하셨습니다.");
-            // return prevInfo.map((prevItem) => {
-            //     console.log(prevItem);
-            //     // if (prevTodo.dbId === dbId) {
-            //     //     return {
-            //     //         ...prevTodo,
-            //     //         nickname: editValueNickname, //새로 들어간 title값
-            //     //         comment: editValueComment,
-            //     //     };
-            //     // }
-            //     // return prevTodo;
-            // });
         });
         setIsEdit(false);
     };
-    // console.log(myPageData);
+    const onEditCancel = (e) => {
+        e.preventDefault();
+        setEditValue(false);
+    };
+
     return (
         <div>
-            <ProfileImage isEdit={isEdit} />
+            <ProfileImage />
             <div>
                 {!isEdit ? (
-                    [myPageData].map((userInfo) => {
-                        const { dbId, nickname, comment } = userInfo;
-                        return (
-                            <div key={dbId}>
-                                <p>닉네임 : {nickname}</p>
-                                <p>comment : {comment}</p>
-                            </div>
-                        );
-                    })
-                ) : (
                     <div>
-                        <textarea
+                        <p>닉네임 : {nickname}</p>
+                        <p>소개 : {comment}</p>
+                    </div>
+                ) : (
+                    <form>
+                        <input
                             name="nickname"
-                            cols="15"
-                            rows="1"
-                            value={contentsValueNickname}
+                            value={editValueNickname}
                             onChange={onEditValueChange}
                             placeholder={
                                 editValueNickname === "" ? "닉네임을 적어주세요" : editValueNickname
                             }
-                        ></textarea>
+                        />
                         <textarea
                             name="comment"
                             cols="30"
                             rows="10"
-                            value={contentsValueComment}
+                            value={editValueComment}
                             onChange={onEditValueChange}
                             placeholder={
                                 editValueComment === "" ? "자신을 소개해주세요" : editValueComment
                             }
                         ></textarea>
-                    </div>
-                )}
-
-                <div>
-                    {isEdit ? (
                         <div>
-                            <Button name="수정완료" onClick={onEditSave} />
-                            <DangerButton name="수정취소" onClick={onEditCancel} />
+                            {!isEdit ? (
+                                <Button name="내용 편집" onClick={onEditContents} />
+                            ) : (
+                                <div>
+                                    <Button name="수정완료" onClick={onEditSave} />
+                                    <DangerButton name="수정취소" onClick={onEditCancel} />
+                                </div>
+                            )}
                         </div>
-                    ) : (
-                        <Button name="내용 편집" onClick={onEditContents} />
-                    )}
-                </div>
+                    </form>
+                )}
             </div>
         </div>
     );
