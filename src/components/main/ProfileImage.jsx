@@ -13,8 +13,8 @@ const ProfileImage = () => {
     const user = useSelector((store) => store.userImage.user);
     const defaultImage = useSelector((store) => store.userImage.fileImage);
     const [isEdit, setEdit] = useState(false);
-    const [imgUpFile, setImgUpFile] = useState("");
-    const imgThumnailRef = useRef(defaultImage);
+    const [imgUpFile, setImgUpFile] = useState(defaultImage);
+    const imgThumnailRef = useRef(defaultImage); // 섬네일 이미지
     // 이미지 추가 (파이어베이스)
     // 1. 이미지 선택
     const [selectFile, setSelectFile] = useState(defaultImage);
@@ -55,6 +55,7 @@ const ProfileImage = () => {
         }
         //ref함수로 Storage 내부 저장할 위치를 회원 고유번호 uid정하고,
         //uploadBytes
+        if (selectFile === null) return defaultImage;
         const imageRef = ref(storage, `${userUid}/${selectFile.name}`);
         try {
             await uploadBytes(imageRef, selectFile);
@@ -81,7 +82,7 @@ const ProfileImage = () => {
 
     return (
         <M.UserImage>
-            <M.ProfileThumbnailImg src={imgUpFile ? imgUpFile : defaultImage} alt="이미지" />
+            <M.ProfileThumbnailImg src={imgUpFile} alt="이미지" />
             <M.ProfileUpLoadBtnLabel htmlFor="ImgfileChoice">등록</M.ProfileUpLoadBtnLabel>
             <button>삭제</button>
             <M.ProfileUpLoad
