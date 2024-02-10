@@ -12,6 +12,7 @@ const RecommendPostItem = ({ post }) => {
         navigate(`detail/${id}`);
     };
 
+    // NOTE: postform에서 글쓴 시각 date (파이어베이스통해) 전달받아 출력하기로? (아래 보류)
     // new Date() 로 파이어베이스에 데이터 넣고 (글쓰기 postForm에서) -> 가져와 toLocaleString써서 출력하기?
     // 파이어베이스에 직접 date를 넣으면 timestamp라서 ..
     //: 파이어베이스에 저장된 타임스탬프객체 -> toDate()메서드로 Date객체로 변환해 쓰기
@@ -24,8 +25,6 @@ const RecommendPostItem = ({ post }) => {
     return (
         <MainArticleWrapper>
             <MainArticle onClick={() => onPostItemClick(id)}>
-                {/* <PostImgBox $thumbImgSrc={thumbImgSrc}>
-                </PostImgBox> */}
                 <RecommendPostVideoSection videoSrc={videoSrc}></RecommendPostVideoSection>
                 <PostTextBox>
                     <PostTitle>{title}</PostTitle>
@@ -56,22 +55,12 @@ const MainArticle = styled.article`
     border-radius: 20px;
 `;
 
-// const PostImgBox = styled.div`
-//     width: 230px;
-//     height: 120px;
-//     border-radius: 15px;
-//     margin-left: 20px;
-//     background-image: url(${(props) => props.$thumbImgSrc});
-//     background-size: cover; // 결국 이미지 border-radius등 적용위해 배경이미지 로 쓰기로 !! 됐다 ㅠ
-// `;
-
 const PostTextBox = styled.div`
     display: flex;
     flex-direction: column;
     width: 230px;
     gap: 10px;
     margin-left: 30px;
-    /* background-color: aliceblue; */
     /* font-family: "Pretendard-Regular"; */
 `;
 
