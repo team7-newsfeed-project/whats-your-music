@@ -1,4 +1,4 @@
-const SET_ACCOUNT = "SET_ACCOUNT";
+const SET_ACCOUNT = "userAccount/SET_ACCOUNT";
 
 export const setAccount = (payload) => {
     return {
