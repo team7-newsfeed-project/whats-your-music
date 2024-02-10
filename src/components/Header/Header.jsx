@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { setCategory } from "store/modules/category";
-import logoImage from "assets/logoImage.png";
+import logoImg from "assets/logoImage.png";
+import defaultUserImg from "assets/defaultImage.png";
 
 const Header = () => {
     const activeCategory = useSelector((state) => state.category);
@@ -11,26 +12,34 @@ const Header = () => {
 
     const onActiveCategory = (e) => {
         if (e.target === e.target.currentTarget) return;
-        dispatch(setCategory(e.target.textContent));
+        dispatch(setCategory(e.target.id));
     };
 
     return (
         <HeaderWrapper>
             <div>
-                <img src={logoImage} width={300} alt="logo" />
+                <img src={logoImg} width={300} alt="logo" />
             </div>
             <MainNav>
                 <TabsWrapper onClick={onActiveCategory}>
-                    <Tab $isActive={activeCategory}>팝</Tab>
-                    <Tab $isActive={activeCategory}>클래식 / 재즈</Tab>
+                    <Tab id="팝" $isActive={activeCategory}>
+                        팝
+                    </Tab>
+                    <Tab id="클래식및재즈" $isActive={activeCategory}>
+                        클래식 / 재즈
+                    </Tab>
                 </TabsWrapper>
                 <LinkWrapper>
                     <NewPostLink to={`postform`}>글쓰기</NewPostLink>
-                    {/* to={`detail/${id}`} */}
+                    {/* 유저 로그인상태? 마이페이지이동,이미지 : 로그인버튼 */}
                     <LoginLink to="log_in">로그인</LoginLink>
+                    <Link to="mypage">
+                        {/*유저프로필이미지 (없으면 기본이미지인) 가져오기 */}
+                        <UserImg />
+                    </Link>
                 </LinkWrapper>
             </MainNav>
-        </HeaderWrapper> //
+        </HeaderWrapper>
     );
 };
 
@@ -68,9 +77,8 @@ const Tab = styled.li`
     height: 50px;
     border: 1px solid var(--subColor1);
     border-radius: 20px;
-    background-color: ${(props) =>
-        props.$isActive === props.children ? "var(--subColor1)" : "none"};
-    color: ${(props) => (props.$isActive === props.children ? "var(--mainColor)" : "none")};
+    background-color: ${(props) => (props.$isActive === props.id ? "var(--subColor1)" : "none")};
+    color: ${(props) => (props.$isActive === props.id ? "var(--mainColor)" : "none")};
 `;
 
 const LinkWrapper = styled.div`
@@ -107,4 +115,12 @@ const LoginLink = styled(Link)`
         background-color: var(--subColor2);
         color: var(--mainColor);
     }
+`;
+
+const UserImg = styled.img.attrs({
+    alt: "userImg",
+    src: `${defaultUserImg}`,
+})`
+    width: 50px;
+    height: 50px;
 `;
