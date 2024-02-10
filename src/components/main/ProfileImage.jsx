@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { auth, db, storage } from "database/firebase";
-// import defaultImage from "assets/defaultImage.png";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { UploadBtn } from "components/styles/Profile";
+import { UploadBtn } from "components/styles/ProfileStyle";
 import { useDispatch, useSelector } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { setUser } from "store/modules/userImage";
@@ -55,9 +54,8 @@ const ProfileImage = () => {
             alert("이미지를 선택해주세요.");
             return;
         }
-        //ref함수로 Storage 내부 저장할 위치 정하고,
+        //ref함수로 Storage 내부 저장할 위치를 회원 고유번호 uid정하고,
         //uploadBytes
-
         const imageRef = ref(storage, `${userUid}/${selectFile.name}`);
         try {
             await uploadBytes(imageRef, selectFile);
