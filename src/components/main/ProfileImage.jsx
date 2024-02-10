@@ -2,19 +2,17 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { auth, db, storage } from "database/firebase";
-import { UploadBtn } from "components/styles/ProfileStyle";
 import { setSelectFile, setThumnailImg } from "store/modules/userImage";
 import Button from "components/common/Button";
 import * as M from "components/styles/MypageStyle";
+import DangerButton from "components/common/DangerButton";
 
 const ProfileImage = () => {
     const dispatch = useDispatch();
     const { userUid } = useSelector((store) => store.userAccount.userLoginState);
     const selectFile = useSelector((store) => store.userImage.selectFile);
-    const [isEdit, setEdit] = useState(false);
     const thumnailImg = useSelector((store) => store.userImage.thumnailImg);
-    console.log(thumnailImg);
-    // 이미지 추가 (파이어베이스)
+    const [isEdit, setEdit] = useState(false);
     // 1. 이미지 선택
     const currUserUid = userUid ? userUid : null;
     const handleUpload = async () => {
@@ -40,10 +38,7 @@ const ProfileImage = () => {
         // 파이어베이스 해당 콜렉션에 있는 문서 가져오기
         // 파일 url 가져오기
         const downloadURL = await getDownloadURL(imageRef);
-        console.log(downloadURL);
-
         dispatch(setThumnailImg(downloadURL));
-        // setThumnailImg(downloadURL);
 
         setEdit(false);
         return downloadURL;
@@ -84,29 +79,18 @@ const ProfileImage = () => {
                 <div>
                     <M.ProfileUpLoadBtnLabel htmlFor="ImgfileChoice">등록</M.ProfileUpLoadBtnLabel>
                     <div>
-                        <Button
-                            onClick={handleUpload}
-                            name="수정 완료"
-                            fsize="1rem"
-                            bd="1px solid var(--subColor2)"
-                            bradius=""
-                            bgc="var(--mainColor)"
-                            pd="0.4, 1"
-                        />
-                        <Button
+                        <Button onClick={handleUpload} name="수정 완료" fsize="1rem" pd="0.4, 1" />
+                        <DangerButton
                             onClick={onEditCancel}
                             name="수정 취소"
                             fsize="1rem"
-                            bd="1px solid var(--subColor2)"
-                            bradius="20"
-                            bgc="var(--mainColor)"
                             pd="0.4, 1"
                         />
                     </div>
                 </div>
             ) : (
                 <div onClick={onEditImg}>
-                    <Button name="이미지 편집" />
+                    <Button name="이미지 편집" pd="0.4, 1" fsize="1rem" />
                 </div>
             )}
         </M.UserImage>
@@ -114,70 +98,3 @@ const ProfileImage = () => {
 };
 
 export default ProfileImage;
-
-// useEffect(() => {
-//     const userState = onAuthStateChanged(auth, (user) => {
-//         dispatch(setUser(user));
-//         console.log("user", user); // 사용자 인증 정보가 변경될 때마다 해당 이벤트를 받아 처리합니다.
-//     });
-
-//     return userState;
-// }, []);
-
-// useEffect(async () => {
-//     const querySnapshot = async () => {
-//         try {
-//             const query = await getDocs(collection(db, "account"));
-//             query.forEach((doc) => {
-//                 console.log(doc.id, doc.data());
-//             });
-//         } catch (error) {
-//             console.error("정보를 받아오지 못하고 있습니다.", error);
-//         }
-//     };
-//     querySnapshot();
-// }, [getDocs]);
-
-// const [thumbnailUrl, setThumnailUrl] = useState(defaultImage);
-
-// 이미지 업로드 (파이어베이스)
-
-//  const handleUpload = async () => {
-//      const currUser = auth.currentUser;
-//      if (!currUser) {
-//          alert("사용자가 로그인되어 있지 않습니다.");
-//          return;
-//      }
-//      //ref함수로 Storage 내부 저장할 위치 정하고,
-//      //uploadBytes
-//      const userUid = currUser.uid;
-//      console.log(userUid);
-//      const imageRef = ref(storage, `${storeUserUid}/${selectFile.name}`);
-//      await uploadBytes(imageRef, selectFile);
-
-//      // 파일 url 가져오기
-//      const downloadURL = await getDownloadURL(imageRef);
-//      console.log(downloadURL);
-
-//      // 파이어베이스 해당 콜렉션에 있는 문서 가져오기
-//  };
-
-// const fileName = downloadURL.split("/").pop().split("?")[0].split("%2F").pop();
-// console.log(fileName);
-
-///
-
-// const q = query(collection(db, "todos"));
-// const querySnapshot = await getDocs(q);
-
-//   const addImgFile = () => {
-//       const imgFile = imgThumnailRef.current.files[0];
-//       const reader = new FileReader();
-//       reader.readAsDataURL(imgFile); //url 뽑아서
-//       console.log(reader);
-
-//       // reader.onloadend = () => {
-
-//       //     setImgUpFile(reader.result);//세팅
-//       // };
-//   };
