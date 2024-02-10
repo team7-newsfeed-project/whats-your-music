@@ -6,7 +6,7 @@ export const dummyData = [
         title: "두아리파 신곡!",
         content: "너무 좋아요",
         date: "2024-01-01",
-        // 이미지? 영상 섬네일 - 주소도 필요
+        // 이미지? 영상 섬네일 - 주소도 필요  videoSrc
     },
     {
         id: "2",
