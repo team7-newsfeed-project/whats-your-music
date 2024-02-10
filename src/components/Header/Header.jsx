@@ -10,8 +10,15 @@ const Header = () => {
     const dispatch = useDispatch();
     const activeCategory = useSelector((state) => state.category);
     const userSetAccount = useSelector((state) => state.userAccount);
-    const isUserLoggedIn = userSetAccount.isLoggedIn;
+    const { userLogin, isLogin } = useSelector((store) => store.userLogin);
+    // const isUserLoggedIn = userSetAccount.isLoggedIn;
+    const defaultImage = useSelector((store) => store.userImage.fileImage);
     const userSetImg = userSetAccount.image;
+    const imgUpFile = useSelector((store) => store.userImage.imgUpFile); // 올린 이미지 주소?
+
+    console.log("userLogin:", userLogin);
+    console.log("isLogin:", isLogin);
+    console.log(defaultImage);
 
     const onActiveCategory = (e) => {
         // if (e.target === e.target.currentTarget) return;
@@ -34,12 +41,11 @@ const Header = () => {
                 </TabsWrapper>
                 <LinkWrapper>
                     <NewPostLink to={`postform`}>글쓰기</NewPostLink>
-                    {/* 유저 로그인상태? 마이페이지이동,이미지 : 로그인버튼 */}
-
-                    {/*유저프로필이미지 (없으면 기본이미지인) 가져오기 */}
-                    {isUserLoggedIn ? (
+                    {/* 유저 로그인상태 ? (O)유저이미지뜨게하고 클릭 시 마이페이지 이동가능 : (X)로그인버튼 */}
+                    {isLogin ? (
                         <Link to="mypage">
                             <UserImg $isImgSet={userSetImg} />
+                            {/*유저프로필이미지 (없으면 기본이미지인) 가져오기 */}
                         </Link>
                     ) : (
                         <LoginLink to="log_in">로그인</LoginLink>
@@ -132,13 +138,15 @@ const LoginLink = styled(Link)`
 const UserImg = styled.img.attrs({
     alt: "userImg",
     // 유저 이미지 가져오기 or 기본이미지
-    // $ { defaultUserImg } `,
+    // src: `${defaultUserImg} `, // 잘 뜸
     // 실패 ${ userSetImg? `userSetImg` : `defaultUserImg`},
     // 실패 ${userSetImg? "none": `{defaultUserImg}`
     // 밸류?에 ""감싸야. 근데 안에 js문법이니 백틱 ``
     //`{userSetImg}`
-    src: `${(props) => (props.$isImgSet ? { defaultUserImg } : { defaultUserImg })}`,
-}`
+    // 프로필등록된이미지 있으면 (true) 등록된 이미지 가져오기
+    // 아래 ${} 안에서 안뜸}  :뒤부분 `{defaultUserImg}`,혹은 ``만, 혹은 `${}`,  {} 했지만 다 안뜸
+    src: `${(props) => (props.$isImgSet ? "none" : { defaultUserImg })}`,
+})`
     width: 50px;
     height: 50px;
-    `);
+`;
