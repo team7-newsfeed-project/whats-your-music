@@ -22,6 +22,14 @@ const initialState = {
     image: "",
     isLoggedIn: false,
     userUid: "",
+    userLoginState: {
+        userUid: "",
+        email: "",
+        nickname: "",
+        comment: "",
+        image: "",
+        isLoggedIn: false,
+    },
 };
 
 const userAccount = (state = initialState, action) => {
@@ -29,16 +37,19 @@ const userAccount = (state = initialState, action) => {
         case SET_ACCOUNT:
             return { ...state, ...action.payload };
         case SET_IS_LOGIN:
+            const loginState = state.userLoginState;
             const userInfo = action.payload;
             console.log(userInfo);
             return {
                 ...state,
-                email: userInfo.email,
-                nickname: userInfo.displayName,
-                comment: "",
-                image: userInfo.photoURL,
-                isLoggedIn: true,
-                userUid: userInfo.uid,
+                userLoginState: {
+                    userUid: userInfo.uid,
+                    email: userInfo.email,
+                    nickname: userInfo.displayName,
+                    comment: "",
+                    image: userInfo.photoURL,
+                    isLoggedIn: true,
+                },
             };
         default:
             return state;

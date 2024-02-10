@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 const MyPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const userState = useSelector((store) => store.userAccount);
+    const userState = useSelector((store) => store.userAccount.userLoginState);
     // console.log(firebaseId);
     console.log(userState);
 
