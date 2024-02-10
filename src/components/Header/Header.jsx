@@ -7,11 +7,14 @@ import logoImg from "assets/logoImage.png";
 import defaultUserImg from "assets/defaultImage.png";
 
 const Header = () => {
-    const activeCategory = useSelector((state) => state.category);
     const dispatch = useDispatch();
+    const activeCategory = useSelector((state) => state.category);
+    const userSetAccount = useSelector((state) => state.userAccount);
+    const isUserLoggedIn = userSetAccount.isLoggedIn;
+    const userSetImg = userSetAccount.image;
 
     const onActiveCategory = (e) => {
-        if (e.target === e.target.currentTarget) return;
+        // if (e.target === e.target.currentTarget) return;
         dispatch(setCategory(e.target.id));
     };
 
@@ -21,22 +24,26 @@ const Header = () => {
                 <img src={logoImg} width={300} alt="logo" />
             </div>
             <MainNav>
-                <TabsWrapper onClick={onActiveCategory}>
-                    <Tab id="팝" $isActive={activeCategory}>
+                <TabsWrapper>
+                    <Tab id="팝" onClick={onActiveCategory} $isActive={activeCategory}>
                         팝
                     </Tab>
-                    <Tab id="클래식및재즈" $isActive={activeCategory}>
+                    <Tab id="클래식및재즈" onClick={onActiveCategory} $isActive={activeCategory}>
                         클래식 / 재즈
                     </Tab>
                 </TabsWrapper>
                 <LinkWrapper>
                     <NewPostLink to={`postform`}>글쓰기</NewPostLink>
                     {/* 유저 로그인상태? 마이페이지이동,이미지 : 로그인버튼 */}
-                    <LoginLink to="log_in">로그인</LoginLink>
-                    <Link to="mypage">
-                        {/*유저프로필이미지 (없으면 기본이미지인) 가져오기 */}
-                        <UserImg />
-                    </Link>
+
+                    {/*유저프로필이미지 (없으면 기본이미지인) 가져오기 */}
+                    {isUserLoggedIn ? (
+                        <Link to="mypage">
+                            <UserImg $isImgSet={userSetImg} />
+                        </Link>
+                    ) : (
+                        <LoginLink to="log_in">로그인</LoginLink>
+                    )}
                 </LinkWrapper>
             </MainNav>
         </HeaderWrapper>
@@ -73,12 +80,16 @@ const Tab = styled.li`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100px;
+    width: 130px;
     height: 50px;
     border: 1px solid var(--subColor1);
     border-radius: 20px;
     background-color: ${(props) => (props.$isActive === props.id ? "var(--subColor1)" : "none")};
     color: ${(props) => (props.$isActive === props.id ? "var(--mainColor)" : "none")};
+    &:hover {
+        background-color: var(--subColor1);
+        color: var(--mainColor);
+    }
 `;
 
 const LinkWrapper = styled.div`
@@ -108,7 +119,8 @@ const LoginLink = styled(Link)`
     width: 100px;
     height: 50px;
     color: white;
-    text-decoration: none;
+    /* text-decoration: none; */
+    text-decoration-line: none;
     border: 1px solid var(--subColor2);
     border-radius: 20px;
     &:hover {
@@ -119,8 +131,14 @@ const LoginLink = styled(Link)`
 
 const UserImg = styled.img.attrs({
     alt: "userImg",
-    src: `${defaultUserImg}`,
-})`
+    // 유저 이미지 가져오기 or 기본이미지
+    // $ { defaultUserImg } `,
+    // 실패 ${ userSetImg? `userSetImg` : `defaultUserImg`},
+    // 실패 ${userSetImg? "none": `{defaultUserImg}`
+    // 밸류?에 ""감싸야. 근데 안에 js문법이니 백틱 ``
+    //`{userSetImg}`
+    src: `${(props) => (props.$isImgSet ? { defaultUserImg } : { defaultUserImg })}`,
+}`
     width: 50px;
     height: 50px;
-`;
+    `);
