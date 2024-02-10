@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import { auth, db, storage } from "database/firebase";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { UploadBtn } from "components/styles/ProfileStyle";
 import { useDispatch, useSelector } from "react-redux";
-import { onAuthStateChanged } from "firebase/auth";
-import { setUser } from "store/modules/userImage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { collection, getDocs } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth, db, storage } from "database/firebase";
+import { UploadBtn } from "components/styles/ProfileStyle";
+import { setUser } from "store/modules/userImage";
 import * as M from "components/styles/MypageStyle";
 
 const ProfileImage = () => {
@@ -13,7 +13,6 @@ const ProfileImage = () => {
     const user = useSelector((store) => store.userImage.user);
     const defaultImage = useSelector((store) => store.userImage.fileImage);
     const [isEdit, setEdit] = useState(false);
-    // 이미지 추가 (일반)
     const [imgUpFile, setImgUpFile] = useState("");
     const imgThumnailRef = useRef(defaultImage);
     // 이미지 추가 (파이어베이스)
@@ -41,7 +40,7 @@ const ProfileImage = () => {
             }
         };
         querySnapshot();
-    }, []);
+    }, [getDocs]);
 
     const userUid = user ? user.uid : null;
     const handleUpload = async () => {
@@ -59,12 +58,6 @@ const ProfileImage = () => {
         const imageRef = ref(storage, `${userUid}/${selectFile.name}`);
         try {
             await uploadBytes(imageRef, selectFile);
-            // 파일 url 가져오기
-            const downloadURL = await getDownloadURL(imageRef);
-            console.log(downloadURL);
-
-            setImgUpFile(downloadURL);
-            return downloadURL;
         } catch (error) {
             console.error("이미지가 업로드되지 않았어용", error);
             return null;
@@ -112,6 +105,13 @@ const ProfileImage = () => {
 export default ProfileImage;
 
 // const [thumbnailUrl, setThumnailUrl] = useState(defaultImage);
+
+// 파일 url 가져오기
+// const downloadURL = await getDownloadURL(imageRef);
+// console.log(downloadURL);
+
+// setImgUpFile(downloadURL);
+// return downloadURL;
 
 // 이미지 업로드 (파이어베이스)
 
