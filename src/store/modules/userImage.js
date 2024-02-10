@@ -2,49 +2,40 @@
 import defaultImage from "assets/defaultImage.png";
 
 // Action value
-const SET_IMAGE = "SET_IMAGE";
-const SET_USER = "SET_USER";
-const SET_IMGUPFILE = "SET_IMGUPFILE";
+const SET_SELECTFILE = "SET_SELECTFILE";
+const SET_THUMNAILIMG = "SET_THUMNAILIMG";
 
 // Action creator
 
-export const setImage = (image) => {
+export const setSelectFile = (selectFile) => {
     return {
-        type: SET_IMAGE,
-        payload: image,
+        type: SET_SELECTFILE,
+        payload: selectFile,
     };
 };
 
-export const setUser = (userInfo) => {
+export const setThumnailImg = (thumnailImg) => {
     return {
-        type: SET_USER,
-        payload: userInfo,
-    };
-};
-export const setImgUpFile = (imgUpFile) => {
-    return {
-        type: SET_IMGUPFILE,
-        payload: imgUpFile,
+        type: SET_THUMNAILIMG,
+        payload: thumnailImg,
     };
 };
 
 // 초기 상태값
-const initialState = { fileImage: defaultImage, user: {}, imgUpFile: "" };
+const initialState = { user: {}, selectFile: defaultImage, thumnailImg: defaultImage };
 
 // 리듀서
 const userImage = (state = initialState, action) => {
     switch (action.type) {
-        case SET_IMAGE:
+        case SET_SELECTFILE:
             return {
-                fileImage: action.payload,
+                ...state,
+                selectFile: action.payload,
             };
-        case SET_USER:
+        case SET_THUMNAILIMG:
             return {
-                user: action.payload,
-            };
-        case SET_IMGUPFILE:
-            return {
-                imgUpFile: action.payload,
+                ...state,
+                thumnailImg: action.payload,
             };
         default:
             return state;

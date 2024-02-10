@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-/* 쓸 수 있는 props : bgc, pd, mg, ml, mr, mb bRadius, color, fSize */
+/* 쓸 수 있는 props : bgc, pd, mg, ml, mr, mb bradius, color, fsize */
 export const NormalButton = styled.button`
     background-color: ${(style) => style.bgc || "#333"};
     padding: ${(style) =>
@@ -26,7 +26,6 @@ export const NormalButton = styled.button`
   1rem = 16px,2rem = 32px, 0.8rem = 16px 미만의 px등등 
   padding: 0.4rem 1rem; 
    props 넘겨주는 입력 형식 : pd={0.4, 1}*/
-
     margin-top: ${(style) =>
         style.mt ? style.mt.map((value) => `${value}rem`).join(" ") : "0rem"};
     margin-left: ${(style) =>
@@ -38,7 +37,7 @@ export const NormalButton = styled.button`
 
     border: ${(style) => style.bd || "none"};
     border-radius: ${(style) =>
-        style.bRadius && style.bRadius.includes("rem")
+        style.bradius && style.bradius.includes("rem")
             ? style.radius
             : style.radius
             ? style.radius + "rem"
@@ -47,7 +46,11 @@ export const NormalButton = styled.button`
     /* 20rem, 10rem, 3rem, 0.4rem 등등 */
 
     color: ${(style) => style.color || "white"};
-    font-size: ${(style) => style.fSize || "1.2rem"};
+    font-size: ${(style) => style.fsize || "1.2rem"};
 
     cursor: pointer;
+    &:hover {
+        color: ${(style) => style.bgc};
+        background-color: ${(style) => style.bd};
+    }
 `;
