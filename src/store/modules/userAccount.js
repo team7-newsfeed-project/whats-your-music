@@ -37,7 +37,6 @@ const userAccount = (state = initialState, action) => {
         case SET_ACCOUNT:
             return { ...state, ...action.payload };
         case SET_IS_LOGIN:
-            const loginState = state.userLoginState;
             const userInfo = action.payload;
             console.log(userInfo);
             return {
