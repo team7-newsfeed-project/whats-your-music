@@ -28,6 +28,19 @@ export const HomeLink = styled(Link)`
     color: var(--subColor2);
 `;
 
+export const LogOutLink = styled(Link)`
+    width: 123px;
+    height: 56px;
+
+    padding: 20px;
+
+    text-decoration: none;
+    border: 1px solid var(--subColor2);
+    border-radius: 20px;
+
+    color: var(--subColor2);
+`;
+
 export const HeaderLogo = styled.img`
     width: 253px;
     height: 56px;
