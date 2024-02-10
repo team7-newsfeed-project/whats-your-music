@@ -13,7 +13,6 @@ const RecommendListMain = () => {
     const setPosts = useSelector((state) => state.posts);
     const activeCategory = useSelector((state) => state.category);
     const dispatch = useDispatch();
-    // const filteredPosts = posts.filter(post)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -28,7 +27,7 @@ const RecommendListMain = () => {
                 initialPosts.push({ id: doc.id, ...doc.data() });
             });
             // firestore에서 가져온 데이터를 redux 통해 전달
-            dispatch(setPost(initialPosts)); // modules폴더의 posts 임포트하기
+            dispatch(setPost(initialPosts));
         };
         fetchData();
     }, []);
@@ -70,6 +69,6 @@ const MainPostList = styled.ul`
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 20px;
     margin: 30px;
 `;
