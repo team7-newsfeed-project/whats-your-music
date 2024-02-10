@@ -70,6 +70,6 @@ const MainPostList = styled.ul`
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 20px;
     margin: 30px;
 `;

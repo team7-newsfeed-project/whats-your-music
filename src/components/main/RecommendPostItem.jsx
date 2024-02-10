@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import thumbnailImg from "assets/thumbnailExImg.png";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import RecommendPostVideoSection from "./RecommendPostVideoSection";
 
 const RecommendPostItem = ({ post }) => {
     const { id, nickname, title, content, date, videoSrc } = post;
@@ -26,7 +26,7 @@ const RecommendPostItem = ({ post }) => {
             <MainArticle onClick={() => onPostItemClick(id)}>
                 {/* <PostImgBox $thumbImgSrc={thumbImgSrc}>
                 </PostImgBox> */}
-                <RecommendPostVideoSection></RecommendPostVideoSection>
+                <RecommendPostVideoSection videoSrc={videoSrc}></RecommendPostVideoSection>
                 <PostTextBox>
                     <PostTitle>{title}</PostTitle>
                     <PostContent>{content}</PostContent>
@@ -51,8 +51,8 @@ const MainArticle = styled.article`
     /* justify-content: space-around; */
     align-items: center;
     background-color: var(--subColor3);
-    width: 550px;
-    height: 145px;
+    width: 600px;
+    height: 200px;
     border-radius: 20px;
 `;
 
