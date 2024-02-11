@@ -25,6 +25,7 @@ const initialState = [
     //     nickname: "보라돌이",
     //     title: "Autumn Leaves 추천해요",
     //     content: "재즈 명곡 들어보세요!",
+    //     date:  // new Date()
     //     videoSrc: "https://www.youtube.com/watch?v=fKIqKvSKJfc",
     // },
 ];
@@ -32,7 +33,7 @@ const initialState = [
 // 리듀서
 const posts = (state = initialState, action) => {
     switch (action.type) {
-        case SET_POST: // 이게 맞는 지 잘 모르겠어요
+        case SET_POST:
             const setPosts = action.payload;
             return setPosts;
         case ADD_POST:

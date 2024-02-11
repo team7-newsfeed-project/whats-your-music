@@ -3,7 +3,9 @@ import styled from "styled-components";
 
 const Footer = () => {
     return (
-        <FooterWrapper>@ developed by N을 품은 S, 멤버 : 보라돌이, 뚜비, 나나, 뽀</FooterWrapper>
+        <FooterWrapper>
+            @ developed by N을 품은 S, 멤버 │ 김지민ㆍ김명환ㆍ남해리ㆍ서혜련
+        </FooterWrapper>
     );
 };
 
