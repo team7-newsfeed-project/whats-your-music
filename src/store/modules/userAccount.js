@@ -21,7 +21,6 @@ const initialState = {
     comment: "",
     image: "",
     isLoggedIn: false,
-    userUid: "",
 };
 
 const userAccount = (state = initialState, action) => {
@@ -39,7 +38,6 @@ const userAccount = (state = initialState, action) => {
                 comment: "",
                 image: "",
                 isLoggedIn: false,
-                userUid: "",
             };
 
         default:
