@@ -4,16 +4,19 @@ import Button from "components/common/Button";
 import DangerButton from "components/common/DangerButton";
 import { useDispatch, useSelector } from "react-redux";
 import { setAccount } from "store/modules/userAccount";
+import { setEditValue } from "store/modules/userContents";
 
 const ProfileContents = ({ userUid }) => {
     const dispatch = useDispatch();
     const { nickname, comment } = useSelector((store) => store.userContents.initUserInfo);
+    const editValue = useSelector((store) => store.userContents.editValue);
+    console.log(" nickname, comment,editValue=>", nickname, comment, editValue);
     const [isEdit, setIsEdit] = useState(false);
-    const [editValue, setEditValue] = useState({
-        userUid: userUid,
-        nickname: "",
-        comment: "",
-    });
+    // const [editValue, setEditValue] = useState({
+    //     userUid: userUid,
+    //     nickname: "",
+    //     comment: "",
+    // });
     const editValueNickname = editValue.nickname;
     const editValueComment = editValue.comment;
     const onEditValueChange = (e) => {
@@ -29,21 +32,22 @@ const ProfileContents = ({ userUid }) => {
 
     const onEditSave = (e) => {
         e.preventDefault();
-        //유효성
-        // const editSaveCheck = window.confirm("수정내용을 저장하시겠습니까?");
-        // if (
-        //     editSaveCheck === true &&
-        //     editValueNickname === nickname &&
-        //     editValueComment === comment
-        // ) {
-        //     alert("수정된 내용이 없습니다");
-        //     return;
-        // }
-        // if (editSaveCheck === false) {
-        //     alert("수정을 취소하셨습니다.");
-        //     setIsEdit(false);
-        //     return;
-        // }
+        // 유효성;
+        const editSaveCheck = window.confirm("수정내용을 저장하시겠습니까?");
+        if (
+            editSaveCheck === true &&
+            editValueNickname === nickname &&
+            editValueComment === comment
+        ) {
+            alert("수정된 내용이 없습니다");
+            return;
+        }
+        if (editSaveCheck === false) {
+            alert("수정을 취소하셨습니다.");
+            setIsEdit(false);
+            return;
+        }
+
         // const editData = letterValue.map((letter) => {
         //     if (letter.id === id) {
         //         return {
@@ -54,8 +58,10 @@ const ProfileContents = ({ userUid }) => {
         //     return letter;
         // });
 
-        console.log(editValue);
-        dispatch(setAccount(editValue));
+        console.log();
+        dispatch(setEditValue({ ...editValue, userUid }));
+        // dispatch(setEditValue(editValue));
+        dispatch(setAccount({ ...editValue, userUid }));
         setIsEdit(false);
     };
     const onEditCancel = (e) => {

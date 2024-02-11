@@ -11,6 +11,7 @@ export const setEditValue = (editValue) => {
 // 초기 상태값
 const initialState = {
     initUserInfo: { userUid: "", nickname: "", comment: "" },
+    editValue: {},
     db: [],
 };
 
@@ -20,7 +21,7 @@ const userContents = (state = initialState, action) => {
         case SET_EDITVALUE:
             return {
                 ...state,
-                initUserInfo: {},
+                initUserInfo: { ...state, ...action.payload },
             };
         default:
             return state;

@@ -36,31 +36,31 @@ const MyPage = () => {
 
     useEffect(() => {
         const userState = auth.onAuthStateChanged((user) => {
-            if (!user || user.uid === null) {
+            console.log(user);
+            if (!user || user === null) {
                 alert("로그인해주세요!");
                 navigate("/");
             }
-            if (user.uid) {
-                const { displayName, email, photoURL, uid } = user;
-                dispatch(setAccount(email, dispatch));
-                // dispatch(setAccount(user));
-            } else {
+            if (!user.uid) {
                 alert("로그인해주세요!");
                 navigate("/");
+            } else if (user.uid) {
+                dispatch(setAccount(user));
             }
         });
         return () => userState();
     }, [dispatch]);
 
     const onLogout = async () => {
-        try {
-            await signout();
-            dispatch(setAccount());
-            navigate("/");
-        } catch (error) {
-            console.log(error);
-            alert("로그아웃을 다시 한 번 시도해 주세용");
-        }
+        // try {
+        //     console.log(1);
+        //     await signout();
+        //     dispatch(setAccount({}));
+        //     navigate("/");
+        // } catch (error) {
+        //     console.log(error);
+        //     alert("로그아웃을 다시 한 번 시도해 주세용");
+        // }
     };
 
     return (
