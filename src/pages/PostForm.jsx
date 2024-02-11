@@ -8,7 +8,7 @@ import Footer from "components/Footer/Footer";
 import { useSelector, useDispatch } from "react-redux";
 import { addPost } from "store/modules/posts";
 import { setCategory } from "store/modules/category";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "database/firebase";
 import CategoryDropdown from "components/common/CategoryDropdown";
 
@@ -20,6 +20,8 @@ const PostForm = () => {
     const [content, setContent] = useState("");
     const [currentDateTime, setCurrentDateTime] = useState("");
     const selectedCategory = useSelector((state) => state.category);
+    const userNickname = useSelector((state) => state.userAccount.nickname);
+    const userUid = useSelector((state) => state.userAccount.userUid);
 
     useEffect(() => {
         const updateDateTime = () => {
@@ -47,15 +49,28 @@ const PostForm = () => {
         }
 
         const newPost = {
+            category: selectedCategory,
+            content,
+            date: serverTimestamp(),
+            nickname: userNickname,
             title,
             videoSrc,
-            content,
+            uid: userUid,
         };
-        dispatch(addPost(newPost));
-        await addDoc(collection(db, "posts"), newPost);
-        setTitle("");
-        setVideoSrc("");
-        setContent("");
+
+        try {
+            const docRef = await addDoc(collection(db, "posts"), newPost);
+            newPost.id = docRef.id;
+            dispatch(addPost(newPost));
+            setTitle("");
+            setVideoSrc("");
+            setContent("");
+            setCurrentDateTime("");
+            alert("게시글이 등록되었습니다.");
+        } catch (error) {
+            console.error("Error adding post to Firestore:", error);
+            alert("게시글 등록에 실패했습니다.");
+        }
     };
     console.log(title, videoSrc, content);
 
@@ -80,7 +95,7 @@ const PostForm = () => {
             <MainWrapper>
                 <FormHeader>
                     <CategoryDisplay>{selectedCategory}</CategoryDisplay>
-                    <NicknameDisplay>보라돌이</NicknameDisplay>
+                    <NicknameDisplay>{userNickname}</NicknameDisplay>
                 </FormHeader>
                 <StyledInput
                     type="text"
