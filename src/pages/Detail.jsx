@@ -51,7 +51,7 @@ const Detail = () => {
 
         try {
             await deleteDoc(docRef);
-            dispatch(deletePost({ postId: id }));
+            dispatch(deletePost(id));
             navigate("/");
         } catch (error) {
             console.error("게시글 삭제 오류:", error);
@@ -64,9 +64,7 @@ const Detail = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const { id, title, videoSrc, content } = post;
-
+        const { title, videoSrc, content } = post;
         const docRef = doc(db, "posts", id);
         await updateDoc(docRef, {
             title,
@@ -74,8 +72,7 @@ const Detail = () => {
             content,
         });
 
-        const editedPost = { id, title, videoSrc, content };
-        dispatch(editPost(editedPost));
+        dispatch(editPost(post));
         setIsEditing(false);
     };
 

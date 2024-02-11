@@ -36,6 +36,7 @@ const initialState = [
 
 // 리듀서
 const posts = (state = initialState, action) => {
+    console.log(action.payload);
     switch (action.type) {
         case SET_POST:
             const setPosts = action.payload;
@@ -53,7 +54,7 @@ const posts = (state = initialState, action) => {
             });
         case DELETE_POST:
             const postId = action.payload;
-            return state.fillter((post) => post.id !== postId);
+            return state.filter((post) => post.id !== postId);
         default:
             return state;
     }
