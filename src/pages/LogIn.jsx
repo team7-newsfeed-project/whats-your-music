@@ -17,7 +17,7 @@ const LogIn = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [pw, setPw] = useState("");
-    let reduxUser = useSelector((state) => state.userAccount); //FIXME - const로 고쳐야함
+    let reduxUser = useSelector((state) => state.userAccount);
     const dispatch = useDispatch();
 
     const onLogIn = async (event) => {
@@ -29,7 +29,6 @@ const LogIn = () => {
             alert("비밀번호를 입력해주세요.");
             return;
         } else if (reduxUser.isLoggedIn === true) {
-            //FIXME - 이것도 무의미함 예전 redux 값을 참조하고 있음
             alert("이미 로그인되어 있습니다.");
             return;
         }
@@ -61,8 +60,8 @@ const LogIn = () => {
             }
         }
         await getUserInfo(email, dispatch);
-        reduxUser = store.getState().userAccount; //FIXME - 이거 고쳐야함
-        await setUserInfo(reduxUser, { isLoggedIn: true }, dispatch); //reduxUser가 빈 값으로 들어감
+        reduxUser = store.getState().userAccount;
+        await setUserInfo(reduxUser, { isLoggedIn: true }, dispatch);
         alert("로그인이 되었습니다.");
         navigate("/");
     };
@@ -84,8 +83,8 @@ const LogIn = () => {
 
         await do3rdPartyLogIn({ email: user.email, nickname: user.displayName }, dispatch);
         await getUserInfo(user.email, dispatch);
-        reduxUser = store.getState().userAccount; //FIXME - 이거 고쳐야함
-        await setUserInfo(reduxUser, { isLoggedIn: true }, dispatch); //reduxUser에 빈 값이 들어감
+        reduxUser = store.getState().userAccount;
+        await setUserInfo(reduxUser, { isLoggedIn: true }, dispatch);
         alert("로그인이 되었습니다.");
         navigate("/");
     };
@@ -110,8 +109,8 @@ const LogIn = () => {
         nickname = user.reloadUserInfo.providerUserInfo[0].screenName;
         await do3rdPartyLogIn({ email, nickname }, dispatch);
         await getUserInfo(email, dispatch);
-        reduxUser = store.getState().userAccount; //FIXME - 이거 고쳐야함
-        await setUserInfo(reduxUser, { isLoggedIn: true }, dispatch); //reduxUser에 빈 값이 들어감
+        reduxUser = store.getState().userAccount;
+        await setUserInfo(reduxUser, { isLoggedIn: true }, dispatch);
         alert("로그인이 되었습니다.");
         navigate("/");
     };
@@ -138,17 +137,25 @@ const LogIn = () => {
                     }}
                     placeholder="비밀번호를 적어주세요."
                 />
-                <Button type="submit" name="로그인" bgc="var(--subColor1)" color="black" />
+                <Button
+                    type="submit"
+                    name="로그인"
+                    bgc="var(--subColor1)"
+                    color="black"
+                    bdc="--subColor1"
+                />
                 <Button
                     name="Google 로그인"
                     bgc="var(--subColor1)"
                     color="black"
+                    bdc="--subColor1"
                     onClick={(event) => onGoogleLogIn(event)}
                 />
                 <Button
                     name="GitHub 로그인"
                     bgc="var(--subColor1)"
                     color="black"
+                    bdc="--subColor1"
                     onClick={(event) => onGitHubLogIn(event)}
                 />
                 <LogInInfo>
@@ -180,6 +187,7 @@ const HomeBtn = styled.button`
     padding: 5px;
     margin-top: 10px;
     margin-left: 10px;
+    cursor: pointer;
 `;
 
 const Logo = styled.p`
