@@ -22,6 +22,8 @@ const RecommendPostItem = ({ post }) => {
         day: "numeric",
     });
 
+    console.log("date:", date);
+
     return (
         <MainArticleWrapper>
             <MainArticle onClick={() => onPostItemClick(id)}>
@@ -50,7 +52,7 @@ const MainArticle = styled.article`
     /* justify-content: space-around; */
     align-items: center;
     background-color: var(--subColor3);
-    width: 600px;
+    width: 750px;
     height: 180px;
     border-radius: 20px;
     &:hover {

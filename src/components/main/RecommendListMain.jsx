@@ -36,7 +36,7 @@ const RecommendListMain = () => {
 
     return (
         <MainWrapper>
-            <MainText>오늘의 음악을 추천해주세요 </MainText>
+            <MainText>♫ 오늘의 음악을 추천해주세요 🎧 </MainText>
             <ListText>
                 '동영상을 재생할 수 없음'이라고 뜨는 경우, &nbsp;
                 <span style={{ textDecorationLine: "underline", textDecorationColor: "gray" }}>
@@ -62,7 +62,7 @@ const MainWrapper = styled.main`
     justify-content: center;
     gap: 10px;
     background-color: var(--mainColor);
-    width: 100%;
+    width: 1650px;
     min-height: 500px;
     border-radius: 20px;
     margin-bottom: 10px;
@@ -71,21 +71,24 @@ const MainWrapper = styled.main`
 const MainText = styled.div`
     margin: 60px;
     font-size: 20px;
-    width: 100%;
-    height: 100px;
-    background-image: url("https://cdn.pixabay.com/photo/2018/02/10/21/21/darkness-3144595_1280.jpg");
+    width: 1600px;
+    height: 200px;
+    background-image: url("https://images.unsplash.com/photo-1630441099796-851705faa3ed?q=80&w=1909&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    /* background-size: 50%; */
     background-size: cover;
-    background-position: center;
+    background-repeat: no-repeat;
+    background-position: right 35% bottom 30%;
     /* background-color: #b192d1; */
     /* background-color: var(--subColor1); */
     display: flex;
     justify-content: center;
     align-items: center;
-    color: black;
-    /* color: white; */
+    /* color: black; */
+    color: white;
     font-family: "Pretendard-Regular";
     border-radius: 30px;
     font-weight: bold;
+    letter-spacing: 0.4rem;
 `;
 
 const MainPostList = styled.ul`

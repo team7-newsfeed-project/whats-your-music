@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { setCategory } from "store/modules/category";
-import logoImg from "assets/whatsyourmusicLogo.png";
+import logoImg from "assets/whatsyourmusic_logo.png";
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -74,7 +74,7 @@ const HeaderWrapper = styled.header`
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 100%;
+    width: 1650px;
     height: 100px;
     margin: 10px auto 10px auto;
     border-radius: 20px;
@@ -84,6 +84,7 @@ const LogoImgBox = styled.div`
     /* background-color: var(--subColor2); */
     margin-left: 130px;
     margin-right: 100px;
+    margin-top: 10px;
 `;
 
 const MainNav = styled.nav`
