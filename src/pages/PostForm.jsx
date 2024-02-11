@@ -70,10 +70,10 @@ const PostForm = () => {
             setVideoSrc("");
             setContent("");
             setCurrentDateTime("");
-            alert("게시글이 등록되었습니다.");
+            alert("게시글이 등록되었습니다!");
         } catch (error) {
             console.error("Error adding post to Firestore:", error);
-            alert("게시글 등록에 실패했습니다.");
+            alert("게시글 등록에 실패했습니다!");
         }
     };
 
