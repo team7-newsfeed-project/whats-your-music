@@ -69,7 +69,6 @@ const LogIn = () => {
 
     const onGoogleLogIn = async (event) => {
         event.preventDefault();
-        const providerName = event.target.textContent.split(" ")[0];
         let provider = new GoogleAuthProvider();
         let user;
 
