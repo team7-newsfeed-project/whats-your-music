@@ -27,7 +27,7 @@ const MyRecommend = ({ userUid }) => {
                             </section>
                             <div>
                                 <div>
-                                    {date.toDate().toLocaleString("ko-KR", {
+                                    {date.toLocaleString("ko-KR", {
                                         year: "2-digit", // 혹은 numeric
                                         month: "numeric",
                                         day: "numeric",
