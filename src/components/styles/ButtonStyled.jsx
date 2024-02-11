@@ -85,6 +85,6 @@ export const DangerButton = styled.button`
     cursor: pointer;
     &:hover {
         background-color: ${(style) => style.hoverbgc || "var(--subColor1)"};
-        color: ${(style) => style.color || "var(--mainColor)"};
+        color: ${(style) => style.hovercolor || "var(--mainColor)"};
     }
 `;
