@@ -1,5 +1,4 @@
 const SET_ACCOUNT = "userAccount/SET_ACCOUNT";
-const SET_IS_LOGIN = "userAccount/SET_IS_LOGIN";
 const SET_LOGOUT = "userAccount/SET_LOGOUT";
 
 export const setAccount = (payload) => {
@@ -22,7 +21,6 @@ const initialState = {
     comment: "",
     image: "",
     isLoggedIn: false,
-    userUid: "",
 };
 
 const userAccount = (state = initialState, action) => {
@@ -40,7 +38,6 @@ const userAccount = (state = initialState, action) => {
                 comment: "",
                 image: "",
                 isLoggedIn: false,
-                userUid: "",
             };
 
         default:

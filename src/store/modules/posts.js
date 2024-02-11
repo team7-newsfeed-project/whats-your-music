@@ -19,17 +19,19 @@ export const deletePost = (payload) => {
 };
 
 const initialState = [
-    // {
-    //     id: "0",
-    //     category: "클래식및재즈",
-    //     nickname: "보라돌이",
-    //     title: "Autumn Leaves 추천해요",
-    //     content: "재즈 명곡 들어보세요!",
-    //     date:  // new Date()
-    //     videoSrc: "https://www.youtube.com/watch?v=fKIqKvSKJfc",
-    // +   uid (추가- 글쓴이 고유 식별):
-    // },
-    //
+    {
+        id: "",
+        category: "",
+        nickname: "",
+        title: "  ",
+        content: "  !",
+        date: new Date().toLocaleDateString("ko-KR", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+        }),
+        videoSrc: "",
+    },
 ];
 
 // 리듀서

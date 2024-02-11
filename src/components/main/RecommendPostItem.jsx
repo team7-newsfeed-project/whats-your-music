@@ -16,11 +16,12 @@ const RecommendPostItem = ({ post }) => {
     // new Date() 로 파이어베이스에 데이터 넣고 (글쓰기 postForm에서) -> 가져와 toLocaleString써서 출력하기?
     // 파이어베이스에 직접 date를 넣으면 timestamp라서 ..
     //: 파이어베이스에 저장된 타임스탬프객체 -> toDate()메서드로 Date객체로 변환해 쓰기
-    const formattedDate = date.toDate().toLocaleString("ko-KR", {
-        year: "2-digit", // 혹은 numeric
-        month: "numeric",
-        day: "numeric",
-    });
+
+    // const formattedDate = new Date().toLocaleDateString("ko-KR", {
+    //     year: "numeric",
+    //     month: "long",
+    //     day: "numeric",
+    // });
 
     console.log("date:", date);
 
@@ -32,7 +33,7 @@ const RecommendPostItem = ({ post }) => {
                     <PostTitle>{title}</PostTitle>
                     <PostContent>{content}</PostContent>
                     <DateNameTextBox>
-                        <time>{formattedDate}</time>
+                        <time>{date}</time>
                         <PostNickname>{nickname}</PostNickname>
                     </DateNameTextBox>
                 </PostTextBox>
