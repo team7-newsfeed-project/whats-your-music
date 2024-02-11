@@ -10,7 +10,7 @@ const Header = () => {
     const activeCategory = useSelector((state) => state.category);
     const userSetAccount = useSelector((state) => state.userAccount);
     const isUserLoggedIn = userSetAccount.isLoggedIn;
-    const userSetImg = userSetAccount.userLoginState.image;
+    const userSetImg = userSetAccount.image;
     // 테스트용 userSetImg -https://cdn.imweb.me/upload/S20221129c3c04fdc67a8b/09e904cb8f26f.png
     // const userSetImg = userSetAccount.image;
 
