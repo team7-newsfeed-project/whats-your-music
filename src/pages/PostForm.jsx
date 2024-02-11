@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { LayoutStyle } from "components/styles/LayoutStyle";
-import logoImg from "assets/logoImage.png";
+import logoImg from "assets/whatsyourmusicLogo.png";
 import Button from "components/common/Button";
 import { useNavigate } from "react-router-dom";
 import Footer from "components/Footer/Footer";
@@ -20,6 +20,8 @@ const PostForm = () => {
     const [content, setContent] = useState("");
     const [currentDateTime, setCurrentDateTime] = useState("");
     const selectedCategory = useSelector((state) => state.category);
+    const userNickname = useSelector((state) => state.userAccount.nickname);
+    const email = useSelector((state) => state.userAccount.email);
 
     useEffect(() => {
         const updateDateTime = () => {
@@ -47,17 +49,33 @@ const PostForm = () => {
         }
 
         const newPost = {
+            category: selectedCategory,
+            content,
+            date: new Date().toLocaleDateString("ko-KR", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+            }),
+            nickname: userNickname,
             title,
             videoSrc,
-            content,
+            email,
         };
-        await dispatch(addPost(newPost));
-        await addDoc(collection(db, "posts"), newPost);
-        setTitle("");
-        setVideoSrc("");
-        setContent("");
+
+        try {
+            const docRef = await addDoc(collection(db, "posts"), newPost);
+            newPost.id = docRef.id;
+            dispatch(addPost(newPost));
+            setTitle("");
+            setVideoSrc("");
+            setContent("");
+            setCurrentDateTime("");
+            alert("게시글이 등록되었습니다!");
+        } catch (error) {
+            console.error("Error adding post to Firestore:", error);
+            alert("게시글 등록에 실패했습니다!");
+        }
     };
-    console.log(title, videoSrc, content);
 
     const handleGenreChange = (event) => {
         dispatch(setCategory(event.target.value));
@@ -80,7 +98,7 @@ const PostForm = () => {
             <MainWrapper>
                 <FormHeader>
                     <CategoryDisplay>{selectedCategory}</CategoryDisplay>
-                    <NicknameDisplay>보라돌이</NicknameDisplay>
+                    <NicknameDisplay>{userNickname}</NicknameDisplay>
                 </FormHeader>
                 <StyledInput
                     type="text"
@@ -101,9 +119,8 @@ const PostForm = () => {
                 />
                 <div>
                     <DateTime>{currentDateTime}</DateTime>
-                    <CategoryDropdown onChange={handleGenreChange} value={selectedCategory} />
+                    <CategoryDropdown onChange={handleGenreChange} value={setCategory} />
                     <SubmitBtn onClick={handlePostSubmit}>등록</SubmitBtn>
-                    {/* dd */}
                 </div>
             </MainWrapper>
             <Footer />
