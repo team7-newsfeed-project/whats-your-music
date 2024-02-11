@@ -12,7 +12,6 @@ export const register = async (newAccount) => {
 
 export const getUserInfo = async (email, dispatch) => {
     //firebase에서 계정정보를 가져와서 redux에 저장
-    console.log("email", email);
     const q = query(collection(db, "accounts"), where("email", "==", email));
     const querySnapshot = await getDocs(q);
     let user;
