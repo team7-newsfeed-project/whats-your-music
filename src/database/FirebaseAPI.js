@@ -15,7 +15,7 @@ export const getUserInfo = async (email, dispatch) => {
     const q = query(collection(db, "accounts"), where("email", "==", email));
     const querySnapshot = await getDocs(q);
     let user;
-
+    console.log(q);
     querySnapshot.forEach((doc) => {
         user = doc.data();
         user.firebaseId = doc.id;

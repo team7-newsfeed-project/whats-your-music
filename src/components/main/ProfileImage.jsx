@@ -6,15 +6,37 @@ import { setSelectFile, setThumnailImg } from "store/modules/userImage";
 import Button from "components/common/Button";
 import * as M from "components/styles/MypageStyle";
 import DangerButton from "components/common/DangerButton";
+import { setAccount } from "store/modules/userAccount";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 const ProfileImage = () => {
     const dispatch = useDispatch();
-    const { userUid } = useSelector((store) => store.userAccount);
+    const { email } = useSelector((store) => store.userAccount);
     const selectFile = useSelector((store) => store.userImage.selectFile);
     const thumnailImg = useSelector((store) => store.userImage.thumnailImg);
     const [isEdit, setEdit] = useState(false);
+
+    // useEffect(() => {
+    //     alert(`${email}`);
+    //     const getUserInfo = async (email) => {
+    //         //firebase에서 계정정보를 가져와서 redux에 저장
+    //         const q = query(collection(db, "accounts"), where("email", "==", email));
+    //         const querySnapshot = await getDocs(q);
+    //         let user;
+    //         querySnapshot.forEach((doc) => {
+    //             user = doc.data();
+    //             // user.firebaseId = doc.id;
+    //             console.log(user);
+    //         });
+    //         console.log(user);
+
+    //         // dispatch(setAccount(user));
+    //         //   dispatch(setThumnailImg(downloadURL));
+    //     };
+    //     getUserInfo(email);
+    // }, []);
     // 1. 이미지 선택
-    const currUserUid = userUid ? userUid : null;
+    const currEmail = email ? email : null;
     const handleUpload = async () => {
         if (!selectFile) {
             alert("이미지를 선택해주세요.");
@@ -26,7 +48,7 @@ const ProfileImage = () => {
         }
         //ref함수로 Storage 내부 저장할 위치를 회원 고유번호 uid정하고, uploadBytes
         if (selectFile === null) return;
-        const imageRef = ref(storage, `${currUserUid}/${selectFile.name}`);
+        const imageRef = ref(storage, `${currEmail}/${selectFile.name}`);
         console.log(imageRef);
         try {
             await uploadBytes(imageRef, selectFile);
@@ -37,6 +59,8 @@ const ProfileImage = () => {
         // 파이어베이스 해당 콜렉션에 있는 문서 파일 url 가져오기
         const downloadURL = await getDownloadURL(imageRef);
         dispatch(setThumnailImg(downloadURL));
+        console.log(downloadURL);
+        dispatch(setAccount({ image: downloadURL }));
 
         setEdit(false);
         return downloadURL;

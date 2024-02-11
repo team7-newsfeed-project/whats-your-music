@@ -2,9 +2,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 import RecommendPostVideoSection from "./RecommendPostVideoSection";
 
-const MyRecommend = ({ userUid }) => {
+const MyRecommend = () => {
     const myRecommends = useSelector((store) => store.userRecommend);
-    const filterMyRecommends = myRecommends.filter((boardItem) => console.log(boardItem));
+    const userEmail = useSelector((store) => store.userAccount.email);
+    const filterMyRecommends = myRecommends.filter((boardItem) => boardItem.email === userEmail);
 
     return (
         <article>
@@ -16,31 +17,34 @@ const MyRecommend = ({ userUid }) => {
                     const { id, title, date, content, videoSrc, nickname } = recommends;
                     return (
                         <article key={id}>
-                            <RecommendPostVideoSection />
-                            <section>
-                                <iframe
-                                    src={videoSrc}
-                                    title="youtube-video-player"
-                                    frameborder="0"
-                                    allowFullScreen
-                                ></iframe>
-                            </section>
+                            <RecommendPostVideoSection videoSrc={videoSrc} />
+
                             <div>
                                 <div>
-                                    {date.toLocaleString("ko-KR", {
-                                        year: "2-digit", // 혹은 numeric
-                                        month: "numeric",
-                                        day: "numeric",
-                                        hour: "2-digit",
-                                        minute: "2-digit",
-                                    })}
+                                    <p>{title}</p>
+                                    <p>{content}</p>
                                 </div>
-                                <div></div>
+                                <ul>
+                                    <li>
+                                        {date.toLocaleString("ko-KR", {
+                                            year: "2-digit", // 혹은 numeric
+                                            month: "numeric",
+                                            day: "numeric",
+                                        })}
+                                    </li>
+
+                                    <li>
+                                        <p>
+                                            <span>{nickname}</span>
+                                        </p>
+                                    </li>
+                                </ul>
                             </div>
                         </article>
                     );
                 })}
             </section>
+            <section>{filterMyRecommends.length === 0 ? <div></div> : null}</section>
         </article>
     );
 };

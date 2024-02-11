@@ -6,28 +6,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { setAccount } from "store/modules/userAccount";
 import { setEditValue } from "store/modules/userContents";
 
-const ProfileContents = ({ userUid }) => {
+const ProfileContents = () => {
     const dispatch = useDispatch();
     const { nickname, comment } = useSelector((store) => store.userContents.initUserInfo);
     const editValue = useSelector((store) => store.userContents.editValue);
     console.log(" nickname, comment,editValue=>", nickname, comment, editValue);
     const [isEdit, setIsEdit] = useState(false);
-    // const [editValue, setEditValue] = useState({
-    //     userUid: userUid,
-    //     nickname: "",
-    //     comment: "",
-    // });
     const editValueNickname = editValue.nickname;
     const editValueComment = editValue.comment;
+
     const onEditValueChange = (e) => {
         e.preventDefault();
         const { name, value } = e.target;
-        setEditValue({ ...editValue, [name]: value });
+        dispatch(setEditValue({ ...editValue, [name]: value }));
     };
     const onEditContents = (e) => {
         e.preventDefault();
         setIsEdit(true);
-        setEditValue({ nickname, comment });
+        dispatch(setEditValue({ nickname, comment }));
     };
 
     const onEditSave = (e) => {
@@ -48,20 +44,9 @@ const ProfileContents = ({ userUid }) => {
             return;
         }
 
-        // const editData = letterValue.map((letter) => {
-        //     if (letter.id === id) {
-        //         return {
-        //             ...letter,
-        //             content: editValueContent,
-        //         };
-        //     }
-        //     return letter;
-        // });
-
-        console.log();
-        dispatch(setEditValue({ ...editValue, userUid }));
-        // dispatch(setEditValue(editValue));
-        dispatch(setAccount({ ...editValue, userUid }));
+        console.log(editValue);
+        dispatch(setEditValue(editValue));
+        dispatch(setAccount(editValue));
         setIsEdit(false);
     };
     const onEditCancel = (e) => {
@@ -75,8 +60,8 @@ const ProfileContents = ({ userUid }) => {
             <div>
                 {!isEdit ? (
                     <div>
-                        <p>닉네임 : {nickname}</p>
-                        <p>소개 : {comment}</p>
+                        <p>닉네임 : {editValueNickname}</p>
+                        <p>소개 : {editValueComment}</p>
                     </div>
                 ) : (
                     <form>

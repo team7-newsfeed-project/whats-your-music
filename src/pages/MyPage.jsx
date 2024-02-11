@@ -1,10 +1,10 @@
 // console.log(querySnapshot);
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { collection, getDocs, query } from "firebase/firestore";
 import { auth, db, signout } from "database/firebase";
-import { setAccount, setUserLogin, setUserLogout } from "store/modules/userAccount";
+import { setAccount, setUserLogout } from "store/modules/userAccount";
 import { setMyRecommend } from "store/modules/userRecommend";
 import ProfileContents from "components/main/ProfileContents";
 import DangerButton from "components/common/DangerButton";
@@ -16,8 +16,7 @@ import logoImage from "assets/logoImage.png";
 const MyPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const userUid = useSelector((store) => store.userAccount.userUid);
-    console.log(userUid);
+
     useEffect(() => {
         const fetchData = async () => {
             // firestore db 가져오기
@@ -39,13 +38,9 @@ const MyPage = () => {
             console.log(user);
             if (!user || user === null) {
                 alert("로그인해주세요!");
-                navigate("/");
-            }
-            if (!user.uid) {
-                alert("로그인해주세요!");
-                navigate("/");
-            } else if (user.uid) {
                 dispatch(setAccount(user));
+
+                navigate("/");
             }
         });
         return () => userState();
@@ -55,7 +50,7 @@ const MyPage = () => {
         // try {
         //     console.log(1);
         //     await signout();
-        //     dispatch(setAccount({}));
+        //     dispatch(setUserLogout());
         //     navigate("/");
         // } catch (error) {
         //     console.log(error);
@@ -76,9 +71,9 @@ const MyPage = () => {
                     <h4>마이페이지</h4>
                 </S.MyPageheadDiv>
                 <S.ImageNdInfo>
-                    <ProfileContents userUid={userUid} />
+                    <ProfileContents />
                 </S.ImageNdInfo>
-                <MyRecommend userUid={userUid} />
+                <MyRecommend />
             </S.MyPageSection>
         </Layout>
     );
