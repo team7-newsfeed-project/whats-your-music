@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-/* 쓸 수 있는 props : bgc, pd, mg, ml, mr, mb bradius, color, fsize */
+/* 쓸 수 있는 props : bgc, pd, mg, ml, mr, mb, bdc, bradius, color, fsize */
 export const NormalButton = styled.button`
-    background-color: ${(style) => style.bgc || "#333"};
+    background-color: ${(style) => style.bgc || "var(--mainColor)"};
     padding: ${(style) =>
         style.pd
             ? style.pd
@@ -21,23 +21,19 @@ export const NormalButton = styled.button`
                   .split(", ")
                   .map((value) => `${value}rem`)
                   .join(" ")
-            : "0.4rem 1rem"};
+            : "0rem 0rem"};
     /* 기본 
   1rem = 16px,2rem = 32px, 0.8rem = 16px 미만의 px등등 
   padding: 0.4rem 1rem; 
    props 넘겨주는 입력 형식 : pd={0.4, 1}*/
-    margin-top: ${(style) =>
-        style.mt ? style.mt.map((value) => `${value}rem`).join(" ") : "0rem"};
-    margin-left: ${(style) =>
-        style.ml ? style.ml.map((value) => `${value}rem`).join(" ") : "0rem"};
-    margin-right: ${(style) =>
-        style.mr ? style.mr.map((value) => `${value}rem`).join(" ") : "0rem"};
-    margin-bottom: ${(style) =>
-        style.mb ? style.mb.map((value) => `${value}rem`).join(" ") : "0rem"};
+    margin-top: ${(style) => (style.mt ? `${style.mt}rem`.join(" ") : "0rem")};
+    margin-left: ${(style) => (style.ml ? `${style.ml}rem`.join(" ") : "0rem")};
+    margin-right: ${(style) => (style.mr ? `${style.mr}rem`.join(" ") : "0rem")};
+    margin-bottom: ${(style) => (style.mb ? `${style.mb}rem`.join(" ") : "0rem")};
 
-    border: ${(style) => style.bd || "none"};
+    border: 1px solid ${(style) => style.bdc || "var(--subColor2)"};
     border-radius: ${(style) =>
-        style.bradius && style.bradius.includes("rem")
+        style.radius || (style.bradius && style.bradius.includes("rem"))
             ? style.radius
             : style.radius
             ? style.radius + "rem"
@@ -50,7 +46,45 @@ export const NormalButton = styled.button`
 
     cursor: pointer;
     &:hover {
-        color: ${(style) => style.bgc};
-        background-color: ${(style) => style.bd};
+        background-color: ${(style) => style.hoverbgc || "var(--subColor2)"};
+        color: ${(style) => style.color || "var(--mainColor)"};
+    }
+`;
+
+export const DangerButton = styled.button`
+    background-color: ${(style) => style.bgc || "var(--mainColor)"};
+    padding: ${(style) =>
+        style.pd
+            ? style.pd
+                  .split(", ")
+                  .map((value) => `${value}rem`)
+                  .join(" ")
+            : "0.4rem 1rem"};
+    margin: ${(style) =>
+        style.mg
+            ? style.mg
+                  .split(", ")
+                  .map((value) => `${value}rem`)
+                  .join(" ")
+            : "0rem 0rem"};
+    margin-top: ${(style) => (style.mt ? `${style.mt}rem`.join(" ") : "0rem")};
+    margin-left: ${(style) => (style.ml ? `${style.ml}rem`.join(" ") : "0rem")};
+    margin-right: ${(style) => (style.mr ? `${style.mr}rem`.join(" ") : "0rem")};
+    margin-bottom: ${(style) => (style.mb ? `${style.mb}rem`.join(" ") : "0rem")};
+
+    color: ${(style) => style.color || "white"};
+    border: 1px solid ${(style) => style.bdc || "var(--subColor1)"};
+    border-radius: ${(style) =>
+        style.radius || (style.bradius && style.bradius.includes("rem"))
+            ? style.radius
+            : style.radius
+            ? style.radius + "rem"
+            : "0.8rem"};
+
+    font-size: ${(style) => style.fsize || "1.2rem"};
+    cursor: pointer;
+    &:hover {
+        background-color: ${(style) => style.hoverbgc || "var(--subColor1)"};
+        color: ${(style) => style.color || "var(--mainColor)"};
     }
 `;
