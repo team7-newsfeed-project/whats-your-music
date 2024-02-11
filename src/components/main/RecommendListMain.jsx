@@ -68,12 +68,15 @@ const MainWrapper = styled.main`
     margin-bottom: 10px;
 `;
 
-const MainText = styled.p`
+const MainText = styled.div`
     margin: 60px;
     font-size: 20px;
     width: 100%;
     height: 100px;
-    background-color: #b192d1;
+    background-image: url("https://cdn.pixabay.com/photo/2018/02/10/21/21/darkness-3144595_1280.jpg");
+    background-size: cover;
+    background-position: center;
+    /* background-color: #b192d1; */
     /* background-color: var(--subColor1); */
     display: flex;
     justify-content: center;
