@@ -28,7 +28,6 @@ const Register = () => {
             alert("비밀번호 확인을 입력하십시오.");
             return;
         } else if (checkPw !== pw) {
-            console.log(checkPw, pw);
             alert("비밀번호 확인이 비밀번호와 다릅니다.");
             return;
         } else if (nickname === "") {

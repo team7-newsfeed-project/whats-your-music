@@ -1,5 +1,6 @@
 const SET_ACCOUNT = "userAccount/SET_ACCOUNT";
-const SET_IS_LOGIN = "SET_IS_LOGIN";
+const SET_IS_LOGIN = "userAccount/SET_IS_LOGIN";
+const SET_LOGOUT = "userAccount/SET_LOGOUT";
 
 export const setAccount = (payload) => {
     return {
@@ -7,10 +8,10 @@ export const setAccount = (payload) => {
         payload,
     };
 };
-export const setUserLogin = (user) => {
+
+export const setUserLogout = () => {
     return {
-        type: SET_IS_LOGIN,
-        payload: user,
+        type: SET_LOGOUT,
     };
 };
 
@@ -22,34 +23,26 @@ const initialState = {
     image: "",
     isLoggedIn: false,
     userUid: "",
-    userLoginState: {
-        userUid: "",
-        email: "",
-        nickname: "",
-        comment: "",
-        image: "",
-        isLoggedIn: false,
-    },
 };
 
 const userAccount = (state = initialState, action) => {
+    console.log("action.payload=>", action.payload);
     switch (action.type) {
         case SET_ACCOUNT:
             return { ...state, ...action.payload };
-        case SET_IS_LOGIN:
-            const userInfo = action.payload;
-            console.log(userInfo);
+
+        case SET_LOGOUT:
             return {
                 ...state,
-                userLoginState: {
-                    userUid: userInfo.uid,
-                    email: userInfo.email,
-                    nickname: userInfo.displayName,
-                    comment: "",
-                    image: userInfo.photoURL,
-                    isLoggedIn: true,
-                },
+                firebaseId: "",
+                email: "",
+                nickname: "",
+                comment: "",
+                image: "",
+                isLoggedIn: false,
+                userUid: "",
             };
+
         default:
             return state;
     }
