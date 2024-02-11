@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { collection, getDocs, query } from "firebase/firestore";
 import { auth, db, signout } from "database/firebase";
-import { setUserLogin, setUserLogout } from "store/modules/userAccount";
+import { setAccount, setUserLogin, setUserLogout } from "store/modules/userAccount";
 import { setMyRecommend } from "store/modules/userRecommend";
 import ProfileContents from "components/main/ProfileContents";
 import DangerButton from "components/common/DangerButton";
@@ -16,8 +16,8 @@ import logoImage from "assets/logoImage.png";
 const MyPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { userUid } = useSelector((store) => store.userAccount.userLoginState);
-
+    const userUid = useSelector((store) => store.userAccount.userUid);
+    console.log(userUid);
     useEffect(() => {
         const fetchData = async () => {
             // firestore db 가져오기
@@ -36,13 +36,14 @@ const MyPage = () => {
 
     useEffect(() => {
         const userState = auth.onAuthStateChanged((user) => {
-            if (!user) {
+            if (!user || user.uid === null) {
                 alert("로그인해주세요!");
                 navigate("/");
             }
             if (user.uid) {
                 const { displayName, email, photoURL, uid } = user;
-                dispatch(setUserLogin({ displayName, email, photoURL, uid }));
+                dispatch(setAccount(email, dispatch));
+                // dispatch(setAccount(user));
             } else {
                 alert("로그인해주세요!");
                 navigate("/");
@@ -54,7 +55,7 @@ const MyPage = () => {
     const onLogout = async () => {
         try {
             await signout();
-            dispatch(setUserLogout());
+            dispatch(setAccount());
             navigate("/");
         } catch (error) {
             console.log(error);

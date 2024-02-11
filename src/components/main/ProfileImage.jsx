@@ -9,7 +9,7 @@ import DangerButton from "components/common/DangerButton";
 
 const ProfileImage = () => {
     const dispatch = useDispatch();
-    const { userUid } = useSelector((store) => store.userAccount.userLoginState);
+    const { userUid } = useSelector((store) => store.userAccount);
     const selectFile = useSelector((store) => store.userImage.selectFile);
     const thumnailImg = useSelector((store) => store.userImage.thumnailImg);
     const [isEdit, setEdit] = useState(false);

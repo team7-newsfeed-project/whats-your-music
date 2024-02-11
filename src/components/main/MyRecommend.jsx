@@ -1,10 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import RecommendPostVideoSection from "./RecommendPostVideoSection";
 
 const MyRecommend = ({ userUid }) => {
     const myRecommends = useSelector((store) => store.userRecommend);
-
-    const filterMyRecommends = myRecommends.filter((boardItem) => boardItem.id === userUid);
+    const filterMyRecommends = myRecommends.filter((boardItem) => console.log(boardItem));
 
     return (
         <article>
@@ -15,15 +15,16 @@ const MyRecommend = ({ userUid }) => {
                 {filterMyRecommends.map((recommends) => {
                     const { id, title, date, content, videoSrc, nickname } = recommends;
                     return (
-                        <div key={id}>
-                            <article>
+                        <article key={id}>
+                            <RecommendPostVideoSection />
+                            <section>
                                 <iframe
                                     src={videoSrc}
                                     title="youtube-video-player"
                                     frameborder="0"
                                     allowFullScreen
                                 ></iframe>
-                            </article>
+                            </section>
                             <div>
                                 <div>
                                     {date.toDate().toLocaleString("ko-KR", {
@@ -36,7 +37,7 @@ const MyRecommend = ({ userUid }) => {
                                 </div>
                                 <div></div>
                             </div>
-                        </div>
+                        </article>
                     );
                 })}
             </section>
