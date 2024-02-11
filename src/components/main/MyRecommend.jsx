@@ -1,13 +1,44 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
-const MyRecommend = () => {
+const MyRecommend = ({ userUid }) => {
+    const myRecommends = useSelector((store) => store.userRecommend);
+
+    const filterMyRecommends = myRecommends.filter((boardItem) => boardItem.id === userUid);
+
     return (
         <article>
             <div>
                 <p>내가 추천한 음악들</p>
             </div>
             <section>
-                <div>{/* <iframe src="" frameborder="0"></iframe> */}</div>
+                {filterMyRecommends.map((recommends) => {
+                    const { id, title, date, content, videoSrc, nickname } = recommends;
+                    return (
+                        <div key={id}>
+                            <article>
+                                <iframe
+                                    src={videoSrc}
+                                    title="youtube-video-player"
+                                    frameborder="0"
+                                    allowFullScreen
+                                ></iframe>
+                            </article>
+                            <div>
+                                <div>
+                                    {date.toDate().toLocaleString("ko-KR", {
+                                        year: "2-digit", // 혹은 numeric
+                                        month: "numeric",
+                                        day: "numeric",
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                    })}
+                                </div>
+                                <div></div>
+                            </div>
+                        </div>
+                    );
+                })}
             </section>
         </article>
     );

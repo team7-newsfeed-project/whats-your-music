@@ -26,14 +26,10 @@ export const NormalButton = styled.button`
   1rem = 16px,2rem = 32px, 0.8rem = 16px 미만의 px등등 
   padding: 0.4rem 1rem; 
    props 넘겨주는 입력 형식 : pd={0.4, 1}*/
-    margin-top: ${(style) =>
-        style.mt ? style.mt.map((value) => `${value}rem`).join(" ") : "0rem"};
-    margin-left: ${(style) =>
-        style.ml ? style.ml.map((value) => `${value}rem`).join(" ") : "0rem"};
-    margin-right: ${(style) =>
-        style.mr ? style.mr.map((value) => `${value}rem`).join(" ") : "0rem"};
-    margin-bottom: ${(style) =>
-        style.mb ? style.mb.map((value) => `${value}rem`).join(" ") : "0rem"};
+    margin-top: ${(style) => (style.mt ? `${style.mt}rem`.join(" ") : "0rem")};
+    margin-left: ${(style) => (style.ml ? `${style.ml}rem`.join(" ") : "0rem")};
+    margin-right: ${(style) => (style.mr ? `${style.mr}rem`.join(" ") : "0rem")};
+    margin-bottom: ${(style) => (style.mb ? `${style.mb}rem`.join(" ") : "0rem")};
 
     border: 1px solid ${(style) => style.bdc || "var(--subColor2)"};
     border-radius: ${(style) =>
@@ -71,6 +67,11 @@ export const DangerButton = styled.button`
                   .map((value) => `${value}rem`)
                   .join(" ")
             : "0rem 0rem"};
+    margin-top: ${(style) => (style.mt ? `${style.mt}rem`.join(" ") : "0rem")};
+    margin-left: ${(style) => (style.ml ? `${style.ml}rem`.join(" ") : "0rem")};
+    margin-right: ${(style) => (style.mr ? `${style.mr}rem`.join(" ") : "0rem")};
+    margin-bottom: ${(style) => (style.mb ? `${style.mb}rem`.join(" ") : "0rem")};
+
     color: ${(style) => style.color || "white"};
     border: 1px solid ${(style) => style.bdc || "var(--subColor1)"};
     border-radius: ${(style) =>

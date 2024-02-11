@@ -40,12 +40,12 @@ const initialState = {
 };
 
 const userAccount = (state = initialState, action) => {
+    console.log("action.payload=>", action.payload);
     switch (action.type) {
         case SET_ACCOUNT:
             return { ...state, ...action.payload };
         case SET_IS_LOGIN:
             const userInfo = action.payload;
-            console.log(userInfo);
             return {
                 ...state,
                 userLoginState: {

@@ -2,28 +2,46 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { auth, db } from "database/firebase";
-import { signOut } from "firebase/auth";
+import { collection, getDocs, query } from "firebase/firestore";
+import { auth, db, signout } from "database/firebase";
 import { setUserLogin, setUserLogout } from "store/modules/userAccount";
+import { setMyRecommend } from "store/modules/userRecommend";
 import ProfileContents from "components/main/ProfileContents";
 import DangerButton from "components/common/DangerButton";
+import MyRecommend from "components/main/MyRecommend";
 import Layout from "components/layout/Layout";
 import * as S from "components/styles/MypageStyle";
 import logoImage from "assets/logoImage.png";
-import MyRecommend from "components/main/MyRecommend";
 
 const MyPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { userUid } = useSelector((store) => store.userAccount.userLoginState);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            // firestore db 가져오기
+            const q = query(collection(db, "posts"));
+            const querySnapshot = await getDocs(q);
+            const initialPosts = [];
+
+            querySnapshot.forEach((doc) => {
+                initialPosts.push({ id: doc.id, ...doc.data() });
+            });
+            console.log(initialPosts);
+            dispatch(setMyRecommend(initialPosts));
+        };
+        fetchData();
+    }, []);
+
     useEffect(() => {
         const userState = auth.onAuthStateChanged((user) => {
             if (!user) {
                 alert("로그인해주세요!");
                 navigate("/");
             }
-            const { displayName, email, photoURL, uid } = user;
             if (user.uid) {
-                // alert("로그인 상태 입니다!");
+                const { displayName, email, photoURL, uid } = user;
                 dispatch(setUserLogin({ displayName, email, photoURL, uid }));
             } else {
                 alert("로그인해주세요!");
@@ -35,7 +53,7 @@ const MyPage = () => {
 
     const onLogout = async () => {
         try {
-            await signOut(auth);
+            await signout();
             dispatch(setUserLogout());
             navigate("/");
         } catch (error) {
@@ -57,9 +75,9 @@ const MyPage = () => {
                     <h4>마이페이지</h4>
                 </S.MyPageheadDiv>
                 <S.ImageNdInfo>
-                    <ProfileContents />
+                    <ProfileContents userUid={userUid} />
                 </S.ImageNdInfo>
-                <MyRecommend />
+                <MyRecommend userUid={userUid} />
             </S.MyPageSection>
         </Layout>
     );

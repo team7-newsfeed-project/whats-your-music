@@ -24,8 +24,7 @@ const ProfileImage = () => {
             alert("이미지를 선택해주세요.");
             return;
         }
-        //ref함수로 Storage 내부 저장할 위치를 회원 고유번호 uid정하고,
-        //uploadBytes
+        //ref함수로 Storage 내부 저장할 위치를 회원 고유번호 uid정하고, uploadBytes
         if (selectFile === null) return;
         const imageRef = ref(storage, `${currUserUid}/${selectFile.name}`);
         console.log(imageRef);
@@ -35,8 +34,7 @@ const ProfileImage = () => {
             console.error("이미지가 업로드되지 않았어용", error);
             return null;
         }
-        // 파이어베이스 해당 콜렉션에 있는 문서 가져오기
-        // 파일 url 가져오기
+        // 파이어베이스 해당 콜렉션에 있는 문서 파일 url 가져오기
         const downloadURL = await getDownloadURL(imageRef);
         dispatch(setThumnailImg(downloadURL));
 
@@ -49,7 +47,6 @@ const ProfileImage = () => {
         const imgFile = e.target.files[0];
         if (imgFile) {
             dispatch(setSelectFile(imgFile));
-            // setSelectFile(imgFile);
             const reader = new FileReader();
             reader.readAsDataURL(imgFile); //url 뽑아서
 
