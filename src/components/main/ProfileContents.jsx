@@ -2,32 +2,34 @@ import React, { useState } from "react";
 import ProfileImage from "./ProfileImage";
 import Button from "components/common/Button";
 import DangerButton from "components/common/DangerButton";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const ProfileContents = () => {
+    const dispatch = useDispatch();
     const { userUid } = useSelector((store) => store.userAccount.userLoginState);
     const { nickname, comment } = useSelector((store) => store.userContents.initUserInfo);
     const [isEdit, setIsEdit] = useState(false);
     const [editValue, setEditValue] = useState({
+        userUid,
         nickname: "",
         comment: "",
     });
     const editValueNickname = editValue.nickname;
     const editValueComment = editValue.comment;
     const onEditValueChange = (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         const { name, value } = e.target;
         setEditValue({ ...editValue, [name]: value });
     };
-    const onEditContents = (e) => {
-        e.preventDefault();
+    const onEditContents = () => {
+        // e.preventDefault();
         console.log(1);
         setIsEdit(true);
         setEditValue({ nickname, comment });
     };
 
     const onEditSave = () => {
-        e.preventDefault();
+        // e.preventDefault();
         //유효성
         const editSaveCheck = window.confirm("수정내용을 저장하시겠습니까?");
         if (
@@ -49,9 +51,8 @@ const ProfileContents = () => {
         });
         setIsEdit(false);
     };
-    const onEditCancel = (e) => {
-        e.preventDefault();
-        setEditValue(false);
+    const onEditCancel = () => {
+        setIsEdit(false);
     };
 
     return (
@@ -65,35 +66,42 @@ const ProfileContents = () => {
                     </div>
                 ) : (
                     <form>
-                        <input
-                            name="nickname"
-                            value={editValueNickname}
-                            onChange={onEditValueChange}
-                            placeholder={
-                                editValueNickname === "" ? "닉네임을 적어주세요" : editValueNickname
-                            }
-                        />
-                        <textarea
-                            name="comment"
-                            cols="30"
-                            rows="10"
-                            value={editValueComment}
-                            onChange={onEditValueChange}
-                            placeholder={
-                                editValueComment === "" ? "자신을 소개해주세요" : editValueComment
-                            }
-                        ></textarea>
                         <div>
-                            {!isEdit ? (
-                                <Button name="내용 편집" onClick={onEditContents} />
-                            ) : (
-                                <div>
-                                    <Button name="수정완료" onClick={onEditSave} />
-                                    <DangerButton name="수정취소" onClick={onEditCancel} />
-                                </div>
-                            )}
+                            <input
+                                name="nickname"
+                                value={editValueNickname}
+                                onChange={onEditValueChange}
+                                placeholder={
+                                    editValueNickname === ""
+                                        ? "닉네임을 적어주세요"
+                                        : editValueNickname
+                                }
+                            />
+                            <textarea
+                                name="comment"
+                                cols="30"
+                                rows="10"
+                                value={editValueComment}
+                                onChange={onEditValueChange}
+                                placeholder={
+                                    editValueComment === ""
+                                        ? "자신을 소개해주세요"
+                                        : editValueComment
+                                }
+                            ></textarea>
+                            <p></p>
                         </div>
                     </form>
+                )}
+                {!isEdit ? (
+                    <div>
+                        <Button name="내용 편집" onClick={onEditContents} />
+                    </div>
+                ) : (
+                    <div>
+                        <Button name="수정완료" onClick={onEditSave} />
+                        <DangerButton name="수정취소" onClick={onEditCancel} />
+                    </div>
                 )}
             </div>
         </div>

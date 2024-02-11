@@ -1,19 +1,20 @@
 // console.log(querySnapshot);
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { auth, db } from "database/firebase";
-import Layout from "components/layout/Layout";
-import logoImage from "assets/logoImage.png";
-import ProfileContents from "components/main/ProfileContents";
-import * as S from "components/styles/MypageStyle";
-import { setUserLogin } from "store/modules/userAccount";
 import { useNavigate } from "react-router-dom";
+import { auth, db } from "database/firebase";
+import { signOut } from "firebase/auth";
+import { setUserLogin, setUserLogout } from "store/modules/userAccount";
+import ProfileContents from "components/main/ProfileContents";
 import DangerButton from "components/common/DangerButton";
+import Layout from "components/layout/Layout";
+import * as S from "components/styles/MypageStyle";
+import logoImage from "assets/logoImage.png";
+import MyRecommend from "components/main/MyRecommend";
 
 const MyPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    // const userState = useSelector((store) => store.userAccount.userLoginState);
     useEffect(() => {
         const userState = auth.onAuthStateChanged((user) => {
             if (!user) {
@@ -32,11 +33,15 @@ const MyPage = () => {
         return () => userState();
     }, [dispatch]);
 
-    const onLogout = () => {
-        auth.signOut().then(() => {
-            // console.log(res);
+    const onLogout = async () => {
+        try {
+            await signOut(auth);
+            dispatch(setUserLogout());
             navigate("/");
-        });
+        } catch (error) {
+            console.log(error);
+            alert("로그아웃을 다시 한 번 시도해 주세용");
+        }
     };
 
     return (
@@ -51,18 +56,10 @@ const MyPage = () => {
                     </h3>
                     <h4>마이페이지</h4>
                 </S.MyPageheadDiv>
-
                 <S.ImageNdInfo>
                     <ProfileContents />
                 </S.ImageNdInfo>
-                <article>
-                    <div>
-                        <p>내가 추천한 음악들</p>
-                    </div>
-                    <section>
-                        <div>{/* <iframe src="" frameborder="0"></iframe> */}</div>
-                    </section>
-                </article>
+                <MyRecommend />
             </S.MyPageSection>
         </Layout>
     );

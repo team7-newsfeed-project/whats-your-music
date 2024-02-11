@@ -1,5 +1,6 @@
 const SET_ACCOUNT = "userAccount/SET_ACCOUNT";
-const SET_IS_LOGIN = "SET_IS_LOGIN";
+const SET_IS_LOGIN = "userAccount/SET_IS_LOGIN";
+const SET_LOGOUT = "userAccount/SET_LOGOUT";
 
 export const setAccount = (payload) => {
     return {
@@ -11,6 +12,12 @@ export const setUserLogin = (user) => {
     return {
         type: SET_IS_LOGIN,
         payload: user,
+    };
+};
+
+export const setUserLogout = () => {
+    return {
+        type: SET_LOGOUT,
     };
 };
 
@@ -50,6 +57,19 @@ const userAccount = (state = initialState, action) => {
                     isLoggedIn: true,
                 },
             };
+        case SET_LOGOUT:
+            return {
+                ...state,
+                userLoginState: {
+                    userUid: "",
+                    email: "",
+                    nickname: "",
+                    comment: "",
+                    image: "",
+                    isLoggedIn: false,
+                },
+            };
+
         default:
             return state;
     }
