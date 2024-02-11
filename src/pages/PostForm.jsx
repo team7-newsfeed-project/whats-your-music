@@ -8,7 +8,7 @@ import Footer from "components/Footer/Footer";
 import { useSelector, useDispatch } from "react-redux";
 import { addPost } from "store/modules/posts";
 import { setCategory } from "store/modules/category";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import { db } from "database/firebase";
 import CategoryDropdown from "components/common/CategoryDropdown";
 
@@ -21,7 +21,7 @@ const PostForm = () => {
     const [currentDateTime, setCurrentDateTime] = useState("");
     const selectedCategory = useSelector((state) => state.category);
     const userNickname = useSelector((state) => state.userAccount.nickname);
-    const userUid = useSelector((state) => state.userAccount.userUid);
+    const email = useSelector((state) => state.userAccount.email);
 
     useEffect(() => {
         const updateDateTime = () => {
@@ -51,11 +51,15 @@ const PostForm = () => {
         const newPost = {
             category: selectedCategory,
             content,
-            date: serverTimestamp(),
+            date: new Date().toLocaleDateString("ko-KR", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+            }),
             nickname: userNickname,
             title,
             videoSrc,
-            uid: userUid,
+            email,
         };
 
         try {
@@ -72,7 +76,6 @@ const PostForm = () => {
             alert("게시글 등록에 실패했습니다.");
         }
     };
-    console.log(title, videoSrc, content);
 
     const handleGenreChange = (event) => {
         dispatch(setCategory(event.target.value));
