@@ -98,7 +98,13 @@ const Register = () => {
                     }}
                     placeholder="닉네임을 적어주세요."
                 />
-                <Button name="회원가입" type="submit" bgc="var(--subColor1)" color="black" />
+                <Button
+                    name="회원가입"
+                    type="submit"
+                    bgc="var(--subColor1)"
+                    color="black"
+                    bdc="--subColor1"
+                />
             </RegisterForm>
         </>
     );
