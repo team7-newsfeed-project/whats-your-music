@@ -27,7 +27,9 @@ const initialState = [
     //     content: "재즈 명곡 들어보세요!",
     //     date:  // new Date()
     //     videoSrc: "https://www.youtube.com/watch?v=fKIqKvSKJfc",
+    // +   uid (추가- 글쓴이 고유 식별):
     // },
+    //
 ];
 
 // 리듀서

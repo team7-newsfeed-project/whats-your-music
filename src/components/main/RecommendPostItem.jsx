@@ -51,8 +51,11 @@ const MainArticle = styled.article`
     align-items: center;
     background-color: var(--subColor3);
     width: 600px;
-    height: 200px;
+    height: 180px;
     border-radius: 20px;
+    &:hover {
+        box-shadow: 0px 0px 3px 0.3px var(--subColor1);
+    }
 `;
 
 const PostTextBox = styled.div`

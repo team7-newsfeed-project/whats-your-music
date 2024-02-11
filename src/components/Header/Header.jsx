@@ -24,15 +24,14 @@ const Header = () => {
     console.log("userSetImg", userSetImg);
 
     const onActiveCategory = (e) => {
-        // if (e.target === e.target.currentTarget) return;
         dispatch(setCategory(e.target.id));
     };
 
     return (
         <HeaderWrapper>
-            <div>
+            <LogoImgBox>
                 <img src={logoImg} width={300} alt="logo" />
-            </div>
+            </LogoImgBox>
             <MainNav>
                 <TabsWrapper>
                     <Tab id="팝" onClick={onActiveCategory} $isActive={activeCategory}>
@@ -77,26 +76,33 @@ const HeaderWrapper = styled.header`
     align-items: center;
     width: 100%;
     height: 100px;
-    margin: 20px;
+    margin: 10px auto 10px auto;
     border-radius: 20px;
+`;
+
+const LogoImgBox = styled.div`
+    /* background-color: var(--subColor2); */
+    margin-left: 130px;
+    margin-right: 100px;
 `;
 
 const MainNav = styled.nav`
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* gap: 50px; */
+    /* background-color: pink; */
+    gap: 50px;
 `;
 
 const TabsWrapper = styled.ul`
+    /* background-color: antiquewhite; */
     display: flex;
-    gap: 70px;
-    /* justify-content: space-between; */
+    gap: 150px;
+    /* justify-content: center; */
+    margin-right: 300px;
 `;
 
 const Tab = styled.li`
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     width: 130px;
     height: 50px;
@@ -112,6 +118,7 @@ const Tab = styled.li`
 
 const LinkWrapper = styled.div`
     display: flex;
+    margin-right: 250px;
 `;
 
 const NewPostLink = styled(Link)`
