@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { LayoutStyle } from "components/styles/LayoutStyle";
-import logoImg from "assets/logoImage.png";
+import logoImg from "assets/whatsyourmusicLogo.png";
 import Button from "components/common/Button";
 import { useNavigate } from "react-router-dom";
 import Footer from "components/Footer/Footer";
@@ -51,7 +51,7 @@ const PostForm = () => {
             videoSrc,
             content,
         };
-        await dispatch(addPost(newPost));
+        dispatch(addPost(newPost));
         await addDoc(collection(db, "posts"), newPost);
         setTitle("");
         setVideoSrc("");
@@ -101,9 +101,8 @@ const PostForm = () => {
                 />
                 <div>
                     <DateTime>{currentDateTime}</DateTime>
-                    <CategoryDropdown onChange={handleGenreChange} value={selectedCategory} />
+                    <CategoryDropdown onChange={handleGenreChange} value={setCategory} />
                     <SubmitBtn onClick={handlePostSubmit}>등록</SubmitBtn>
-                    {/* dd */}
                 </div>
             </MainWrapper>
             <Footer />
