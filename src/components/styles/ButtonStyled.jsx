@@ -47,7 +47,7 @@ export const NormalButton = styled.button`
     cursor: pointer;
     &:hover {
         background-color: ${(style) => style.hoverbgc || "var(--subColor2)"};
-        color: ${(style) => style.color || "var(--mainColor)"};
+        color: ${(style) => style.hovercolor || "var(--mainColor)"};
     }
 `;
 
