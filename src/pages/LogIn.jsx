@@ -35,6 +35,7 @@ const LogIn = () => {
         try {
             await signInWithEmailAndPassword(auth, email, pw);
         } catch (error) {
+            console.log(error);
             switch (error.code) {
                 case "auth/user-not-found":
                     alert("입력하신 이메일로 가입하신 계정이 존재하지 않습니다.");
@@ -54,8 +55,11 @@ const LogIn = () => {
                 case "auth/operation-not-allowed":
                     alert("현재 로그인이 허가되지 않습니다. 관리자에게 문의해주세요.");
                     return;
+                case "auth/invalid-credential":
+                    alert("올바른 이메일과 비밀번호를 입력해주세요.");
+                    return;
                 default:
-                    alert(`${error.code} 로그인에 실패했습니다.`);
+                    alert(`${error.code}`);
                     return;
             }
         }
@@ -77,7 +81,7 @@ const LogIn = () => {
             const result = await signInWithPopup(auth, provider);
             user = result.user;
         } catch (error) {
-            alert(error.code + " : " + error.message);
+            alert(`로그인을 실패했습니다.${error.code}`);
             return;
         }
 
@@ -101,7 +105,7 @@ const LogIn = () => {
             const result = await signInWithPopup(auth, provider);
             user = result.user;
         } catch (error) {
-            alert(error.code + " : " + error.message);
+            alert(`로그인을 실패했습니다.${error.code}`);
             return;
         }
 
