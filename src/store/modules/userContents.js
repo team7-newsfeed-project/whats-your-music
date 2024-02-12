@@ -18,7 +18,6 @@ export const setInitValue = (editValue) => {
 // 초기 상태값
 const initialState = {
     initUserInfo: { nickname: "", comment: "" },
-    editValue: { nickname: "", comment: "" },
 };
 
 // 리듀서
