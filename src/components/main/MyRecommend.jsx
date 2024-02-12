@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import RecommendPostVideoSection from "./RecommendPostVideoSection";
+import { Link } from "react-router-dom";
 
 const MyRecommend = () => {
     const myRecommends = useSelector((store) => store.userRecommend);
@@ -16,7 +17,7 @@ const MyRecommend = () => {
                 {filterMyRecommends.map((recommends) => {
                     const { id, title, date, content, videoSrc, nickname } = recommends;
                     return (
-                        <article key={id}>
+                        <Link to={`/detail/${id}`} key={id}>
                             <RecommendPostVideoSection videoSrc={videoSrc} />
 
                             <div>
@@ -40,7 +41,7 @@ const MyRecommend = () => {
                                     </li>
                                 </ul>
                             </div>
-                        </article>
+                        </Link>
                     );
                 })}
             </section>

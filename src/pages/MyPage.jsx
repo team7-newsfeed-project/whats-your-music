@@ -43,10 +43,9 @@ const MyPage = () => {
                     dispatch(setAccount({ image, nickname, comment }));
                     dispatch(setThumnailImg(user.image));
                     dispatch(setInitValue({ nickname, comment }));
-                    // dispatch(setEditValue({ nickname, comment }));
                 });
                 if (!user || !user.image) {
-                    alert(`1,로그인 해주세요!, ${user.image}`);
+                    alert(`로그인 해주세요!`);
                     navigate("/");
                 }
             } catch (error) {
