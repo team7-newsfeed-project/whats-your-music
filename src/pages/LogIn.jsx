@@ -8,10 +8,10 @@ import {
     GithubAuthProvider,
 } from "firebase/auth";
 import { auth } from "database/firebase";
-import { getUserInfo, do3rdPartyLogIn, setUserInfo } from "../database/FirebaseAPI";
+import { getUserInfo, do3rdPartyLogIn, setUserInfo } from "database/FirebaseAPI";
 import { useDispatch, useSelector } from "react-redux";
-import store from "store/config/configStore";
 import Button from "components/common/Button";
+import { setAccount } from "store/modules/userAccount";
 
 const LogIn = () => {
     const navigate = useNavigate();
@@ -55,13 +55,13 @@ const LogIn = () => {
                     alert("현재 로그인이 허가되지 않습니다. 관리자에게 문의해주세요.");
                     return;
                 default:
-                    alert("로그인에 실패했습니다.");
+                    alert(`${error.code} 로그인에 실패했습니다.`);
                     return;
             }
         }
-        await getUserInfo(email, dispatch);
-        reduxUser = store.getState().userAccount;
-        await setUserInfo(reduxUser, { isLoggedIn: true }, dispatch);
+        reduxUser = await getUserInfo(email);
+        reduxUser = await setUserInfo(reduxUser, { isLoggedIn: true });
+        dispatch(setAccount(reduxUser));
         alert("로그인이 되었습니다.");
         navigate("/");
     };
@@ -81,10 +81,10 @@ const LogIn = () => {
             return;
         }
 
-        await do3rdPartyLogIn({ email: user.email, nickname: user.displayName }, dispatch);
-        await getUserInfo(user.email, dispatch);
-        reduxUser = store.getState().userAccount;
-        await setUserInfo(reduxUser, { isLoggedIn: true }, dispatch);
+        await do3rdPartyLogIn({ email: user.email, nickname: user.displayName });
+        reduxUser = await getUserInfo(user.email);
+        await setUserInfo(reduxUser, { isLoggedIn: true });
+        dispatch(setAccount(reduxUser));
         alert("로그인이 되었습니다.");
         navigate("/");
     };
@@ -107,10 +107,10 @@ const LogIn = () => {
 
         email = user.reloadUserInfo.providerUserInfo[0].email;
         nickname = user.reloadUserInfo.providerUserInfo[0].screenName;
-        await do3rdPartyLogIn({ email, nickname }, dispatch);
-        await getUserInfo(email, dispatch);
-        reduxUser = store.getState().userAccount;
-        await setUserInfo(reduxUser, { isLoggedIn: true }, dispatch);
+        await do3rdPartyLogIn({ email, nickname });
+        reduxUser = await getUserInfo(email);
+        reduxUser = await setUserInfo(reduxUser, { isLoggedIn: true });
+        dispatch(setAccount(reduxUser));
         alert("로그인이 되었습니다.");
         navigate("/");
     };
