@@ -39,7 +39,7 @@ export default RecommendPostVideoSection;
 
 const VideoSection = styled.section`
     /* margin-top: 20px; */
-    /* margin */
+    margin-left: 20px;
     overflow: hidden;
     /* width: 100%; */
     /* height: 100%; */
@@ -49,7 +49,7 @@ const Iframe = styled.iframe`
     position: relative; // 상관 x
     /* top: 0px; // 마진 */
     /* bottom: 0px; */
-    width: 250px;
+    width: 302px; // 볼륨크기조절이 같이 뜨려면 최소 이정도 넓이 부여해야
     height: 150px;
     border: 1px solid var(--mainColor);
     border-radius: 15px;

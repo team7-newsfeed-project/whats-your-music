@@ -11,7 +11,7 @@ import DangerButton from "components/common/DangerButton";
 import MyRecommend from "components/main/MyRecommend";
 import Layout from "components/layout/Layout";
 import * as S from "components/styles/MypageStyle";
-import logoImage from "assets/logoImage.png";
+import logoImage from "assets/whatsyourmusic_logo.png";
 
 const MyPage = () => {
     const dispatch = useDispatch();
