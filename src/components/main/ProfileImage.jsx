@@ -8,33 +8,19 @@ import * as M from "components/styles/MypageStyle";
 import DangerButton from "components/common/DangerButton";
 import { setAccount } from "store/modules/userAccount";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import { setUserInfo } from "database/FirebaseAPI";
+import { setEditValue, setInitValue } from "store/modules/userContents";
+import { useNavigate } from "react-router-dom";
 
 const ProfileImage = () => {
     const dispatch = useDispatch();
     const { email } = useSelector((store) => store.userAccount);
     const selectFile = useSelector((store) => store.userImage.selectFile);
     const thumnailImg = useSelector((store) => store.userImage.thumnailImg);
+    const reduxUser = useSelector((store) => store.userAccount);
     const [isEdit, setEdit] = useState(false);
+    const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     alert(`${email}`);
-    //     const getUserInfo = async (email) => {
-    //         //firebase에서 계정정보를 가져와서 redux에 저장
-    //         const q = query(collection(db, "accounts"), where("email", "==", email));
-    //         const querySnapshot = await getDocs(q);
-    //         let user;
-    //         querySnapshot.forEach((doc) => {
-    //             user = doc.data();
-    //             // user.firebaseId = doc.id;
-    //             console.log(user);
-    //         });
-    //         console.log(user);
-
-    //         // dispatch(setAccount(user));
-    //         //   dispatch(setThumnailImg(downloadURL));
-    //     };
-    //     getUserInfo(email);
-    // }, []);
     // 1. 이미지 선택
     const currEmail = email ? email : null;
     const handleUpload = async () => {
@@ -58,8 +44,8 @@ const ProfileImage = () => {
         // 파이어베이스 해당 콜렉션에 있는 문서 파일 url 가져오기
         const downloadURL = await getDownloadURL(imageRef);
         dispatch(setThumnailImg(downloadURL));
-        console.log(downloadURL);
         dispatch(setAccount({ image: downloadURL }));
+        await setUserInfo(reduxUser, { image: downloadURL }, dispatch);
 
         setEdit(false);
         return downloadURL;
@@ -118,3 +104,41 @@ const ProfileImage = () => {
 };
 
 export default ProfileImage;
+
+// useEffect(() => {
+//     alert(`${email}`);
+//     if (!email) {
+//         alert("로그인 해주세요!");
+//         navigate("/");
+//     }
+//     const getUserInfo = async (email) => {
+//         //firebase에서 계정정보를 가져와서 redux에 저장
+//         const q = query(collection(db, "accounts"), where("email", "==", email));
+//         const querySnapshot = await getDocs(q);
+//         let user;
+//         try {
+//             querySnapshot.forEach((doc) => {
+//                 user = doc.data();
+//                 // user.firebaseId = doc.id;
+//                 const image = user.image;
+//                 const nickname = user.nickname;
+//                 const comment = user.comment;
+//                 console.log(user.nickname, user.comment);
+
+//                 dispatch(setAccount({ image, nickname, comment }));
+//                 dispatch(setThumnailImg(user.image));
+//                 // dispatch(setInitValue({ nickname, comment }));
+//                 dispatch(setEditValue({ nickname, comment }));
+//             });
+//         } catch (error) {
+//             console.log("로그인 해주세요!", error);
+//             alert("로그인 해주세요!");
+//             navigate("/");
+//         }
+//         if (!user || !user.image) {
+//             alert("로그인 해주세요!");
+//             navigate("/");
+//         }
+//     };
+//     getUserInfo(email);
+// }, []);

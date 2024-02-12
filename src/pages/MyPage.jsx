@@ -1,21 +1,62 @@
 // console.log(querySnapshot);
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { collection, getDocs, query } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { signOut } from "firebase/auth";
 import { auth, db, signout } from "database/firebase";
-import { setAccount, setUserLogout } from "store/modules/userAccount";
+import { setAccount } from "store/modules/userAccount";
 import { setMyRecommend } from "store/modules/userRecommend";
 import ProfileContents from "components/main/ProfileContents";
 import DangerButton from "components/common/DangerButton";
 import MyRecommend from "components/main/MyRecommend";
 import Layout from "components/layout/Layout";
-import * as S from "components/styles/MypageStyle";
 import logoImage from "assets/logoImage.png";
+import * as S from "components/styles/MypageStyle";
+import { setEditValue, setInitValue } from "store/modules/userContents";
+import { setThumnailImg } from "store/modules/userImage";
 
 const MyPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { email } = useSelector((store) => store.userAccount);
+    const user = auth.currentUser;
+    console.log(user);
+    useEffect(() => {
+        alert(`${email}`);
+        if (!email) {
+            alert("로그인 해주세요!");
+            navigate("/");
+        }
+        const fetchData = async (email) => {
+            // firestore db 가져오기
+            try {
+                const q = query(collection(db, "accounts"), where("email", "==", email));
+                const querySnapshot = await getDocs(q);
+                let user;
+                querySnapshot.forEach((doc) => {
+                    user = doc.data();
+                    const image = user.image;
+                    const nickname = user.nickname;
+                    const comment = user.comment;
+
+                    dispatch(setAccount({ image, nickname, comment }));
+                    dispatch(setThumnailImg(user.image));
+                    dispatch(setInitValue({ nickname, comment }));
+                    dispatch(setEditValue({ nickname, comment }));
+                });
+                if (!user || !user.image) {
+                    alert(`1,로그인 해주세요!, ${user.image}`);
+                    navigate("/");
+                }
+            } catch (error) {
+                console.log("로그인 해주세요!", error);
+                alert("로그인 해주세요!");
+                navigate("/");
+            }
+        };
+        fetchData(email);
+    }, []);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,7 +68,6 @@ const MyPage = () => {
             querySnapshot.forEach((doc) => {
                 initialPosts.push({ id: doc.id, ...doc.data() });
             });
-            console.log(initialPosts);
             dispatch(setMyRecommend(initialPosts));
         };
         fetchData();
@@ -39,23 +79,21 @@ const MyPage = () => {
             if (!user || user === null) {
                 alert("로그인해주세요!");
                 dispatch(setAccount(user));
-
                 navigate("/");
             }
         });
-        return () => userState();
+        userState();
     }, [dispatch]);
 
     const onLogout = async () => {
-        // try {
-        //     console.log(1);
-        //     await signout();
-        //     dispatch(setUserLogout());
-        //     navigate("/");
-        // } catch (error) {
-        //     console.log(error);
-        //     alert("로그아웃을 다시 한 번 시도해 주세용");
-        // }
+        try {
+            await signout(auth);
+            alert("로그아웃되셨습니다!");
+            navigate("/");
+        } catch (error) {
+            console.log(error);
+            alert("로그아웃을 다시 한 번 시도해 주세용");
+        }
     };
 
     return (

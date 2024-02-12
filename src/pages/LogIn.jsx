@@ -140,22 +140,22 @@ const LogIn = () => {
                 <Button
                     type="submit"
                     name="로그인"
-                    bgc="var(--subColor1)"
-                    color="black"
-                    bdc="--subColor1"
+                    $bgc="var(--subColor1)"
+                    $color="black"
+                    $bdc="--subColor1"
                 />
                 <Button
                     name="Google 로그인"
-                    bgc="var(--subColor1)"
-                    color="black"
-                    bdc="--subColor1"
+                    $bgc="var(--subColor1)"
+                    $color="black"
+                    $bdc="--subColor1"
                     onClick={(event) => onGoogleLogIn(event)}
                 />
                 <Button
                     name="GitHub 로그인"
-                    bgc="var(--subColor1)"
-                    color="black"
-                    bdc="--subColor1"
+                    $bgc="var(--subColor1)"
+                    $color="black"
+                    $bdc="--subColor1"
                     onClick={(event) => onGitHubLogIn(event)}
                 />
                 <LogInInfo>
