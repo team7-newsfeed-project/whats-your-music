@@ -16,16 +16,42 @@ export const MyPageheadDiv = styled.div`
 `;
 
 export const HomeLink = styled(Link)`
-    width: 123px;
-    height: 56px;
+    background-color: ${(style) => style.bgc || "var(--mainColor)"};
+    padding: ${(style) =>
+        style.pd
+            ? style.pd
+                  .split(", ")
+                  .map((value) => `${value}rem`)
+                  .join(" ")
+            : "0.4rem 1rem"};
 
-    padding: 20px;
+    margin: ${(style) =>
+        style.mg
+            ? style.mg
+                  .split(", ")
+                  .map((value) => `${value}rem`)
+                  .join(" ")
+            : "0rem 0rem"};
+    margin-top: ${(style) => (style.mt ? `${style.mt}rem`.join(" ") : "0rem")};
+    margin-left: ${(style) => (style.ml ? `${style.ml}rem`.join(" ") : "0rem")};
+    margin-right: ${(style) => (style.mr ? `${style.mr}rem`.join(" ") : "0rem")};
+    margin-bottom: ${(style) => (style.mb ? `${style.mb}rem`.join(" ") : "0rem")};
 
-    text-decoration: none;
-    border: 1px solid var(--subColor2);
-    border-radius: 20px;
+    border: 1px solid ${(style) => style.bdc || "var(--subColor2)"};
+    border-radius: ${(style) =>
+        style.radius || (style.bradius && style.$bradius.includes("rem"))
+            ? style.radius
+            : style.radius
+            ? style.radius + "rem"
+            : "0.8rem"};
+    color: ${(style) => style.color || "white"};
+    font-size: ${(style) => style.fsize || "1.2rem"};
 
-    color: var(--subColor2);
+    cursor: pointer;
+    &:hover {
+        background-color: ${(style) => style.hoverbgc || "var(--subColor2)"};
+        color: ${(style) => style.hovercolor || "var(--mainColor)"};
+    }
 `;
 
 export const LogOutLink = styled(Link)`

@@ -1,17 +1,18 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import RecommendPostVideoSection from "./RecommendPostVideoSection";
 import { Link } from "react-router-dom";
+import RecommendPostVideoSection from "./RecommendPostVideoSection";
 
 const MyRecommend = () => {
     const myRecommends = useSelector((store) => store.userRecommend);
-    const userEmail = useSelector((store) => store.userAccount.email);
-    const filterMyRecommends = myRecommends.filter((boardItem) => boardItem.email === userEmail);
+    const { email } = useSelector((store) => store.userAccount);
+    const filterMyRecommends = myRecommends.filter((boardItem) => boardItem.email === email);
 
     return (
         <article>
             <div>
                 <p>내가 추천한 음악들</p>
+                <div></div>
             </div>
             <section>
                 {filterMyRecommends.map((recommends) => {

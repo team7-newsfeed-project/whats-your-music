@@ -20,7 +20,6 @@ const RecommendPostVideoSection = ({ videoSrc }) => {
             youtubeIdRef.current = youtubeId;
         }
     }
-    // console.log("youtubeIdRef ", youtubeIdRef);
     return (
         <VideoSection>
             <Iframe
@@ -38,20 +37,13 @@ const RecommendPostVideoSection = ({ videoSrc }) => {
 export default RecommendPostVideoSection;
 
 const VideoSection = styled.section`
-    /* margin-top: 20px; */
-    /* margin */
     overflow: hidden;
-    /* width: 100%; */
-    /* height: 100%; */
 `;
 
 const Iframe = styled.iframe`
-    position: relative; // 상관 x
-    /* top: 0px; // 마진 */
-    /* bottom: 0px; */
+    position: relative;
     width: 250px;
     height: 150px;
     border: 1px solid var(--mainColor);
     border-radius: 15px;
-    /* margin-top: 30px; */
 `;

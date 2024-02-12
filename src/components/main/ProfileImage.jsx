@@ -1,27 +1,22 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { auth, db, storage } from "database/firebase";
-import { setSelectFile, setThumnailImg } from "store/modules/userImage";
-import Button from "components/common/Button";
-import * as M from "components/styles/MypageStyle";
-import DangerButton from "components/common/DangerButton";
-import { setAccount } from "store/modules/userAccount";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { storage } from "database/firebase";
 import { setUserInfo } from "database/FirebaseAPI";
-import { setEditValue, setInitValue } from "store/modules/userContents";
-import { useNavigate } from "react-router-dom";
+import { setSelectFile, setThumnailImg } from "store/modules/userImage";
+import { setAccount } from "store/modules/userAccount";
+import Button from "components/common/Button";
+import DangerButton from "components/common/DangerButton";
+import * as I from "components/styles/MypageStyle";
 
 const ProfileImage = () => {
     const dispatch = useDispatch();
     const { email } = useSelector((store) => store.userAccount);
     const selectFile = useSelector((store) => store.userImage.selectFile);
     const thumnailImg = useSelector((store) => store.userImage.thumnailImg);
-    const reduxUser = useSelector((store) => store.userAccount);
+    const myPageUser = useSelector((store) => store.userAccount);
     const [isEdit, setEdit] = useState(false);
-    const navigate = useNavigate();
 
-    // 1. 이미지 선택
     const currEmail = email ? email : null;
     const handleUpload = async () => {
         if (!selectFile) {
@@ -39,19 +34,25 @@ const ProfileImage = () => {
             await uploadBytes(imageRef, selectFile);
         } catch (error) {
             console.error("이미지가 업로드되지 않았어용", error);
+            alert("이미지가 업로드 되지 않았어용! 다시 등록해주세용!");
             return null;
         }
         // 파이어베이스 해당 콜렉션에 있는 문서 파일 url 가져오기
         const downloadURL = await getDownloadURL(imageRef);
+        await setUserInfo(myPageUser, { image: downloadURL });
+
+        if (!downloadURL) {
+            alert("사진을 등록해주세요!");
+        } else {
+            alert("사진 등록이 완료됐습니다.");
+        }
         dispatch(setThumnailImg(downloadURL));
         dispatch(setAccount({ image: downloadURL }));
-        await setUserInfo(reduxUser, { image: downloadURL }, dispatch);
 
         setEdit(false);
         return downloadURL;
     };
 
-    //일반 방법으로 섬네일로
     const addImgFile = (e) => {
         const imgFile = e.target.files[0];
         if (imgFile) {
@@ -72,18 +73,17 @@ const ProfileImage = () => {
         setEdit(false);
     };
     return (
-        <M.UserImage>
-            <M.ProfileThumbnailImg src={thumnailImg} alt="이미지" />
-            <M.ProfileUpLoad
+        <I.UserImage>
+            <I.ProfileThumbnailImg src={thumnailImg} alt="이미지" />
+            <I.ProfileUpLoad
                 type="file"
                 accept="image/*"
                 id="ImgfileChoice"
                 onChange={addImgFile}
             />
-            {/* display : none */}
             {isEdit ? (
                 <div>
-                    <M.ProfileUpLoadBtnLabel htmlFor="ImgfileChoice">등록</M.ProfileUpLoadBtnLabel>
+                    <I.ProfileUpLoadBtnLabel htmlFor="ImgfileChoice">등록</I.ProfileUpLoadBtnLabel>
                     <div>
                         <Button onClick={handleUpload} name="수정 완료" fsize="1rem" pd="0.4, 1" />
                         <DangerButton
@@ -99,46 +99,8 @@ const ProfileImage = () => {
                     <Button name="이미지 편집" pd="0.4, 1" fsize="1rem" />
                 </div>
             )}
-        </M.UserImage>
+        </I.UserImage>
     );
 };
 
 export default ProfileImage;
-
-// useEffect(() => {
-//     alert(`${email}`);
-//     if (!email) {
-//         alert("로그인 해주세요!");
-//         navigate("/");
-//     }
-//     const getUserInfo = async (email) => {
-//         //firebase에서 계정정보를 가져와서 redux에 저장
-//         const q = query(collection(db, "accounts"), where("email", "==", email));
-//         const querySnapshot = await getDocs(q);
-//         let user;
-//         try {
-//             querySnapshot.forEach((doc) => {
-//                 user = doc.data();
-//                 // user.firebaseId = doc.id;
-//                 const image = user.image;
-//                 const nickname = user.nickname;
-//                 const comment = user.comment;
-//                 console.log(user.nickname, user.comment);
-
-//                 dispatch(setAccount({ image, nickname, comment }));
-//                 dispatch(setThumnailImg(user.image));
-//                 // dispatch(setInitValue({ nickname, comment }));
-//                 dispatch(setEditValue({ nickname, comment }));
-//             });
-//         } catch (error) {
-//             console.log("로그인 해주세요!", error);
-//             alert("로그인 해주세요!");
-//             navigate("/");
-//         }
-//         if (!user || !user.image) {
-//             alert("로그인 해주세요!");
-//             navigate("/");
-//         }
-//     };
-//     getUserInfo(email);
-// }, []);
