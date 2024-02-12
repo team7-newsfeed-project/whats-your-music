@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setAccount } from "store/modules/userAccount";
-import { setInitValue } from "store/modules/userContents";
+import { useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
 import { setUserInfo } from "database/FirebaseAPI";
-import DangerButton from "components/common/DangerButton";
+import { auth } from "database/firebase";
+import { setAccount, setUserLogout } from "store/modules/userAccount";
+import { setInitValue } from "store/modules/userContents";
 import Button from "components/common/Button";
+import DangerButton from "components/common/DangerButton";
 import ProfileImage from "./ProfileImage";
+import * as PC from "components/styles/ProfileContentsSt";
 
 const ProfileContents = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const myPageUserInfo = useSelector((store) => store.userAccount);
     const { nickname, comment } = useSelector((store) => store.userContents.initUserInfo);
     const [editValue, setEditValue] = useState({
@@ -63,18 +69,32 @@ const ProfileContents = () => {
     const onEditCancel = (e) => {
         e.preventDefault();
         setIsEdit(false);
-        // setEditValue({ nickname, comment });
     };
 
+    const onLogout = async () => {
+        try {
+            await signOut(auth);
+            alert("로그아웃되셨습니다!");
+            // TODO : dispatch(setAccount())
+            dispatch(setUserLogout());
+            navigate("/");
+        } catch (error) {
+            console.log(error);
+            alert("로그아웃을 다시 한 번 시도해 주세용");
+        }
+    };
     return (
-        <div>
+        <PC.ProfileContentsSection>
             <ProfileImage />
             <div>
                 {!isEdit ? (
                     <div>
                         <div>
-                            <p>닉네임 : {nickname}</p>
-                            <p>소개 : {comment}</p>
+                            <div>
+                                <p>{nickname}</p>
+                                <DangerButton name="⛔ 로그아웃 " onClick={onLogout} />
+                            </div>
+                            <p>{comment}</p>
                         </div>
                         <div>
                             <Button name="내용 편집" onClick={onEditContents} />
@@ -113,7 +133,7 @@ const ProfileContents = () => {
                     </form>
                 )}
             </div>
-        </div>
+        </PC.ProfileContentsSection>
     );
 };
 

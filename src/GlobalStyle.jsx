@@ -29,7 +29,6 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 900;
     font-style: normal;
 }
-
 :root {
   --mainColor : #0F0F0F;
   --subColor1 : #D3ADFC;
@@ -83,7 +82,7 @@ table {
 
 * {
 box-sizing: border-box;
-font-family: "Pretandard-Regular","sans-serif";
+font-family: "Pretandard-Regular";
 }
 
 a{
@@ -93,8 +92,8 @@ a{
 
 body {
   margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; */
   background-color: var(--subColor3);
   color: white;
   font-family: "Pretandard-Regular",

@@ -3,16 +3,17 @@ import styled from "styled-components";
 
 export const MyPageSection = styled.section`
     min-width: 400px;
-    /* width: 1060px; */
-    max-width: 1060px;
-    border: 1px solid white;
+    max-width: 1020px;
 `;
 
 export const MyPageheadDiv = styled.div`
-    background-color: var(--subColor3);
+    /* background-color: var(--mainColor); */
+    background-color: antiquewhite;
     display: flex;
-    flex-direction: column;
     align-items: center;
+    width: 100%;
+    height: 100px;
+    margin: 0px auto 10px auto;
 `;
 
 export const HomeLink = styled(Link)`
@@ -83,18 +84,3 @@ export const ImageNdInfo = styled.article`
 
     gap: 30px;
 `;
-export const ProfileThumbnailImg = styled.img`
-    width: 230px;
-    height: 230px;
-    min-width: 130px;
-    min-height: 130px;
-
-    object-fit: cover;
-`;
-export const ProfileUpLoadBtnLabel = styled.label``;
-export const ProfileUpLoad = styled.input`
-    display: none;
-    background-color: red;
-`;
-
-export const UserImage = styled.div``;

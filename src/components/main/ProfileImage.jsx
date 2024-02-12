@@ -7,7 +7,7 @@ import { setSelectFile, setThumnailImg } from "store/modules/userImage";
 import { setAccount } from "store/modules/userAccount";
 import Button from "components/common/Button";
 import DangerButton from "components/common/DangerButton";
-import * as I from "components/styles/MypageStyle";
+import * as PI from "components/styles/ProfileContentsSt";
 
 const ProfileImage = () => {
     const dispatch = useDispatch();
@@ -73,9 +73,9 @@ const ProfileImage = () => {
         setEdit(false);
     };
     return (
-        <I.UserImage>
-            <I.ProfileThumbnailImg src={thumnailImg} alt="이미지" />
-            <I.ProfileUpLoad
+        <PI.UserImage>
+            <PI.ProfileThumbnailImg src={thumnailImg} alt="이미지" />
+            <PI.ProfileUpLoad
                 type="file"
                 accept="image/*"
                 id="ImgfileChoice"
@@ -83,7 +83,9 @@ const ProfileImage = () => {
             />
             {isEdit ? (
                 <div>
-                    <I.ProfileUpLoadBtnLabel htmlFor="ImgfileChoice">등록</I.ProfileUpLoadBtnLabel>
+                    <PI.ProfileUpLoadBtnLabel htmlFor="ImgfileChoice">
+                        등록
+                    </PI.ProfileUpLoadBtnLabel>
                     <div>
                         <Button onClick={handleUpload} name="수정 완료" fsize="1rem" pd="0.4, 1" />
                         <DangerButton
@@ -99,7 +101,7 @@ const ProfileImage = () => {
                     <Button name="이미지 편집" pd="0.4, 1" fsize="1rem" />
                 </div>
             )}
-        </I.UserImage>
+        </PI.UserImage>
     );
 };
 

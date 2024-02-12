@@ -15,7 +15,7 @@ export const FooterWrapper = styled.footer`
     width: 100%;
     height: 100px;
     background-color: var(--mainColor);
-    border-radius: 20px;
+    color: gray;
     display: flex;
     justify-content: center;
     align-items: center;

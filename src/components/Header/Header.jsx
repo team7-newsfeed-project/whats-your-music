@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { setCategory } from "store/modules/category";
-import logoImg from "assets/whatsyourmusicLogo.png";
+import logoImg from "assets/whatsyourmusic_logo.png";
 
 const Header = () => {
     const dispatch = useDispatch();
