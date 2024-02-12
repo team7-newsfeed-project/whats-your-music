@@ -35,33 +35,7 @@ const LogIn = () => {
         try {
             await signInWithEmailAndPassword(auth, email, pw);
         } catch (error) {
-            console.log(error);
-            switch (error.code) {
-                case "auth/user-not-found":
-                    alert("입력하신 이메일로 가입하신 계정이 존재하지 않습니다.");
-                    return;
-                case "auth/invalid-email":
-                    alert("올바르지 않은 이메일 형식입니다.");
-                    return;
-                case "auth/wrong-password":
-                    alert("비밀번호가 올바르지 않습니다.");
-                    return;
-                case "auth/too-many-requests":
-                    alert("로그인 시도를 많이 하셔서 차단되었습니다. 관리자에게 문의해주세요.");
-                    return;
-                case "auth/user-disabled":
-                    alert("해당 계정이 비활성화 되었습니다. 관리자에게 문의해주세요.");
-                    return;
-                case "auth/operation-not-allowed":
-                    alert("현재 로그인이 허가되지 않습니다. 관리자에게 문의해주세요.");
-                    return;
-                case "auth/invalid-credential":
-                    alert("올바른 이메일과 비밀번호를 입력해주세요.");
-                    return;
-                default:
-                    alert(`${error.code}`);
-                    return;
-            }
+            alert(`로그인에 실패했습니다.${error.code}`);
         }
         reduxUser = await getUserInfo(email);
         reduxUser = await setUserInfo(reduxUser, { isLoggedIn: true });
@@ -126,7 +100,7 @@ const LogIn = () => {
                 <Logo>WHAT'S YOUR MUSIC?</Logo>
                 <Title>LOGIN</Title>
                 <InputFiled
-                    type="email"
+                    type="text"
                     value={email}
                     onChange={(event) => {
                         setEmail(event.target.value);
