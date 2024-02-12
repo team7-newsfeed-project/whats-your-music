@@ -89,7 +89,7 @@ const HeaderWrapper = styled.header`
     /* width: 1650px; */
     width: 100%;
     height: 100px;
-    margin: 10px auto 10px auto;
+    margin: 0px auto 10px auto;
     /* border-radius: 20px; */
 `;
 

@@ -151,8 +151,7 @@ const HeaderBox = styled.header`
     background-color: var(--mainColor);
     width: 100%;
     height: 100px;
-    margin: 20px;
-    border-radius: 20px;
+    margin: 0px auto 10px auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -171,9 +170,10 @@ const MainWrapper = styled.main`
     gap: 10px;
     background-color: var(--mainColor);
     width: 100%;
-    min-height: 550px;
-    border-radius: 20px;
-    margin-bottom: 20px;
+    /* min-height: 550px; */
+    /* margin-bottom: 20px; */
+    min-height: 600px;
+    margin-bottom: 10px;
 `;
 
 const StyledTitle = styled.div`
