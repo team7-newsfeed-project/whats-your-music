@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { LayoutStyle } from "components/styles/LayoutStyle";
-import logoImg from "assets/whatsyourmusicLogo.png";
+import logoImg from "assets/whatsyourmusic_logo.png";
 import Button from "components/common/Button";
 import { useNavigate } from "react-router-dom";
 import Footer from "components/Footer/Footer";
@@ -51,17 +51,21 @@ const PostForm = () => {
         const newPost = {
             category: selectedCategory,
             content,
-            date: new Date().toLocaleDateString("ko-KR", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-            }),
+            date: new Date().toISOString(),
+            //     .toLocaleDateString("ko-KR", {
+            //     year: "numeric",
+            //     month: "numeric",
+            //     day: "numeric",
+            //     hour: "numeric",
+            //     minute: "numeric",
+            // }),
             nickname: userNickname,
             title,
             videoSrc,
             email,
         };
 
+        console.log("date 밸류", new Date(), typeof new Date());
         try {
             const docRef = await addDoc(collection(db, "posts"), newPost);
             newPost.id = docRef.id;
@@ -92,7 +96,7 @@ const PostForm = () => {
                     $bd={"1px solid #C9F254"}
                 />
                 <LogoBox>
-                    <img src={logoImg} width={300} alt="logo" />
+                    <img src={logoImg} width={270} alt="logo" />
                 </LogoBox>
             </HeaderBox>
             <MainWrapper>

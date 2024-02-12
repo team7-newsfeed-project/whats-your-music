@@ -12,6 +12,7 @@ import { getUserInfo, do3rdPartyLogIn, setUserInfo } from "../database/FirebaseA
 import { useDispatch, useSelector } from "react-redux";
 import store from "store/config/configStore";
 import Button from "components/common/Button";
+import logoImg from "assets/whatsyourmusic_logo.png";
 
 const LogIn = () => {
     const navigate = useNavigate();
@@ -116,10 +117,12 @@ const LogIn = () => {
     };
 
     return (
-        <>
+        <LoginWrapper>
             <HomeBtn onClick={() => navigate("/")}>&larr;home</HomeBtn>
             <LogInForm onSubmit={(event) => onLogIn(event)}>
-                <Logo>WHAT'S YOUR MUSIC?</Logo>
+                <Logo>
+                    <img src={logoImg} width={300} alt="logo" />
+                </Logo>
                 <Title>LOGIN</Title>
                 <InputFiled
                     type="email"
@@ -163,11 +166,16 @@ const LogIn = () => {
                     <RegisterText onClick={() => navigate("/register")}>회원가입</RegisterText>
                 </LogInInfo>
             </LogInForm>
-        </>
+        </LoginWrapper>
     );
 };
 
 export default LogIn;
+
+const LoginWrapper = styled.div`
+    background-color: var(--mainColor);
+    min-height: 870px;
+`;
 
 const LogInForm = styled.form`
     display: flex;
@@ -179,7 +187,8 @@ const LogInForm = styled.form`
 
 const HomeBtn = styled.button`
     font-size: 20px;
-    border: 1px solid var(--subColor2);
+    /* border: 1px solid var(--subColor2); */
+    box-shadow: 0px 0px 3px 1px var(--subColor2);
     background-color: var(--subColor3);
     color: var(--subColor2);
     border-radius: 15px;
@@ -188,21 +197,28 @@ const HomeBtn = styled.button`
     margin-top: 10px;
     margin-left: 10px;
     cursor: pointer;
+    &:hover {
+        background-color: var(--subColor2);
+        color: var(--mainColor);
+    }
 `;
 
-const Logo = styled.p`
+const Logo = styled.div`
     text-align: center;
-    font-size: 20px;
-    border: 1px solid var(--subColor1);
-    color: var(--subColor1);
-    height: 100%;
-    line-height: 100px;
-    border-radius: 10px;
-    vertical-align: middle;
+    /* font-size: 20px; */
+    /* border: 1px solid var(--subColor1); */
+    /* color: var(--subColor1); */
+    /* height: 100%; */
+    margin: 50px;
+    /* line-height: 100px; */
+    /* border-radius: 10px; */
+    /* vertical-align: middle; */
 `;
 
 const Title = styled.p`
+    font-family: "Pretendard-Regular";
     font-size: 20px;
+    letter-spacing: 0.5rem;
     color: var(--subColor1);
     width: 200px;
     margin: 0 auto;
@@ -217,11 +233,13 @@ const InputFiled = styled.input`
 
 const LogInInfo = styled.p`
     text-align: center;
+    margin-top: 50px;
 `;
 
 const RegisterText = styled.span`
     color: var(--subColor1);
-    & {
+    &:hover {
         cursor: pointer;
+        color: var(--subColor2);
     }
 `;
