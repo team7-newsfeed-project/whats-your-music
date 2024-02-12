@@ -136,5 +136,5 @@ const PostTime = styled.time`
     font-size: 15px;
     width: 500px;
     color: gray;
-    background-color: antiquewhite;
+    /* background-color: antiquewhite; */
 `;

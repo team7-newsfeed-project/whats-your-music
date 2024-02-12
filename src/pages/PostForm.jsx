@@ -65,7 +65,6 @@ const PostForm = () => {
             email,
         };
 
-        console.log("date 밸류", new Date(), typeof new Date());
         try {
             const docRef = await addDoc(collection(db, "posts"), newPost);
             newPost.id = docRef.id;

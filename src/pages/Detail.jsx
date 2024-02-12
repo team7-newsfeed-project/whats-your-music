@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { LayoutStyle } from "components/styles/LayoutStyle";
 import styled from "styled-components";
 import Button from "components/common/Button";
-import logoImg from "assets/whatsyourmusicLogo.png";
+import logoImg from "assets/whatsyourmusic_logo.png";
 import { useNavigate, useParams } from "react-router-dom";
 import Footer from "components/Footer/Footer";
 import { doc, getDoc, deleteDoc, updateDoc } from "firebase/firestore";
