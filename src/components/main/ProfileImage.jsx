@@ -11,22 +11,11 @@ import * as Pi from "components/styles/ProfileImageStyle";
 
 const ProfileImage = () => {
     const dispatch = useDispatch();
-    const { isLoggedIn, image, email } = useSelector((store) => store.userAccount);
+    const { email } = useSelector((store) => store.userAccount);
     const selectFile = useSelector((store) => store.userImage.selectFile);
-    const defaultImage = useSelector((store) => store.userImage.selectFile);
     const thumnailImg = useSelector((store) => store.userImage.thumnailImg);
     const myPageUser = useSelector((store) => store.userAccount);
     const [isEdit, setEdit] = useState(false);
-
-    useEffect(() => {
-        if (isLoggedIn) {
-            if (image) {
-                dispatch(setThumnailImg(image));
-            } else {
-                dispatch(setThumnailImg(defaultImage));
-            }
-        }
-    }, [dispatch]);
 
     const currEmail = email ? email : null;
     const handleUpload = async () => {
