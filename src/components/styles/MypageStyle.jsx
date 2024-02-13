@@ -78,6 +78,7 @@ export const HomeLink = styled(Link)`
 export const HomeBtnP = styled.p`
     width: 100px;
     /* height: 19px; */
+    /* height: 19px; */
     margin: 0 auto;
 `;
 
