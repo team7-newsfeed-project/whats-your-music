@@ -14,6 +14,7 @@ export const getUserInfo = async (email) => {
     const q = query(collection(db, "accounts"), where("email", "==", email));
     const querySnapshot = await getDocs(q);
     let user;
+
     querySnapshot.forEach((doc) => {
         user = doc.data();
         user.firebaseId = doc.id;
@@ -29,17 +30,20 @@ export const setUserInfo = async (reduxUser, newAccount) => {
     // reduxUser, newAccount : 객체
     const userId = reduxUser.firebaseId;
     const accountRef = doc(db, "accounts", userId);
+    const resultAccount = { ...reduxUser, ...newAccount };
 
-    await updateDoc(accountRef, { ...reduxUser, ...newAccount });
+    await updateDoc(accountRef, resultAccount);
 
-    return { ...reduxUser, ...newAccount };
+    return resultAccount;
 };
 
 export const do3rdPartyLogIn = async ({ email, nickname }) => {
-    const user = await getUserInfo(email);
-    if (user) {
-        return;
-    } else {
+    let user = await getUserInfo(email);
+
+    if (!user) {
         register({ email, nickname });
+        user = await getUserInfo(email);
     }
+
+    return user;
 };

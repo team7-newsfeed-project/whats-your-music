@@ -7,9 +7,10 @@ export const setAccount = (payload) => {
         payload,
     };
 };
-export const setUserLogout = () => {
+export const setUserLogout = (payload) => {
     return {
-        type: SET_ACCOUNT,
+        type: SET_LOGOUT,
+        payload,
     };
 };
 

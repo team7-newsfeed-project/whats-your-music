@@ -83,15 +83,23 @@ const MyPage = () => {
         <Layout>
             <MP.MyPageSection>
                 <MP.MyPageheadDiv>
-                    <MP.HomeLink to="/">← HOME</MP.HomeLink>
-                    <h3>
-                        <MP.HeaderLogo src={logoImage} alt="logo" />
-                    </h3>
-                    <h4>마이페이지</h4>
+                    <MP.MyPageheadWrapDiv>
+                        <MP.HomeLink to="/" pd="1, 1.2" bradius="">
+                            <MP.HomeBtnP>← HOME</MP.HomeBtnP>
+                        </MP.HomeLink>
+                        <h3>
+                            <MP.HeaderLogo src={logoImage} alt="logo" />
+                        </h3>
+                        <div>
+                            <MP.MyPageText>마이페이지</MP.MyPageText>
+                        </div>
+                    </MP.MyPageheadWrapDiv>
                 </MP.MyPageheadDiv>
+
                 <MP.ImageNdInfo>
                     <ProfileContents />
                 </MP.ImageNdInfo>
+
                 <MyRecommend />
             </MP.MyPageSection>
         </Layout>

@@ -17,7 +17,7 @@ const LogIn = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [pw, setPw] = useState("");
-    let reduxUser = useSelector((state) => state.userAccount);
+    const reduxUser = useSelector((state) => state.userAccount);
     const dispatch = useDispatch();
 
     const onLogIn = async (event) => {
@@ -35,11 +35,30 @@ const LogIn = () => {
         try {
             await signInWithEmailAndPassword(auth, email, pw);
         } catch (error) {
-            alert(`로그인에 실패했습니다.${error.code}`);
+            switch (error.code) {
+                case "auth/user-not-found":
+                    alert("입력하신 이메일로 가입하신 계정이 존재하지 않습니다.");
+                    return;
+                case "auth/invalid-email" || "auth/wrong-password":
+                    alert("이메일 또는 비밀번호가 올바르지 않습니다.");
+                    return;
+                case "auth/too-many-requests":
+                    alert("로그인 시도를 많이 하셔서 차단되었습니다. 관리자에게 문의해주세요.");
+                    return;
+                case "auth/user-disabled":
+                    alert("해당 계정이 비활성화 되었습니다. 관리자에게 문의해주세요.");
+                    return;
+                case "auth/operation-not-allowed":
+                    alert("현재 로그인이 허가되지 않습니다. 관리자에게 문의해주세요.");
+                    return;
+                default:
+                    alert(`로그인에 실패했습니다.`);
+                    return;
+            }
         }
-        reduxUser = await getUserInfo(email);
-        reduxUser = await setUserInfo(reduxUser, { isLoggedIn: true });
-        dispatch(setAccount(reduxUser));
+        const firebaseUser = await getUserInfo(email);
+        const currentUser = await setUserInfo(firebaseUser, { isLoggedIn: true });
+        dispatch(setAccount(currentUser));
         alert("로그인이 되었습니다.");
         navigate("/");
     };
@@ -55,18 +74,19 @@ const LogIn = () => {
             const result = await signInWithPopup(auth, provider);
             user = result.user;
         } catch (error) {
-            alert(`로그인을 실패했습니다.${error.code}`);
+            alert("로그인에 실패했습니다.");
             return;
         }
 
-        await do3rdPartyLogIn({ email: user.email, nickname: user.displayName });
-        reduxUser = await getUserInfo(user.email);
-        await setUserInfo(reduxUser, { isLoggedIn: true });
-        dispatch(setAccount(reduxUser));
+        const firebaseUser = await do3rdPartyLogIn({
+            email: user.email,
+            nickname: user.displayName,
+        });
+        const currentUser = await setUserInfo(firebaseUser, { isLoggedIn: true });
+        dispatch(setAccount(currentUser));
         alert("로그인이 되었습니다.");
         navigate("/");
     };
-
     const onGitHubLogIn = async (event) => {
         event.preventDefault();
         let provider = new GithubAuthProvider();
@@ -80,20 +100,15 @@ const LogIn = () => {
             const result = await signInWithPopup(auth, provider);
             user = result.user;
         } catch (error) {
-            console.log(error);
-            alert(`로그인을 실패했습니다.${error.code}`);
+            alert("로그인에 실패했습니다.");
             return;
         }
 
         email = user.reloadUserInfo.providerUserInfo[0].email;
         nickname = user.reloadUserInfo.providerUserInfo[0].screenName;
-        await do3rdPartyLogIn({ email, nickname });
-        const userInfoFromFirebase = await getUserInfo(email);
-        dispatch(setAccount(userInfoFromFirebase));
-        // 사용처에 따라 변수명 : userDataSaveTo~~
-        reduxUser = await setUserInfo(userInfoFromFirebase, { isLoggedIn: true });
-        console.log({ reduxUser, userInfoFromFirebase });
-        dispatch(setAccount(reduxUser));
+        const firebaseUser = await do3rdPartyLogIn({ email, nickname });
+        const currentUser = await setUserInfo(firebaseUser, { isLoggedIn: true });
+        dispatch(setAccount(currentUser));
         alert("로그인이 되었습니다.");
         navigate("/");
     };

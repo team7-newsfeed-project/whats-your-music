@@ -2,21 +2,41 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const MyPageSection = styled.section`
-    min-width: 400px;
-    max-width: 1020px;
+    background-color: #444;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    gap: 20px;
 `;
 
 export const MyPageheadDiv = styled.div`
     /* background-color: var(--mainColor); */
-    background-color: antiquewhite;
+    background-color: #fff;
     display: flex;
     align-items: center;
+    justify-content: center;
+
+    height: 70px;
+`;
+
+export const MyPageheadWrapDiv = styled.div`
+    background-color: var(--mainColor);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-width: 320px;
     width: 100%;
-    height: 100px;
-    margin: 0px auto 10px auto;
+
+    height: 70px;
+    padding: 7px 120px;
+    /* gap: 26rem; */
 `;
 
 export const HomeLink = styled(Link)`
+    width: 140px;
+    height: 56px;
+    text-align: center;
     background-color: ${(style) => style.bgc || "var(--mainColor)"};
     padding: ${(style) =>
         style.pd
@@ -55,6 +75,12 @@ export const HomeLink = styled(Link)`
     }
 `;
 
+export const HomeBtnP = styled.p`
+    width: 100px;
+    /* height: 19px; */
+    margin: 0 auto;
+`;
+
 export const LogOutLink = styled(Link)`
     width: 123px;
     height: 56px;
@@ -70,6 +96,11 @@ export const LogOutLink = styled(Link)`
 
 export const HeaderLogo = styled.img`
     width: 253px;
+    height: 56px;
+`;
+
+export const MyPageText = styled.p`
+    width: 80px;
     height: 56px;
 `;
 

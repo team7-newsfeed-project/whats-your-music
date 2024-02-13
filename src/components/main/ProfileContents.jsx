@@ -14,7 +14,6 @@ import * as PC from "components/styles/ProfileContentsSt";
 const ProfileContents = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
     const myPageUserInfo = useSelector((store) => store.userAccount);
     const { nickname, comment } = useSelector((store) => store.userContents.initUserInfo);
     const [editValue, setEditValue] = useState({
@@ -74,9 +73,8 @@ const ProfileContents = () => {
     const onLogout = async () => {
         try {
             await signOut(auth);
-            alert("로그아웃되셨습니다!");
-            // TODO : dispatch(setAccount())
             dispatch(setUserLogout());
+            alert("로그아웃되셨습니다!");
             navigate("/");
         } catch (error) {
             console.log(error);
