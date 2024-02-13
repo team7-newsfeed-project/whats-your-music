@@ -10,6 +10,7 @@ import { db } from "database/firebase";
 import DangerButton from "components/common/DangerButton";
 import { useSelector, useDispatch } from "react-redux";
 import { deletePost, editPost } from "store/modules/posts";
+import RecommendPostVideoSection from "components/main/RecommendPostVideoSection";
 
 const Detail = () => {
     const navigate = useNavigate();
@@ -114,7 +115,10 @@ const Detail = () => {
                             onChange={(e) => setPost({ ...post, videoSrc: e.target.value })}
                         />
                     ) : (
-                        post.videoSrc
+                        //post.videoSrc
+                        <RecommendPostVideoSection
+                            videoSrc={post.videoSrc}
+                        ></RecommendPostVideoSection>
                     )}
                 </StyledTitle>
                 <StyledContent>
