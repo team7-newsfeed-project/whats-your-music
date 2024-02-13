@@ -115,21 +115,17 @@ const Detail = () => {
                         post.title
                     )}
                 </StyledTitle>
-                <StyledTitle>
-                    {isEditing ? (
-                        <StyledInput
-                            type="text"
-                            value={post.videoSrc}
-                            onChange={(e) => setPost({ ...post, videoSrc: e.target.value })}
-                        />
-                    ) : (
-                        //post.videoSrc
-                        <RecommendPostVideoSection
-                            videoSrc={post.videoSrc}
-                        ></RecommendPostVideoSection>
-                    )}
-                </StyledTitle>
-                <RecommendPostVideoSection videoSrc={post.videoSrc} type="detail" />
+                {/* <StyledTitle> */}
+                {isEditing ? (
+                    <StyledInput
+                        type="text"
+                        value={post.videoSrc}
+                        onChange={(e) => setPost({ ...post, videoSrc: e.target.value })}
+                    />
+                ) : (
+                    <RecommendPostVideoSection videoSrc={post.videoSrc} type="detail" />
+                )}
+                {/* </StyledTitle> */}
                 <StyledContent>
                     {isEditing ? (
                         <StyledTextarea
