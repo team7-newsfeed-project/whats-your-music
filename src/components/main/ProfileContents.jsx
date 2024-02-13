@@ -106,25 +106,27 @@ const ProfileContents = () => {
                                     name="내용 편집"
                                     onClick={onEditContents}
                                     fsize="1.1rem"
-                                    // pd="0, 1"
+                                    pd="0.6, 1"
                                 />
                             </PC.ProfileEditor>
                         </PC.ProfileInfoarticle>
                     ) : (
                         <form onSubmit={onEditSave}>
-                            <div>
-                                <input
-                                    name="nickname"
-                                    value={editValueNickname}
-                                    onChange={onEditValueChange}
-                                    maxLength={8}
-                                    placeholder={
-                                        editValueNickname === ""
-                                            ? "닉네임을 적어주세요 (8글자 이내)"
-                                            : editValueNickname
-                                    }
-                                />
-                                <textarea
+                            <PC.ProfileEditDiv>
+                                <PC.ProfileEditInputDiv>
+                                    <PC.ProfileEditInput
+                                        name="nickname"
+                                        value={editValueNickname}
+                                        onChange={onEditValueChange}
+                                        maxLength={8}
+                                        placeholder={
+                                            editValueNickname === ""
+                                                ? "닉네임을 적어주세요 (8글자 이내)"
+                                                : editValueNickname
+                                        }
+                                    />
+                                </PC.ProfileEditInputDiv>
+                                <PC.ProfileEditTextarea
                                     name="comment"
                                     cols="30"
                                     rows="10"
@@ -136,12 +138,12 @@ const ProfileContents = () => {
                                             ? "자신을 소개해주세요 (50글자 이내)"
                                             : editValueComment
                                     }
-                                ></textarea>
-                            </div>
-                            <div>
-                                <Button name="수정완료" />
-                                <DangerButton name="수정취소" onClick={onEditCancel} />
-                            </div>
+                                ></PC.ProfileEditTextarea>
+                                <PC.EditDoneDiv>
+                                    <Button name="수정완료" />
+                                    <DangerButton name="수정취소" onClick={onEditCancel} />
+                                </PC.EditDoneDiv>
+                            </PC.ProfileEditDiv>
                         </form>
                     )}
                 </div>
