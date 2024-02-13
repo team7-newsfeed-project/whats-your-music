@@ -29,7 +29,6 @@ const ProfileImage = () => {
         }
         //ref함수로 Storage 내부 저장할 위치를 회원 고유번호 uid정하고, uploadBytes
         if (selectFile === null) return;
-        console.log(currEmail);
         const imageRef = ref(storage, `${currEmail}/${selectFile.name}`);
         try {
             await uploadBytes(imageRef, selectFile);
@@ -51,7 +50,6 @@ const ProfileImage = () => {
         dispatch(setAccount({ image: downloadURL }));
 
         setEdit(false);
-        //return downloadURL;
     };
 
     const addImgFile = (e) => {

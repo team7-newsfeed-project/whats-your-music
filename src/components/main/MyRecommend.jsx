@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 import * as MR from "components/styles/MyRecommendStyle";
 
 const MyRecommend = () => {
+    const youtubeIdRef = useRef("");
     const myRecommends = useSelector((store) => store.userRecommend);
     const { email } = useSelector((store) => store.userAccount);
-    const filterMyRecommends = myRecommends.filter((boardItem) => boardItem.email === email);
-    const youtubeIdRef = useRef("");
     const setPosts = useSelector((state) => state.posts);
     const activeCategory = useSelector((state) => state.category);
+    const filterMyRecommends = myRecommends.filter((boardItem) => boardItem.email === email);
     const filteredPosts = setPosts.filter((post) => post.category === activeCategory);
     const { videoSrc } = filteredPosts.map((post) => post);
     if (videoSrc) {

@@ -37,7 +37,6 @@ export const ProfileImageEditDiv = styled.div`
 
 export const ProfileUpLoad = styled.input`
     display: none;
-    background-color: red;
 `;
 
 export const ProfileUpLoadBtnLabel = styled.label`

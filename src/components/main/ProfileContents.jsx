@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
@@ -30,12 +30,6 @@ const ProfileContents = () => {
         const { name, value } = e.target;
         setEditValue({ ...editValue, [name]: value });
     };
-
-    // useEffect(() => {
-    //     if (!isEdit) {
-    //         editNicknameRef.current.focus();
-    //     }
-    // }, [isEdit]);
 
     const onEditContents = (e) => {
         e.preventDefault();
