@@ -33,7 +33,7 @@ export const NormalButton = styled.button`
 
     border: 1px solid ${(style) => style.bdc || "var(--subColor2)"};
     border-radius: ${(style) =>
-        style.radius || (style.bradius && style.bradius.includes("rem"))
+        style.radius || (style.bradius && style.$bradius.includes("rem"))
             ? style.radius
             : style.radius
             ? style.radius + "rem"

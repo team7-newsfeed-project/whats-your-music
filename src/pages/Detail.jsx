@@ -82,9 +82,9 @@ const Detail = () => {
                 <Button
                     onClick={() => navigate("/")}
                     name={"← HOME"}
-                    $bgc={"black"}
+                    bgc={"black"}
                     color={"#C9F254"}
-                    $bd={"1px solid #C9F254"}
+                    bd={"1px solid #C9F254"}
                 />
                 <LogoBox>
                     <img src={logoImg} width={300} alt="logo" />

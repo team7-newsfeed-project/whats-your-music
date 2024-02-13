@@ -2,30 +2,84 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const MyPageSection = styled.section`
-    min-width: 400px;
-    /* width: 1060px; */
-    max-width: 1060px;
-    border: 1px solid white;
+    background-color: #444;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    gap: 20px;
 `;
 
 export const MyPageheadDiv = styled.div`
-    background-color: var(--subColor3);
+    /* background-color: var(--mainColor); */
+    background-color: #fff;
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: center;
+
+    height: 70px;
+`;
+
+export const MyPageheadWrapDiv = styled.div`
+    background-color: var(--mainColor);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-width: 320px;
+    width: 100%;
+
+    height: 70px;
+    padding: 7px 120px;
+    /* gap: 26rem; */
 `;
 
 export const HomeLink = styled(Link)`
-    width: 123px;
+    width: 140px;
     height: 56px;
+    text-align: center;
+    background-color: ${(style) => style.bgc || "var(--mainColor)"};
+    padding: ${(style) =>
+        style.pd
+            ? style.pd
+                  .split(", ")
+                  .map((value) => `${value}rem`)
+                  .join(" ")
+            : "0.4rem 1rem"};
 
-    padding: 20px;
+    margin: ${(style) =>
+        style.mg
+            ? style.mg
+                  .split(", ")
+                  .map((value) => `${value}rem`)
+                  .join(" ")
+            : "0rem 0rem"};
+    margin-top: ${(style) => (style.mt ? `${style.mt}rem`.join(" ") : "0rem")};
+    margin-left: ${(style) => (style.ml ? `${style.ml}rem`.join(" ") : "0rem")};
+    margin-right: ${(style) => (style.mr ? `${style.mr}rem`.join(" ") : "0rem")};
+    margin-bottom: ${(style) => (style.mb ? `${style.mb}rem`.join(" ") : "0rem")};
 
-    text-decoration: none;
-    border: 1px solid var(--subColor2);
-    border-radius: 20px;
+    border: 1px solid ${(style) => style.bdc || "var(--subColor2)"};
+    border-radius: ${(style) =>
+        style.radius || (style.bradius && style.$bradius.includes("rem"))
+            ? style.radius
+            : style.radius
+            ? style.radius + "rem"
+            : "0.8rem"};
+    color: ${(style) => style.color || "white"};
+    font-size: ${(style) => style.fsize || "1.2rem"};
 
-    color: var(--subColor2);
+    cursor: pointer;
+    &:hover {
+        background-color: ${(style) => style.hoverbgc || "var(--subColor2)"};
+        color: ${(style) => style.hovercolor || "var(--mainColor)"};
+    }
+`;
+
+export const HomeBtnP = styled.p`
+    width: 100px;
+    /* height: 19px; */
+    /* height: 19px; */
+    margin: 0 auto;
 `;
 
 export const LogOutLink = styled(Link)`
@@ -46,6 +100,11 @@ export const HeaderLogo = styled.img`
     height: 56px;
 `;
 
+export const MyPageText = styled.p`
+    width: 80px;
+    height: 56px;
+`;
+
 export const ImageNdInfo = styled.article`
     background-color: var(--mainColor);
 
@@ -57,18 +116,3 @@ export const ImageNdInfo = styled.article`
 
     gap: 30px;
 `;
-export const ProfileThumbnailImg = styled.img`
-    width: 230px;
-    height: 230px;
-    min-width: 130px;
-    min-height: 130px;
-
-    object-fit: cover;
-`;
-export const ProfileUpLoadBtnLabel = styled.label``;
-export const ProfileUpLoad = styled.input`
-    display: none;
-    background-color: red;
-`;
-
-export const UserImage = styled.div``;
