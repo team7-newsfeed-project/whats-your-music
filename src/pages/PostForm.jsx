@@ -11,6 +11,7 @@ import { setCategory } from "store/modules/category";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "database/firebase";
 import CategoryDropdown from "components/common/CategoryDropdown";
+import RecommendPostVideoSection from "components/main/RecommendPostVideoSection";
 
 const PostForm = () => {
     const dispatch = useDispatch();
@@ -52,21 +53,12 @@ const PostForm = () => {
             category: selectedCategory,
             content,
             date: new Date().toISOString(),
-            //     .toLocaleDateString("ko-KR", {
-            //     year: "numeric",
-            //     month: "numeric",
-            //     day: "numeric",
-            //     hour: "numeric",
-            //     minute: "numeric",
-            // }),
             nickname: userNickname,
             title,
             videoSrc,
             email,
         };
         console.log(newPost);
-
-        // console.log("post시 date는 ", date);
 
         try {
             const docRef = await addDoc(collection(db, "posts"), newPost);
@@ -111,18 +103,29 @@ const PostForm = () => {
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    placeholder="제목"
+                    placeholder=" 제목을 입력해주세요"
                 />
                 <StyledInput
                     type="text"
                     value={videoSrc}
                     onChange={(e) => setVideoSrc(e.target.value)}
-                    placeholder="영상 url 주소"
+                    placeholder=" 올리고 싶은 Youtube 영상의 일반 URL 주소 혹은 공유 URL 주소를 입력해주세요"
                 />
+                {videoSrc ? (
+                    <>
+                        <RecommendPostVideoSection videoSrc={videoSrc} type="detail" />
+                        <VideoText>
+                            Youtube 영상 재생 시 '오류가 발생'했다고 뜨는 경우, 유효하지 않은 영상
+                            URL 주소일 수 있어요
+                        </VideoText>
+                    </>
+                ) : (
+                    ""
+                )}
                 <StyledTextarea
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
-                    placeholder="본문 입력"
+                    placeholder=" 본문을 입력해주세요"
                 />
                 <div>
                     <DateTime>{currentDateTime}</DateTime>
@@ -240,4 +243,9 @@ const FormHeader = styled.div`
 
 const NicknameDisplay = styled.span`
     font-size: 20px;
+`;
+
+const VideoText = styled.p`
+    font-size: 13px;
+    color: gray;
 `;
