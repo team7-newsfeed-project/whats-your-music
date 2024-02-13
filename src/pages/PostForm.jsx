@@ -64,6 +64,7 @@ const PostForm = () => {
             videoSrc,
             email,
         };
+        console.log(newPost);
 
         // console.log("post시 date는 ", date);
 
@@ -140,7 +141,6 @@ const HeaderBox = styled.header`
     background-color: var(--mainColor);
     width: 100%;
     height: 100px;
-    /* margin: 20px; */
     margin: 0px auto 10px auto;
     display: flex;
     align-items: center;
