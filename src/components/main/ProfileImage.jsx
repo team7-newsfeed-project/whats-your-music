@@ -7,7 +7,7 @@ import { setSelectFile, setThumnailImg } from "store/modules/userImage";
 import { setAccount } from "store/modules/userAccount";
 import Button from "components/common/Button";
 import DangerButton from "components/common/DangerButton";
-import * as PI from "components/styles/ProfileContentsSt";
+import * as Pi from "components/styles/ProfileImageStyle";
 
 const ProfileImage = () => {
     const dispatch = useDispatch();
@@ -73,35 +73,37 @@ const ProfileImage = () => {
         setEdit(false);
     };
     return (
-        <PI.UserImage>
-            <PI.ProfileThumbnailImg src={thumnailImg} alt="이미지" />
-            <PI.ProfileUpLoad
+        <Pi.UserImage>
+            <Pi.ProfileThumbnailImg src={thumnailImg} alt="이미지" />
+            <Pi.ProfileUpLoad
                 type="file"
                 accept="image/*"
                 id="ImgfileChoice"
                 onChange={addImgFile}
             />
+            {/* <Pi.ProfileBtnWrapDiv> */}
             {isEdit ? (
-                <div>
-                    <PI.ProfileUpLoadBtnLabel htmlFor="ImgfileChoice">
+                <Pi.ProfileImageBtnsDiv>
+                    <Pi.ProfileUpLoadBtnLabel htmlFor="ImgfileChoice">
                         등록
-                    </PI.ProfileUpLoadBtnLabel>
-                    <div>
-                        <Button onClick={handleUpload} name="수정 완료" fsize="1rem" pd="0.4, 1" />
+                    </Pi.ProfileUpLoadBtnLabel>
+                    <Pi.ProfileImageEditDiv>
+                        <Button onClick={handleUpload} name="수정 완료" fsize="1.1rem" pd="0, 1" />
                         <DangerButton
                             onClick={onEditCancel}
                             name="수정 취소"
-                            fsize="1rem"
-                            pd="0.4, 1"
+                            fsize="1.1rem"
+                            pd="0, 1"
                         />
-                    </div>
-                </div>
+                    </Pi.ProfileImageEditDiv>
+                </Pi.ProfileImageBtnsDiv>
             ) : (
                 <div onClick={onEditImg}>
-                    <Button name="이미지 편집" pd="0.4, 1" fsize="1rem" />
+                    <Button name="이미지 편집" pd="0.6, 3.9" fsize="1.2rem" />
                 </div>
             )}
-        </PI.UserImage>
+            {/* </Pi.ProfileBtnWrapDiv> */}
+        </Pi.UserImage>
     );
 };
 

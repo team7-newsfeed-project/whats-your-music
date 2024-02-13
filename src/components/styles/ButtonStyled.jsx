@@ -31,7 +31,7 @@ export const NormalButton = styled.button`
     margin-right: ${(style) => (style.mr ? `${style.mr}rem`.join(" ") : "0rem")};
     margin-bottom: ${(style) => (style.mb ? `${style.mb}rem`.join(" ") : "0rem")};
 
-    border: 1px solid ${(style) => style.bdc || "var(--subColor2)"};
+    /* border: 1px solid ${(style) => style.bdc || "var(--subColor2)"}; */
     border-radius: ${(style) =>
         style.radius || (style.bradius && style.$bradius.includes("rem"))
             ? style.radius
@@ -40,13 +40,12 @@ export const NormalButton = styled.button`
             : "0.8rem"};
 
     /* 20rem, 10rem, 3rem, 0.4rem 등등 */
-
-    border: 0; // border 안주고 shadow로 경계선구분하는 것으로 추가
+    /* box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor2); */
 
     color: ${(style) => style.color || "white"};
     font-size: ${(style) => style.fsize || "1.2rem"};
 
-    box-shadow: 0px 0px 3px 1px var(--subColor2);
+    box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor2);
 
     cursor: pointer;
     &:hover {
@@ -78,7 +77,7 @@ export const DangerButton = styled.button`
     margin-bottom: ${(style) => (style.mb ? `${style.mb}rem`.join(" ") : "0rem")};
 
     color: ${(style) => style.color || "white"};
-    border: 1px solid ${(style) => style.bdc || "var(--subColor1)"};
+    /* border: 1px solid ${(style) => style.bdc || "var(--subColor1)"}; */
     border-radius: ${(style) =>
         style.radius || (style.bradius && style.bradius.includes("rem"))
             ? style.radius
@@ -86,11 +85,9 @@ export const DangerButton = styled.button`
             ? style.radius + "rem"
             : "0.8rem"};
 
-    border: 0; // border 안주고 shadow로 경계선구분하는 것으로 추가
+    box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor1);
 
     font-size: ${(style) => style.fsize || "1.2rem"};
-
-    box-shadow: 0px 0px 3px 1px var(--subColor1);
 
     cursor: pointer;
     &:hover {

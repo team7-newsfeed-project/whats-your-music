@@ -2,88 +2,63 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const MyPageSection = styled.section`
-    background-color: #444;
+    background-color: var(--subColor3);
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin-bottom: 10px;
 
-    gap: 20px;
+    gap: 10px;
 `;
 
 export const MyPageheadDiv = styled.div`
-    /* background-color: var(--mainColor); */
-    background-color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    height: 70px;
 `;
 
 export const MyPageheadWrapDiv = styled.div`
     background-color: var(--mainColor);
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: space-evenly;
     min-width: 320px;
     width: 100%;
 
-    height: 70px;
-    padding: 7px 120px;
-    /* gap: 26rem; */
+    height: 100px;
 `;
 
 export const HomeLink = styled(Link)`
     width: 140px;
     height: 56px;
     text-align: center;
-    background-color: ${(style) => style.bgc || "var(--mainColor)"};
-    padding: ${(style) =>
-        style.pd
-            ? style.pd
-                  .split(", ")
-                  .map((value) => `${value}rem`)
-                  .join(" ")
-            : "0.4rem 1rem"};
+    background-color: var(--mainColor);
+    padding: 1rem 1.1rem;
 
-    margin: ${(style) =>
-        style.mg
-            ? style.mg
-                  .split(", ")
-                  .map((value) => `${value}rem`)
-                  .join(" ")
-            : "0rem 0rem"};
-    margin-top: ${(style) => (style.mt ? `${style.mt}rem`.join(" ") : "0rem")};
-    margin-left: ${(style) => (style.ml ? `${style.ml}rem`.join(" ") : "0rem")};
-    margin-right: ${(style) => (style.mr ? `${style.mr}rem`.join(" ") : "0rem")};
-    margin-bottom: ${(style) => (style.mb ? `${style.mb}rem`.join(" ") : "0rem")};
+    /* border: var(--subColor2); */
+    border-radius: 0.8rem;
+    color: white;
+    font-size: 1.4rem;
+    box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor2);
+    transition: all 0.3s;
 
-    /* border: 1px solid ${(style) => style.bdc || "var(--subColor2)"}; */
-    border: 0;
-    border-radius: ${(style) =>
-        style.radius || (style.bradius && style.$bradius.includes("rem"))
-            ? style.radius
-            : style.radius
-            ? style.radius + "rem"
-            : "0.8rem"};
-    color: ${(style) => style.color || "white"};
-    font-size: ${(style) => style.fsize || "1.2rem"};
-
-    box-shadow: 0px 0px 3px 1px var(--subColor2);
+    color: var(--subColor2);
+    text-align: center;
     cursor: pointer;
+
     &:hover {
-        background-color: ${(style) => style.hoverbgc || "var(--subColor2)"};
-        color: ${(style) => style.hovercolor || "var(--mainColor)"};
-        transition: all 0.3s; // 시간차두고 바뀌도록 추가
+        background-color: var(--subColor2);
+        color: var(--mainColor);
     }
 `;
 
 export const HomeBtnP = styled.p`
     width: 100px;
-    /* height: 19px; */
-    /* height: 19px; */
-    margin: 0 auto;
+    height: 1rem;
 `;
+
+export const ProfileInfoDiv = styled.div``;
 
 export const LogOutLink = styled(Link)`
     width: 123px;
@@ -103,18 +78,5 @@ export const HeaderLogo = styled.img`
 `;
 
 export const MyPageText = styled.p`
-    width: 80px;
-    height: 56px;
-`;
-
-export const ImageNdInfo = styled.article`
-    background-color: var(--mainColor);
-
-    padding: 44px;
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    gap: 30px;
+    font-size: 1.2rem;
 `;
