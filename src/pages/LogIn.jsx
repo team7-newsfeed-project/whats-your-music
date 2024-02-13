@@ -12,6 +12,7 @@ import { getUserInfo, do3rdPartyLogIn, setUserInfo } from "database/FirebaseAPI"
 import { useDispatch, useSelector } from "react-redux";
 import Button from "components/common/Button";
 import { setAccount } from "store/modules/userAccount";
+import logoImg from "assets/whatsyourmusic_logo.png";
 
 const LogIn = () => {
     const navigate = useNavigate();
@@ -114,10 +115,12 @@ const LogIn = () => {
     };
 
     return (
-        <>
-            <HomeBtn onClick={() => navigate("/")}>&larr;home</HomeBtn>
+        <LoginWrapper>
+            <HomeBtn onClick={() => navigate("/")}>&larr; HOME</HomeBtn>
             <LogInForm onSubmit={(event) => onLogIn(event)}>
-                <Logo>WHAT'S YOUR MUSIC?</Logo>
+                <Logo>
+                    <img src={logoImg} width={300} alt="logo" />
+                </Logo>
                 <Title>LOGIN</Title>
                 <InputFiled
                     type="text"
@@ -161,11 +164,16 @@ const LogIn = () => {
                     <RegisterText onClick={() => navigate("/register")}>회원가입</RegisterText>
                 </LogInInfo>
             </LogInForm>
-        </>
+        </LoginWrapper>
     );
 };
 
 export default LogIn;
+
+const LoginWrapper = styled.div`
+    background-color: var(--mainColor);
+    min-height: 870px;
+`;
 
 const LogInForm = styled.form`
     display: flex;
@@ -177,26 +185,34 @@ const LogInForm = styled.form`
 
 const HomeBtn = styled.button`
     font-size: 20px;
-    border: 1px solid var(--subColor2);
-    background-color: var(--subColor3);
+    /* border: 1px solid var(--subColor2); */
+    border: 0;
+    background-color: var(--mainColor);
     color: var(--subColor2);
     border-radius: 15px;
-    width: 90px;
+    width: 100px;
     padding: 5px;
     margin-top: 10px;
     margin-left: 10px;
+    box-shadow: 0px 0px 3px 1px var(--subColor2);
     cursor: pointer;
+    &:hover {
+        background-color: var(--subColor2);
+        color: var(--mainColor);
+        transition: all 0.3s;
+    }
 `;
 
 const Logo = styled.p`
     text-align: center;
-    font-size: 20px;
+    margin: 50px;
+    /* font-size: 20px;
     border: 1px solid var(--subColor1);
     color: var(--subColor1);
-    height: 100%;
+    height: 100%; 
     line-height: 100px;
     border-radius: 10px;
-    vertical-align: middle;
+    vertical-align: middle; */
 `;
 
 const Title = styled.p`

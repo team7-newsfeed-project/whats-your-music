@@ -58,7 +58,8 @@ export const HomeLink = styled(Link)`
     margin-right: ${(style) => (style.mr ? `${style.mr}rem`.join(" ") : "0rem")};
     margin-bottom: ${(style) => (style.mb ? `${style.mb}rem`.join(" ") : "0rem")};
 
-    border: 1px solid ${(style) => style.bdc || "var(--subColor2)"};
+    /* border: 1px solid ${(style) => style.bdc || "var(--subColor2)"}; */
+    border: 0;
     border-radius: ${(style) =>
         style.radius || (style.bradius && style.$bradius.includes("rem"))
             ? style.radius
@@ -68,10 +69,12 @@ export const HomeLink = styled(Link)`
     color: ${(style) => style.color || "white"};
     font-size: ${(style) => style.fsize || "1.2rem"};
 
+    box-shadow: 0px 0px 3px 1px var(--subColor2);
     cursor: pointer;
     &:hover {
         background-color: ${(style) => style.hoverbgc || "var(--subColor2)"};
         color: ${(style) => style.hovercolor || "var(--mainColor)"};
+        transition: all 0.3s; // 시간차두고 바뀌도록 추가
     }
 `;
 

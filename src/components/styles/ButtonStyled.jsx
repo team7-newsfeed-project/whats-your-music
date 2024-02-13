@@ -41,13 +41,18 @@ export const NormalButton = styled.button`
 
     /* 20rem, 10rem, 3rem, 0.4rem 등등 */
 
+    border: 0; // border 안주고 shadow로 경계선구분하는 것으로 추가
+
     color: ${(style) => style.color || "white"};
     font-size: ${(style) => style.fsize || "1.2rem"};
+
+    box-shadow: 0px 0px 3px 1px ${(style) => style.bgc};
 
     cursor: pointer;
     &:hover {
         background-color: ${(style) => style.hoverbgc || "var(--subColor2)"};
         color: ${(style) => style.hovercolor || "var(--mainColor)"};
+        transition: all 0.3s; // 시간차두고 바뀌도록 추가
     }
 `;
 
@@ -81,10 +86,16 @@ export const DangerButton = styled.button`
             ? style.radius + "rem"
             : "0.8rem"};
 
+    border: 0; // border 안주고 shadow로 경계선구분하는 것으로 추가
+
     font-size: ${(style) => style.fsize || "1.2rem"};
+
+    box-shadow: 0px 0px 3px 1px var(--subColor1);
+
     cursor: pointer;
     &:hover {
         background-color: ${(style) => style.hoverbgc || "var(--subColor1)"};
         color: ${(style) => style.hovercolor || "var(--mainColor)"};
+        transition: all 0.3s; // 시간차두고 바뀌도록 추가
     }
 `;

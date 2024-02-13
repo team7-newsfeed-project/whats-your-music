@@ -9,7 +9,7 @@ import { setInitValue } from "store/modules/userContents";
 import { setThumnailImg } from "store/modules/userImage";
 import { setMyRecommend } from "store/modules/userRecommend";
 import Layout from "components/layout/Layout";
-import logoImage from "assets/logoImage.png";
+import logoImage from "assets/whatsyourmusic_logo.png";
 import ProfileContents from "components/main/ProfileContents";
 import MyRecommend from "components/main/MyRecommend";
 import * as MP from "components/styles/MypageStyle";

@@ -83,7 +83,7 @@ table {
 
 * {
 box-sizing: border-box;
-font-family: "Pretandard-Regular";
+font-family: "Pretendard-Regular";
 }
 
 a{
