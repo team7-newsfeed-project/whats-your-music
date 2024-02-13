@@ -9,7 +9,7 @@ import { setInitValue } from "store/modules/userContents";
 import Button from "components/common/Button";
 import DangerButton from "components/common/DangerButton";
 import ProfileImage from "./ProfileImage";
-import * as PC from "components/styles/ProfileContentsSt";
+import * as PC from "components/styles/ProfileContentsStyle";
 
 const ProfileContents = () => {
     const dispatch = useDispatch();
@@ -89,15 +89,15 @@ const ProfileContents = () => {
                     {!isEdit ? (
                         <PC.ProfileInfoarticle>
                             <PC.ProfileContentsDiv>
-                                <div>
+                                <PC.ProfileNicknameDiv>
                                     <p>{nickname}</p>
                                     <DangerButton name="⛔ 로그아웃" onClick={onLogout} />
-                                </div>
+                                </PC.ProfileNicknameDiv>
                                 <p>{comment}</p>
                             </PC.ProfileContentsDiv>
-                            <div>
+                            <PC.ProfileEditor>
                                 <Button name="내용 편집" onClick={onEditContents} />
-                            </div>
+                            </PC.ProfileEditor>
                         </PC.ProfileInfoarticle>
                     ) : (
                         <form onSubmit={onEditSave}>

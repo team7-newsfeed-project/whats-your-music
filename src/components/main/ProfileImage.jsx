@@ -7,7 +7,7 @@ import { setSelectFile, setThumnailImg } from "store/modules/userImage";
 import { setAccount } from "store/modules/userAccount";
 import Button from "components/common/Button";
 import DangerButton from "components/common/DangerButton";
-import * as Pi from "components/styles/ProfileImageSt";
+import * as Pi from "components/styles/ProfileImageStyle";
 
 const ProfileImage = () => {
     const dispatch = useDispatch();

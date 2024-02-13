@@ -39,7 +39,37 @@ export const ImageNdInfo = styled.article`
 
 export const ProfileInfoarticle = styled.article`
     background-color: #333;
+    display: flex;
+    flex-direction: column;
+
+    max-width: 708px;
     height: 296px;
+
+    gap: 10px;
 `;
 
-export const ProfileContentsDiv = styled.div``;
+export const ProfileContentsDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    background-color: #a07979;
+
+    gap: 20px;
+`;
+
+export const ProfileNicknameDiv = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    gap: 4rem;
+
+    > p {
+        background-color: #444;
+        padding: 0rem 2rem;
+        font-size: 1.2rem;
+    }
+`;
+
+export const ProfileEditor = styled.div`
+    background-color: #fff;
+`;
