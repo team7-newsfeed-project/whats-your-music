@@ -20,7 +20,6 @@ const RecommendPostVideoSection = ({ videoSrc }) => {
             youtubeIdRef.current = youtubeId;
         }
     }
-    // console.log("youtubeIdRef ", youtubeIdRef);
     return (
         <VideoSection>
             <Iframe
@@ -41,8 +40,6 @@ const VideoSection = styled.section`
     /* margin-top: 20px; */
     margin-left: 20px;
     overflow: hidden;
-    /* width: 100%; */
-    /* height: 100%; */
 `;
 
 const Iframe = styled.iframe`
@@ -53,5 +50,4 @@ const Iframe = styled.iframe`
     height: 150px;
     border: 1px solid var(--mainColor);
     border-radius: 15px;
-    /* margin-top: 30px; */
 `;

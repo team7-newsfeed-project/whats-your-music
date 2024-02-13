@@ -86,10 +86,15 @@ box-sizing: border-box;
 font-family: "Pretendard-Regular";
 }
 
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
 body {
   margin: 0;
-  /* -webkit-font-smoothing: antialiased; */
-  /* -moz-osx-font-smoothing: grayscale; */
+  /* -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; */
   background-color: var(--subColor3);
   color: white;
   font-family: "Pretendard-Regular",

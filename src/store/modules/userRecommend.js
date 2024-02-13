@@ -14,10 +14,9 @@ const initialState = [];
 
 // 리듀서
 const example = (state = initialState, action) => {
-    console.log(action.payload);
     switch (action.type) {
         case SET_MYRECOMMEND:
-            return [...state, ...action.payload];
+            return [...action.payload];
         default:
             return state;
     }
