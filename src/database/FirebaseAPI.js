@@ -30,10 +30,11 @@ export const setUserInfo = async (reduxUser, newAccount) => {
     // reduxUser, newAccount : 객체
     const userId = reduxUser.firebaseId;
     const accountRef = doc(db, "accounts", userId);
+    const resultAccount = { ...reduxUser, ...newAccount };
 
-    await updateDoc(accountRef, { ...reduxUser, ...newAccount });
+    await updateDoc(accountRef, resultAccount);
 
-    return newAccount;
+    return resultAccount;
 };
 
 export const do3rdPartyLogIn = async ({ email, nickname }) => {
