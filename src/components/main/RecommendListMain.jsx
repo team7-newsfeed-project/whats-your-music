@@ -26,7 +26,7 @@ const RecommendListMain = () => {
 
             // date 날짜시간순 정렬
             const dateOrderedPosts = [...initialPosts].sort((a, b) => {
-                return new Date(b.date) - new Date(a.date);
+                return new Date(b.date) - new Date(a.date); // post컬렉션 문서의 date키 밸류값은 ISO String이므로 date객체로 변환해준 후 sort
             });
 
             // firestore에서 가져온 데이터를 redux 통해 전달

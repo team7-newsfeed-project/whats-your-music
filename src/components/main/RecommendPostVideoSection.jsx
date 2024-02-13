@@ -7,12 +7,10 @@ const RecommendPostVideoSection = ({ videoSrc, type }) => {
         if (videoSrc.includes("youtube.com/live")) {
             // 유튭 라이브영상 (공유)주소의 경우
             const youtubeId = videoSrc.substring(29, 40);
-            // console.log("라이브영상 (공유)주소:", youtubeId);
             youtubeIdRef.current = youtubeId;
         } else if (videoSrc.includes("youtube.com/watch")) {
             // 일반 유튭주소의 경우 (공유주소아닌)
             const youtubeId = videoSrc.substring(32, 43);
-            // console.log("일반유튭주소:", youtubeId);
             youtubeIdRef.current = youtubeId;
         } else {
             // 일반 공유 주소 : ..youtu.be/..
@@ -38,15 +36,12 @@ const RecommendPostVideoSection = ({ videoSrc, type }) => {
 export default RecommendPostVideoSection;
 
 const VideoSection = styled.section`
-    /* margin-top: 20px; */
     margin-left: 20px;
     overflow: hidden;
 `;
 
 const Iframe = styled.iframe`
     position: relative; // 상관 x
-    /* top: 0px; // 마진 */
-    /* bottom: 0px; */
     width: 302px; // 볼륨크기조절이 같이 뜨려면 최소 이정도 넓이 부여해야
     height: 150px;
     border: 1px solid var(--mainColor);

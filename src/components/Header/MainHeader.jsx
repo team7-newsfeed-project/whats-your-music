@@ -10,9 +10,6 @@ const MainHeader = () => {
         width: 50,
         height: 50,
         borderRadius: 50,
-        // border: 1,
-        // borderColor: "var(--subColor2)",
-        // borderStyle: "solid",
         boxShadow: "0px 0px 2px 0.5px var(--subColor2)",
     };
 
@@ -86,34 +83,22 @@ export default MainHeader;
 const HeaderWrapper = styled.header`
     background-color: var(--mainColor);
     display: flex;
-    /* justify-content: space-around; */
     align-items: center;
     /* width: 1650px; */
     width: 100%;
     height: 100px;
     margin: 0px auto 10px auto;
-    /* border-radius: 20px; */
 `;
 
 const LogoImgBox = styled.div`
-    /* background-color: var(--subColor2); */
     margin-left: 40px;
     margin-right: 160px;
     margin-top: 10px;
 `;
 
-// const MainNav = styled.nav`
-/* display: flex; */
-// background-color: pink;
-/* gap: 50px; */
-// `;
-
 const TabsWrapper = styled.ul`
-    /* background-color: antiquewhite; */
     display: flex;
     gap: 150px;
-    /* justify-content: center; */
-    /* margin-left: 0px; */
     margin-right: 300px; // 이렇게 맞추면 화면전체사이즈마다 다르게 나오는 문제점
 `;
 
@@ -123,7 +108,6 @@ const Tab = styled.li`
     align-items: center;
     width: 200px;
     height: 50px;
-    /* border: 1px solid var(--subColor1); */
     border-radius: 20px;
     background-color: ${(props) => (props.$isActive === props.id ? "var(--subColor1)" : "none")};
     color: ${(props) => (props.$isActive === props.id ? "var(--mainColor)" : "none")};
@@ -152,7 +136,6 @@ const NewPostLink = styled(Link)`
     height: 40px;
     color: white;
     text-decoration: none;
-    /* border: 1px solid var(--subColor1); */
     border-radius: 20px;
     box-shadow: 0px 0px 3px 1px var(--subColor1);
     &:hover {
@@ -173,7 +156,6 @@ const LoginLink = styled(Link)`
     height: 40px;
     color: white;
     text-decoration: none;
-    /* border: 1px solid var(--subColor2); */
     border-radius: 20px;
     box-shadow: 0px 0px 3px 1px var(--subColor2);
     &:hover {
@@ -185,28 +167,4 @@ const LoginLink = styled(Link)`
     font-size: 17px;
     margin-top: 0.3rem;
     margin-left: 4rem;
-`;
-
-const UserImg = styled.img.attrs({
-    alt: "userImg",
-    // 유저 이미지 가져오기 or 기본이미지
-    // src: `${defaultUserImg} `, // 잘 뜸
-    // 실패 ${ userSetImg? `userSetImg` : `defaultUserImg`},
-    // 실패 ${userSetImg? "none": `{defaultUserImg}`
-    // 밸류?에 ""감싸야. 근데 안에 js문법이니 백틱 ``
-    //`{userSetImg}`
-    // 프로필등록된이미지 있으면 (true) 등록된 이미지 가져오기
-    // 아래 ${} 안에서 안뜸}  :뒤부분 `{defaultUserImg}`,혹은 ``만, 혹은 `${}`,  {} 했지만 다 안뜸
-    // src: `${(props) => props.$defaultImage}`,
-    // src: `{defaultImage}`, 이렇게 하면 에러없이뜨긴하는데 이미지는 안뜸
-    // src: `${defaultImage}`,
-})`
-    width: 50px;
-    height: 50px;
-`;
-
-const UserProfileImgBox = styled.div`
-    width: 50px;
-    height: 50px;
-    background-image: ${(props) => props.$defaultImage}; // 안뜸.  url() 넣고 해도 안뜸
 `;
