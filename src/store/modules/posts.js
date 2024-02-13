@@ -25,11 +25,12 @@ const initialState = [
         nickname: "",
         title: "  ",
         content: "  !",
-        date: new Date().toLocaleDateString("ko-KR", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-        }),
+        date: new Date().toISOString(),
+        //     new Date().toLocaleDateString("ko-KR", {
+        //     year: "numeric",
+        //     month: "long",
+        //     day: "numeric",
+        // }),
         videoSrc: "",
     },
 ];

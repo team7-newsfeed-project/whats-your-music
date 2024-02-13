@@ -40,15 +40,18 @@ export const NormalButton = styled.button`
             : "0.8rem"};
 
     /* 20rem, 10rem, 3rem, 0.4rem 등등 */
-    box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor2);
-    transition: all 0.3s;
+    /* box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor2); */
+
     color: ${(style) => style.color || "white"};
     font-size: ${(style) => style.fsize || "1.2rem"};
+
+    box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor2);
 
     cursor: pointer;
     &:hover {
         background-color: ${(style) => style.hoverbgc || "var(--subColor2)"};
         color: ${(style) => style.hovercolor || "var(--mainColor)"};
+        transition: all 0.3s; // 시간차두고 바뀌도록 추가
     }
 `;
 
@@ -82,13 +85,14 @@ export const DangerButton = styled.button`
             ? style.radius + "rem"
             : "0.8rem"};
 
-    box-shadow: 0rem 0rem 0.3rem 0px var(--subColor1);
-    transition: all 0.3s;
+    box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor1);
 
     font-size: ${(style) => style.fsize || "1.2rem"};
+
     cursor: pointer;
     &:hover {
         background-color: ${(style) => style.hoverbgc || "var(--subColor1)"};
         color: ${(style) => style.hovercolor || "var(--mainColor)"};
+        transition: all 0.3s; // 시간차두고 바뀌도록 추가
     }
 `;

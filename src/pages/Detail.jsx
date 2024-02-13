@@ -76,18 +76,26 @@ const Detail = () => {
         setIsEditing(false);
     };
 
+    const formattedDate = new Date(post.date).toLocaleDateString("ko-KR", {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+    });
+
     return (
         <LayoutStyle>
             <HeaderBox>
                 <Button
                     onClick={() => navigate("/")}
                     name={"← HOME"}
-                    bgc={"black"}
+                    $bgc={"black"}
                     color={"#C9F254"}
                     bd={"1px solid #C9F254"}
                 />
                 <LogoBox>
-                    <img src={logoImg} width={300} alt="logo" />
+                    <img src={logoImg} width={270} alt="logo" />
                 </LogoBox>
             </HeaderBox>
             <MainWrapper>
@@ -128,7 +136,7 @@ const Detail = () => {
                     )}
                 </StyledContent>
                 <div>
-                    <DateTime>{post.date}</DateTime>
+                    <DateTime>{formattedDate}</DateTime>
                     {isAuthor && (
                         <>
                             <Button
@@ -208,7 +216,7 @@ const NicknameDisplay = styled.span`
 `;
 
 const CategoryDisplay = styled.span`
-    border: 1px solid var(--subColor1);
+    /* border: 1px solid var(--subColor1); */
     border-radius: 20px;
     padding: 15px;
     width: 80px;
@@ -217,6 +225,7 @@ const CategoryDisplay = styled.span`
     background-color: var(--mainColor);
     outline: none;
     appearance: none;
+    box-shadow: 0px 0px 3px 2px var(--subColor1);
 `;
 
 const DateTime = styled.span`

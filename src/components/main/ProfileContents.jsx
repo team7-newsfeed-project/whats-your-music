@@ -90,7 +90,9 @@ const ProfileContents = () => {
                         <PC.ProfileInfoarticle>
                             <PC.ProfileContentsDiv>
                                 <PC.ProfileNicknameDiv>
-                                    <p>{nickname}</p>
+                                    <div>
+                                        <p>{nickname}</p>
+                                    </div>
                                     <DangerButton name="⛔ 로그아웃" onClick={onLogout} />
                                 </PC.ProfileNicknameDiv>
                                 <p>{comment}</p>
@@ -106,9 +108,10 @@ const ProfileContents = () => {
                                     name="nickname"
                                     value={editValueNickname}
                                     onChange={onEditValueChange}
+                                    maxLength={8}
                                     placeholder={
                                         editValueNickname === ""
-                                            ? "닉네임을 적어주세요"
+                                            ? "닉네임을 적어주세요 (8글자 이내)"
                                             : editValueNickname
                                     }
                                 />
@@ -118,9 +121,10 @@ const ProfileContents = () => {
                                     rows="10"
                                     value={editValueComment}
                                     onChange={onEditValueChange}
+                                    maxLength={50}
                                     placeholder={
                                         editValueComment === ""
-                                            ? "자신을 소개해주세요"
+                                            ? "자신을 소개해주세요 (50글자 이내)"
                                             : editValueComment
                                     }
                                 ></textarea>

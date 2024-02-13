@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ProfileContentsSection = styled.section`
-    min-width: 400px;
+    min-width: 330px;
     max-width: 100%;
 
     display: flex;
@@ -42,7 +42,9 @@ export const ProfileInfoarticle = styled.article`
     display: flex;
     flex-direction: column;
 
-    max-width: 708px;
+    min-width: 300px;
+    max-width: 100%;
+    width: 708px;
     height: 296px;
 
     gap: 10px;
@@ -61,11 +63,18 @@ export const ProfileNicknameDiv = styled.div`
     flex-direction: row;
     justify-content: space-between;
 
-    gap: 4rem;
+    > div {
+        background-color: black;
+        display: flex;
+        align-items: center;
 
-    > p {
-        background-color: #444;
-        padding: 0rem 2rem;
+        min-width: 50px;
+        width: 300px;
+        height: 56px;
+
+        padding: 5px 10px;
+
+        text-align: center;
         font-size: 1.2rem;
     }
 `;

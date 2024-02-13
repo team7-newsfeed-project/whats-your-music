@@ -45,7 +45,7 @@ const RecommendPostItem = ({ post }) => {
                     <PostTitle>{title}</PostTitle>
                     <PostContent>{content}</PostContent>
                     <DateNameTextBox>
-                        <PostTime>{formattedDate}</PostTime>
+                        <PostTime>{formattedDate} &emsp;│</PostTime>
                         <PostNickname>{nickname}</PostNickname>
                     </DateNameTextBox>
                 </PostTextBox>

@@ -74,8 +74,7 @@ export const LogOutLink = styled(Link)`
 `;
 
 export const HeaderLogo = styled.img`
-    width: 253px;
-    height: 56px;
+    width: 270px;
 `;
 
 export const MyPageText = styled.p`

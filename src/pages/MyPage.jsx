@@ -12,7 +12,7 @@ import Layout from "components/layout/Layout";
 import logoImage from "assets/whatsyourmusic_logo.png";
 import ProfileContents from "components/main/ProfileContents";
 import MyRecommend from "components/main/MyRecommend";
-import * as MP from "components/styles/MyPageStyle";
+import * as MP from "components/styles/MypageStyle";
 
 const MyPage = () => {
     const dispatch = useDispatch();
