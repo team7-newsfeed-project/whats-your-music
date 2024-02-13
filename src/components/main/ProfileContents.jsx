@@ -140,10 +140,10 @@ const ProfileContents = () => {
                                     rows="10"
                                     value={editValueComment}
                                     onChange={onEditValueChange}
-                                    maxLength={50}
+                                    maxLength={100}
                                     placeholder={
                                         editValueComment === ""
-                                            ? "자신을 소개해주세요 (50글자 이내)"
+                                            ? "자신을 소개해주세요 (100글자 이내)"
                                             : editValueComment
                                     }
                                 ></PC.ProfileEditTextarea>

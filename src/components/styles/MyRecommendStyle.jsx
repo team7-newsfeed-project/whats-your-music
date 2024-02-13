@@ -27,7 +27,7 @@ export const MyRecommentMusicDiv = styled.div`
 
 export const RecommendContentsWrap = styled.article`
     display: grid;
-    grid-template-columns: repeat(2, minmax(500px, 2fr));
+    grid-template-columns: repeat(2, minmax(400px, 2fr));
     grid-auto-rows: auto;
 
     gap: 40px;
@@ -44,7 +44,11 @@ export const ListText = styled.p`
 `;
 
 export const RecoommendVideoWrap = styled.div`
-    border-radius: 100rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 302px;
 `;
 
 export const CardsWrap = styled.div`
