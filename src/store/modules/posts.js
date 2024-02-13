@@ -1,5 +1,3 @@
-import { dummyData } from "shared/postsDummyData";
-
 const SET_POST = "posts / SET_POST";
 const ADD_POST = "posts/ADD_POST";
 const EDIT_POST = "posts/EDIT_POST";
@@ -26,18 +24,11 @@ const initialState = [
         title: "  ",
         content: "  !",
         date: new Date().toISOString(),
-        //     new Date().toLocaleDateString("ko-KR", {
-        //     year: "numeric",
-        //     month: "long",
-        //     day: "numeric",
-        // }),
         videoSrc: "",
     },
 ];
 
-// 리듀서
 const posts = (state = initialState, action) => {
-    console.log(action.payload);
     switch (action.type) {
         case SET_POST:
             const setPosts = action.payload;
