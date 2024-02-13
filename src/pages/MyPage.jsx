@@ -26,7 +26,6 @@ const MyPage = () => {
         }
 
         const myPageUserData = async () => {
-            // firestore db 가져오기
             try {
                 const q = query(collection(db, "accounts"), where("email", "==", email));
                 const querySnapshot = await getDocs(q);
