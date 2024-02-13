@@ -10,6 +10,7 @@ import { db } from "database/firebase";
 import DangerButton from "components/common/DangerButton";
 import { useSelector, useDispatch } from "react-redux";
 import { deletePost, editPost } from "store/modules/posts";
+import RecommendPostVideoSection from "components/main/RecommendPostVideoSection";
 
 const Detail = () => {
     const navigate = useNavigate();
@@ -92,7 +93,7 @@ const Detail = () => {
                     name={"← HOME"}
                     $bgc={"black"}
                     color={"#C9F254"}
-                    bd={"1px solid #C9F254"}
+                    bd={"1px solid "}
                 />
                 <LogoBox>
                     <img src={logoImg} width={270} alt="logo" />
@@ -125,6 +126,7 @@ const Detail = () => {
                         post.videoSrc
                     )}
                 </StyledTitle>
+                <RecommendPostVideoSection videoSrc={post.videoSrc} type="detail" />
                 <StyledContent>
                     {isEditing ? (
                         <StyledTextarea
