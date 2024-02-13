@@ -65,6 +65,8 @@ const PostForm = () => {
             email,
         };
 
+        // console.log("post시 date는 ", date);
+
         try {
             const docRef = await addDoc(collection(db, "posts"), newPost);
             newPost.id = docRef.id;

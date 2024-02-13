@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { setCategory } from "store/modules/category";
 import logoImg from "assets/whatsyourmusic_logo.png";
 
-const Header = () => {
+const MainHeader = () => {
     const userImgStyles = {
         width: 50,
         height: 50,
@@ -53,11 +53,11 @@ const Header = () => {
                 </Tab>
             </TabsWrapper>
             <LinkWrapper>
-                <NewPostLink to={`postform`}>글쓰기</NewPostLink>
                 {/* 유저 로그인상태 ? (O)유저이미지뜨게하고 클릭 시 마이페이지 이동가능 : (X)로그인버튼 */}
                 {isUserLoggedIn ? (
+                    <NewPostLink to={`postform`}>글쓰기</NewPostLink>
                     <Link to="mypage">
-                        {userSetImg ? (
+                            {userSetImg ? (
                             <img src={userSetImg} style={userImgStyles} />
                         ) : (
                             // borderRadius={10} "..px"등 다 적용안됨.. ㅠ imageStyle={{ borderRadius: 15 }}
@@ -79,7 +79,7 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default MainHeader;
 
 const HeaderWrapper = styled.header`
     background-color: var(--mainColor);

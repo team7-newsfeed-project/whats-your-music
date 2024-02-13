@@ -11,14 +11,13 @@ import { auth } from "database/firebase";
 import { getUserInfo, do3rdPartyLogIn, setUserInfo } from "database/FirebaseAPI";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "components/common/Button";
-import logoImg from "assets/whatsyourmusic_logo.png";
 import { setAccount } from "store/modules/userAccount";
 
 const LogIn = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [pw, setPw] = useState("");
-    let reduxUser = useSelector((state) => state.userAccount);
+    const reduxUser = useSelector((state) => state.userAccount);
     const dispatch = useDispatch();
 
     const onLogIn = async (event) => {
@@ -36,11 +35,30 @@ const LogIn = () => {
         try {
             await signInWithEmailAndPassword(auth, email, pw);
         } catch (error) {
-            alert(`로그인에 실패했습니다.${error.code}`);
+            switch (error.code) {
+                case "auth/user-not-found":
+                    alert("입력하신 이메일로 가입하신 계정이 존재하지 않습니다.");
+                    return;
+                case "auth/invalid-email" || "auth/wrong-password":
+                    alert("이메일 또는 비밀번호가 올바르지 않습니다.");
+                    return;
+                case "auth/too-many-requests":
+                    alert("로그인 시도를 많이 하셔서 차단되었습니다. 관리자에게 문의해주세요.");
+                    return;
+                case "auth/user-disabled":
+                    alert("해당 계정이 비활성화 되었습니다. 관리자에게 문의해주세요.");
+                    return;
+                case "auth/operation-not-allowed":
+                    alert("현재 로그인이 허가되지 않습니다. 관리자에게 문의해주세요.");
+                    return;
+                default:
+                    alert(`로그인에 실패했습니다.`);
+                    return;
+            }
         }
-        reduxUser = await getUserInfo(email);
-        reduxUser = await setUserInfo(reduxUser, { isLoggedIn: true });
-        dispatch(setAccount(reduxUser));
+        const firebaseUser = await getUserInfo(email);
+        const currentUser = await setUserInfo(firebaseUser, { isLoggedIn: true });
+        dispatch(setAccount(currentUser));
         alert("로그인이 되었습니다.");
         navigate("/");
     };
@@ -56,14 +74,16 @@ const LogIn = () => {
             const result = await signInWithPopup(auth, provider);
             user = result.user;
         } catch (error) {
-            alert(`로그인을 실패했습니다.${error.code}`);
+            alert("로그인에 실패했습니다.");
             return;
         }
 
-        await do3rdPartyLogIn({ email: user.email, nickname: user.displayName });
-        reduxUser = await getUserInfo(user.email);
-        await setUserInfo(reduxUser, { isLoggedIn: true });
-        dispatch(setAccount(reduxUser));
+        const firebaseUser = await do3rdPartyLogIn({
+            email: user.email,
+            nickname: user.displayName,
+        });
+        const currentUser = await setUserInfo(firebaseUser, { isLoggedIn: true });
+        dispatch(setAccount(currentUser));
         alert("로그인이 되었습니다.");
         navigate("/");
     };
@@ -80,27 +100,24 @@ const LogIn = () => {
             const result = await signInWithPopup(auth, provider);
             user = result.user;
         } catch (error) {
-            alert(`로그인을 실패했습니다.${error.code}`);
+            alert("로그인에 실패했습니다.");
             return;
         }
 
         email = user.reloadUserInfo.providerUserInfo[0].email;
         nickname = user.reloadUserInfo.providerUserInfo[0].screenName;
-        await do3rdPartyLogIn({ email, nickname });
-        reduxUser = await getUserInfo(email);
-        reduxUser = await setUserInfo(reduxUser, { isLoggedIn: true });
-        dispatch(setAccount(reduxUser));
+        const firebaseUser = await do3rdPartyLogIn({ email, nickname });
+        const currentUser = await setUserInfo(firebaseUser, { isLoggedIn: true });
+        dispatch(setAccount(currentUser));
         alert("로그인이 되었습니다.");
         navigate("/");
     };
 
     return (
-        <LoginWrapper>
+        <>
             <HomeBtn onClick={() => navigate("/")}>&larr;home</HomeBtn>
             <LogInForm onSubmit={(event) => onLogIn(event)}>
-                <Logo>
-                    <img src={logoImg} width={300} alt="logo" />
-                </Logo>
+                <Logo>WHAT'S YOUR MUSIC?</Logo>
                 <Title>LOGIN</Title>
                 <InputFiled
                     type="text"
@@ -144,16 +161,11 @@ const LogIn = () => {
                     <RegisterText onClick={() => navigate("/register")}>회원가입</RegisterText>
                 </LogInInfo>
             </LogInForm>
-        </LoginWrapper>
+        </>
     );
 };
 
 export default LogIn;
-
-const LoginWrapper = styled.div`
-    background-color: var(--mainColor);
-    min-height: 870px;
-`;
 
 const LogInForm = styled.form`
     display: flex;
@@ -165,8 +177,7 @@ const LogInForm = styled.form`
 
 const HomeBtn = styled.button`
     font-size: 20px;
-    /* border: 1px solid var(--subColor2); */
-    box-shadow: 0px 0px 3px 1px var(--subColor2);
+    border: 1px solid var(--subColor2);
     background-color: var(--subColor3);
     color: var(--subColor2);
     border-radius: 15px;
@@ -175,28 +186,21 @@ const HomeBtn = styled.button`
     margin-top: 10px;
     margin-left: 10px;
     cursor: pointer;
-    &:hover {
-        background-color: var(--subColor2);
-        color: var(--mainColor);
-    }
 `;
 
-const Logo = styled.div`
+const Logo = styled.p`
     text-align: center;
-    /* font-size: 20px; */
-    /* border: 1px solid var(--subColor1); */
-    /* color: var(--subColor1); */
-    /* height: 100%; */
-    margin: 50px;
-    /* line-height: 100px; */
-    /* border-radius: 10px; */
-    /* vertical-align: middle; */
+    font-size: 20px;
+    border: 1px solid var(--subColor1);
+    color: var(--subColor1);
+    height: 100%;
+    line-height: 100px;
+    border-radius: 10px;
+    vertical-align: middle;
 `;
 
 const Title = styled.p`
-    font-family: "Pretendard-Regular";
     font-size: 20px;
-    letter-spacing: 0.5rem;
     color: var(--subColor1);
     width: 200px;
     margin: 0 auto;
@@ -211,13 +215,11 @@ const InputFiled = styled.input`
 
 const LogInInfo = styled.p`
     text-align: center;
-    margin-top: 50px;
 `;
 
 const RegisterText = styled.span`
     color: var(--subColor1);
-    &:hover {
+    & {
         cursor: pointer;
-        color: var(--subColor2);
     }
 `;

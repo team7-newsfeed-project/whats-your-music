@@ -26,6 +26,11 @@ const initialState = [
         title: "  ",
         content: "  !",
         date: new Date().toISOString(),
+        //     new Date().toLocaleDateString("ko-KR", {
+        //     year: "numeric",
+        //     month: "long",
+        //     day: "numeric",
+        // }),
         videoSrc: "",
     },
 ];
