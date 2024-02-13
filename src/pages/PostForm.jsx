@@ -215,7 +215,7 @@ const SubmitBtn = styled.button`
 `;
 
 const CategoryDisplay = styled.span`
-    border: 1px solid var(--subColor1);
+    /* border: 1px solid var(--subColor1); */
     border-radius: 20px;
     padding: 15px;
     width: 80px;
@@ -224,6 +224,7 @@ const CategoryDisplay = styled.span`
     background-color: var(--mainColor);
     outline: none;
     appearance: none;
+    box-shadow: 0px 0px 3px 2px var(--subColor1);
 `;
 
 const FormHeader = styled.div`
