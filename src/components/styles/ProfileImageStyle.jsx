@@ -47,17 +47,19 @@ export const ProfileUpLoadBtnLabel = styled.label`
     margin: 0rem 0rem;
     padding: 0.7rem 5.7rem;
 
-    border: 1px solid var(--subColor2);
     border-radius: 0.8rem;
 
+    box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor2);
     text-align: center;
     color: white;
     font-size: 1.4rem;
 
     cursor: pointer;
+
     &:hover {
-        background-color: var(--subColor2);
-        color: var(--mainColor);
+        background-color: ${(style) => style.hoverbgc || "var(--subColor2)"};
+        color: ${(style) => style.hovercolor || "var(--mainColor)"};
+        transition: all 0.3s; // 시간차두고 바뀌도록 추가
     }
 `;
 
