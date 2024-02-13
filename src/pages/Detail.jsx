@@ -123,7 +123,10 @@ const Detail = () => {
                             onChange={(e) => setPost({ ...post, videoSrc: e.target.value })}
                         />
                     ) : (
-                        post.videoSrc
+                        //post.videoSrc
+                        <RecommendPostVideoSection
+                            videoSrc={post.videoSrc}
+                        ></RecommendPostVideoSection>
                     )}
                 </StyledTitle>
                 <RecommendPostVideoSection videoSrc={post.videoSrc} type="detail" />
