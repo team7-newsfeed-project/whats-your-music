@@ -199,7 +199,7 @@ const HomeBtn = styled.button`
     &:hover {
         background-color: var(--subColor2);
         color: var(--mainColor);
-        transition: all 0.3s; // 시간차두고 바뀌도록 추가
+        transition: all 0.3s;
     }
 `;
 
