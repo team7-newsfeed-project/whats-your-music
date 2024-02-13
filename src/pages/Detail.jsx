@@ -93,7 +93,7 @@ const Detail = () => {
                     name={"← HOME"}
                     $bgc={"black"}
                     color={"#C9F254"}
-                    bd={"1px solid #C9F254"}
+                    bd={"1px solid "}
                 />
                 <LogoBox>
                     <img src={logoImg} width={270} alt="logo" />
@@ -115,20 +115,17 @@ const Detail = () => {
                         post.title
                     )}
                 </StyledTitle>
-                <StyledTitle>
-                    {isEditing ? (
-                        <StyledInput
-                            type="text"
-                            value={post.videoSrc}
-                            onChange={(e) => setPost({ ...post, videoSrc: e.target.value })}
-                        />
-                    ) : (
-                        //post.videoSrc
-                        <RecommendPostVideoSection
-                            videoSrc={post.videoSrc}
-                        ></RecommendPostVideoSection>
-                    )}
-                </StyledTitle>
+                {/* <StyledTitle> */}
+                {isEditing ? (
+                    <StyledInput
+                        type="text"
+                        value={post.videoSrc}
+                        onChange={(e) => setPost({ ...post, videoSrc: e.target.value })}
+                    />
+                ) : (
+                    <RecommendPostVideoSection videoSrc={post.videoSrc} type="detail" />
+                )}
+                {/* </StyledTitle> */}
                 <StyledContent>
                     {isEditing ? (
                         <StyledTextarea

@@ -73,6 +73,7 @@ const MainArticle = styled.article`
         transition: all 0.2s;
         transform: scale(1.01);
     }
+    cursor: pointer;
 `;
 
 const PostTextBox = styled.div`
