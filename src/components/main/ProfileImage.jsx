@@ -50,7 +50,6 @@ const ProfileImage = () => {
         dispatch(setAccount({ image: downloadURL }));
 
         setEdit(false);
-        return downloadURL;
     };
 
     const addImgFile = (e) => {

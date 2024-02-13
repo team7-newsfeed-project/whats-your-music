@@ -58,7 +58,6 @@ const PostForm = () => {
             videoSrc,
             email,
         };
-        console.log(newPost);
 
         try {
             const docRef = await addDoc(collection(db, "posts"), newPost);
@@ -83,13 +82,7 @@ const PostForm = () => {
     return (
         <LayoutStyle>
             <HeaderBox>
-                <Button
-                    onClick={() => navigate("/")}
-                    name={"← HOME"}
-                    //$bgc={"black"}
-                    // color={"#C9F254"}
-                    // $bd={"1px solid #C9F254"}
-                />
+                <Button onClick={() => navigate("/")} name={"← HOME"} />
                 <LogoBox>
                     <img src={logoImg} width={270} alt="logo" />
                 </LogoBox>
@@ -199,7 +192,6 @@ const DateTime = styled.span`
 `;
 
 const SubmitBtn = styled.button`
-    /* border: 1px solid var(--subColor2); */
     border: 0;
     border-radius: 20px;
     padding: 15px;
@@ -216,14 +208,11 @@ const SubmitBtn = styled.button`
         color: var(--mainColor);
         transition: all 0.3s;
     }
-    /* font-family: "Pretendard-Regular"; */
 `;
 
 const CategoryDisplay = styled.span`
-    /* border: 1px solid var(--subColor1); */
     border-radius: 20px;
     padding: 15px;
-    //margin-right: 200px;
     width: 120px;
     font-size: 16px;
     color: white;

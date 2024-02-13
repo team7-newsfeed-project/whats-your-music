@@ -8,8 +8,8 @@ import { setAccount } from "store/modules/userAccount";
 import { setInitValue } from "store/modules/userContents";
 import { setThumnailImg } from "store/modules/userImage";
 import { setMyRecommend } from "store/modules/userRecommend";
-import Layout from "components/layout/Layout";
 import logoImage from "assets/whatsyourmusic_logo.png";
+import Layout from "components/layout/Layout";
 import ProfileContents from "components/main/ProfileContents";
 import MyRecommend from "components/main/MyRecommend";
 import * as MP from "components/styles/MypageStyle";
@@ -26,7 +26,6 @@ const MyPage = () => {
         }
 
         const myPageUserData = async () => {
-            // firestore db 가져오기
             try {
                 const q = query(collection(db, "accounts"), where("email", "==", email));
                 const querySnapshot = await getDocs(q);
@@ -35,7 +34,7 @@ const MyPage = () => {
                     user = doc.data();
                     const image = user.image;
                     const nickname = user.nickname;
-                    const comment = user.comment;
+                    const comment = user.comment || "";
 
                     dispatch(setAccount({ image, nickname, comment }));
                     dispatch(setThumnailImg(image));
