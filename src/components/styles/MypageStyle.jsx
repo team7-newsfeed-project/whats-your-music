@@ -6,8 +6,9 @@ export const MyPageSection = styled.section`
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin-bottom: 10px;
 
-    gap: 20px;
+    gap: 10px;
 `;
 
 export const MyPageheadDiv = styled.div`
@@ -16,21 +17,18 @@ export const MyPageheadDiv = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-
-    height: 70px;
 `;
 
 export const MyPageheadWrapDiv = styled.div`
     background-color: var(--mainColor);
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: space-evenly;
     min-width: 320px;
     width: 100%;
 
-    height: 70px;
-    padding: 7px 120px;
-    /* gap: 26rem; */
+    height: 90px;
 `;
 
 export const HomeLink = styled(Link)`
@@ -53,10 +51,6 @@ export const HomeLink = styled(Link)`
                   .map((value) => `${value}rem`)
                   .join(" ")
             : "0rem 0rem"};
-    margin-top: ${(style) => (style.mt ? `${style.mt}rem`.join(" ") : "0rem")};
-    margin-left: ${(style) => (style.ml ? `${style.ml}rem`.join(" ") : "0rem")};
-    margin-right: ${(style) => (style.mr ? `${style.mr}rem`.join(" ") : "0rem")};
-    margin-bottom: ${(style) => (style.mb ? `${style.mb}rem`.join(" ") : "0rem")};
 
     border: 1px solid ${(style) => style.bdc || "var(--subColor2)"};
     border-radius: ${(style) =>
@@ -77,9 +71,7 @@ export const HomeLink = styled(Link)`
 
 export const HomeBtnP = styled.p`
     width: 100px;
-    /* height: 19px; */
-    /* height: 19px; */
-    margin: 0 auto;
+    height: 1rem;
 `;
 
 export const LogOutLink = styled(Link)`
@@ -101,8 +93,7 @@ export const HeaderLogo = styled.img`
 `;
 
 export const MyPageText = styled.p`
-    width: 80px;
-    height: 56px;
+    font-size: 1.2rem;
 `;
 
 export const ImageNdInfo = styled.article`
