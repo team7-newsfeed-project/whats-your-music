@@ -1,29 +1,35 @@
 import React, { useState } from "react";
-import ProfileImage from "./ProfileImage";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { setUserInfo } from "database/FirebaseAPI";
+import { auth } from "database/firebase";
+import { setAccount, setUserLogout } from "store/modules/userAccount";
+import { setInitValue } from "store/modules/userContents";
 import Button from "components/common/Button";
 import DangerButton from "components/common/DangerButton";
-import { useDispatch, useSelector } from "react-redux";
-import { setAccount } from "store/modules/userAccount";
-import { setEditValue } from "store/modules/userContents";
+import ProfileImage from "./ProfileImage";
+import * as PC from "components/styles/ProfileContentsSt";
 
-const ProfileContents = ({ userUid }) => {
+const ProfileContents = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const myPageUserInfo = useSelector((store) => store.userAccount);
     const { nickname, comment } = useSelector((store) => store.userContents.initUserInfo);
-    const editValue = useSelector((store) => store.userContents.editValue);
-    console.log(" nickname, comment,editValue=>", nickname, comment, editValue);
+    const [editValue, setEditValue] = useState({
+        nickname,
+        comment,
+    });
     const [isEdit, setIsEdit] = useState(false);
-    // const [editValue, setEditValue] = useState({
-    //     userUid: userUid,
-    //     nickname: "",
-    //     comment: "",
-    // });
     const editValueNickname = editValue.nickname;
     const editValueComment = editValue.comment;
+
     const onEditValueChange = (e) => {
         e.preventDefault();
         const { name, value } = e.target;
         setEditValue({ ...editValue, [name]: value });
     };
+
     const onEditContents = (e) => {
         e.preventDefault();
         setIsEdit(true);
@@ -42,44 +48,58 @@ const ProfileContents = ({ userUid }) => {
             alert("수정된 내용이 없습니다");
             return;
         }
+
         if (editSaveCheck === false) {
             alert("수정을 취소하셨습니다.");
             setIsEdit(false);
             return;
         }
 
-        // const editData = letterValue.map((letter) => {
-        //     if (letter.id === id) {
-        //         return {
-        //             ...letter,
-        //             content: editValueContent,
-        //         };
-        //     }
-        //     return letter;
-        // });
+        dispatch(setInitValue(editValue));
+        dispatch(setAccount(editValue));
 
-        console.log();
-        dispatch(setEditValue({ ...editValue, userUid }));
-        // dispatch(setEditValue(editValue));
-        dispatch(setAccount({ ...editValue, userUid }));
+        const userAccountEdit = async () => {
+            await setUserInfo(myPageUserInfo, editValue);
+        };
+        userAccountEdit();
         setIsEdit(false);
     };
+
     const onEditCancel = (e) => {
         e.preventDefault();
         setIsEdit(false);
     };
 
+    const onLogout = async () => {
+        try {
+            await signOut(auth);
+            dispatch(setUserLogout());
+            alert("로그아웃되셨습니다!");
+            navigate("/");
+        } catch (error) {
+            console.log(error);
+            alert("로그아웃을 다시 한 번 시도해 주세용");
+        }
+    };
     return (
-        <div>
+        <PC.ProfileContentsSection>
             <ProfileImage />
             <div>
                 {!isEdit ? (
                     <div>
-                        <p>닉네임 : {nickname}</p>
-                        <p>소개 : {comment}</p>
+                        <div>
+                            <div>
+                                <p>{nickname}</p>
+                                <DangerButton name="⛔ 로그아웃 " onClick={onLogout} />
+                            </div>
+                            <p>{comment}</p>
+                        </div>
+                        <div>
+                            <Button name="내용 편집" onClick={onEditContents} />
+                        </div>
                     </div>
                 ) : (
-                    <form>
+                    <form onSubmit={onEditSave}>
                         <div>
                             <input
                                 name="nickname"
@@ -103,22 +123,15 @@ const ProfileContents = ({ userUid }) => {
                                         : editValueComment
                                 }
                             ></textarea>
-                            <p></p>
+                        </div>
+                        <div>
+                            <Button name="수정완료" />
+                            <DangerButton name="수정취소" onClick={onEditCancel} />
                         </div>
                     </form>
                 )}
-                {!isEdit ? (
-                    <div>
-                        <Button name="내용 편집" onClick={onEditContents} />
-                    </div>
-                ) : (
-                    <div>
-                        <Button name="수정완료" onClick={onEditSave} />
-                        <DangerButton name="수정취소" onClick={onEditCancel} />
-                    </div>
-                )}
             </div>
-        </div>
+        </PC.ProfileContentsSection>
     );
 };
 
