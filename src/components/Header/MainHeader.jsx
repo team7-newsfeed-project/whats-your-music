@@ -55,21 +55,23 @@ const MainHeader = () => {
             <LinkWrapper>
                 {/* 유저 로그인상태 ? (O)유저이미지뜨게하고 클릭 시 마이페이지 이동가능 : (X)로그인버튼 */}
                 {isUserLoggedIn ? (
-                    <NewPostLink to={`postform`}>글쓰기</NewPostLink>
-                    <Link to="mypage">
+                    <>
+                        <NewPostLink to={`postform`}>글쓰기</NewPostLink>
+                        <Link to="mypage">
                             {userSetImg ? (
-                            <img src={userSetImg} style={userImgStyles} />
-                        ) : (
-                            // borderRadius={10} "..px"등 다 적용안됨.. ㅠ imageStyle={{ borderRadius: 15 }}
-                            // style={{}} 인스타일링 형식으로 안써줘서 생긴문제였음. 해결! and src는 style안에 써주는게 아님 따로 써줘야
-                            <img src={defaultImage} style={userImgStyles} />
-                        )}
-                        {/* userAccount.js에서 useerLoginState - image 주소 문자열 넣어보면 잘 뜸 
+                                <img src={userSetImg} style={userImgStyles} />
+                            ) : (
+                                // borderRadius={10} "..px"등 다 적용안됨.. ㅠ imageStyle={{ borderRadius: 15 }}
+                                // style={{}} 인스타일링 형식으로 안써줘서 생긴문제였음. 해결! and src는 style안에 써주는게 아님 따로 써줘야
+                                <img src={defaultImage} style={userImgStyles} />
+                            )}
+                            {/* userAccount.js에서 useerLoginState - image 주소 문자열 넣어보면 잘 뜸 
                             auth설정해서 더 해보고 이미지border-radius등 조절하기 */}
-                        {/* <UserImg $isImgSet={userSetImg} $defaultImage={defaultImage} /> */}
-                        {/*유저프로필이미지 (없으면 기본이미지인) 가져오기 */}
-                        {/* <UserProfileImgBox $defaultImage={defaultImage}></UserProfileImgBox> */}
-                    </Link>
+                            {/* <UserImg $isImgSet={userSetImg} $defaultImage={defaultImage} /> */}
+                            {/*유저프로필이미지 (없으면 기본이미지인) 가져오기 */}
+                            {/* <UserProfileImgBox $defaultImage={defaultImage}></UserProfileImgBox> */}
+                        </Link>
+                    </>
                 ) : (
                     <LoginLink to="log_in">로그인</LoginLink>
                 )}
@@ -112,7 +114,7 @@ const TabsWrapper = styled.ul`
     gap: 150px;
     /* justify-content: center; */
     /* margin-left: 0px; */
-    margin-right: 260px; // 이렇게 맞추면 화면전체사이즈마다 다르게 나오는 문제점
+    margin-right: 300px; // 이렇게 맞추면 화면전체사이즈마다 다르게 나오는 문제점
 `;
 
 const Tab = styled.li`
@@ -182,6 +184,7 @@ const LoginLink = styled(Link)`
     font-family: "Pretendard-Regular";
     font-size: 17px;
     margin-top: 0.3rem;
+    margin-left: 4rem;
 `;
 
 const UserImg = styled.img.attrs({

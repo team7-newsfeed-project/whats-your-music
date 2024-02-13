@@ -194,16 +194,24 @@ const DateTime = styled.span`
 `;
 
 const SubmitBtn = styled.button`
-    border: 1px solid var(--subColor2);
+    /* border: 1px solid var(--subColor2); */
+    border: 0;
     border-radius: 20px;
     padding: 15px;
     width: 80px;
     font-size: 16px;
     color: white;
     background-color: var(--mainColor);
+    box-shadow: 0px 0px 3px 1px var(--subColor2);
     outline: none;
     appearance: none;
     cursor: pointer;
+    &:hover {
+        background-color: var(--subColor2);
+        color: var(--mainColor);
+        transition: all 0.3s;
+    }
+    /* font-family: "Pretendard-Regular"; */
 `;
 
 const CategoryDisplay = styled.span`
