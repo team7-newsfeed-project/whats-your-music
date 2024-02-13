@@ -13,7 +13,13 @@ const MyRecommend = () => {
         <MR.RecommendSection>
             <MR.MyRecommentMusicDiv>
                 <p>내가 추천한 음악들</p>
-                <div></div>
+                <MR.ListText>
+                    '동영상을 재생할 수 없음'이라고 뜨는 경우, &nbsp;
+                    <span style={{ textDecorationLine: "underline", textDecorationColor: "gray" }}>
+                        YouTube에서 보기
+                    </span>
+                    &nbsp;를 눌러주세요 :)
+                </MR.ListText>
             </MR.MyRecommentMusicDiv>
             <MR.RecommendContentsWrap>
                 {filterMyRecommends.map((recommends) => {
@@ -21,7 +27,9 @@ const MyRecommend = () => {
                     return (
                         <Link to={`/detail/${id}`} key={id}>
                             <MR.CardsWrap>
-                                <RecommendPostVideoSection videoSrc={videoSrc} />
+                                <MR.RecoommendVideoWrap>
+                                    <RecommendPostVideoSection videoSrc={videoSrc} />
+                                </MR.RecoommendVideoWrap>
 
                                 <div>
                                     <div>

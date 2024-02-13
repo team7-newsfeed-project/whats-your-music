@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
@@ -12,6 +12,7 @@ import ProfileImage from "./ProfileImage";
 import * as PC from "components/styles/ProfileContentsStyle";
 
 const ProfileContents = () => {
+    const editNicknameRef = useRef();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const myPageUserInfo = useSelector((store) => store.userAccount);
@@ -29,6 +30,12 @@ const ProfileContents = () => {
         const { name, value } = e.target;
         setEditValue({ ...editValue, [name]: value });
     };
+
+    // useEffect(() => {
+    //     if (!isEdit) {
+    //         editNicknameRef.current.focus();
+    //     }
+    // }, [isEdit]);
 
     const onEditContents = (e) => {
         e.preventDefault();
@@ -117,6 +124,7 @@ const ProfileContents = () => {
                                     <PC.ProfileEditInput
                                         name="nickname"
                                         value={editValueNickname}
+                                        ref={editNicknameRef}
                                         onChange={onEditValueChange}
                                         maxLength={8}
                                         placeholder={
