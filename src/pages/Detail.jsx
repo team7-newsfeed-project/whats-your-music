@@ -93,7 +93,7 @@ const Detail = () => {
                     name={"← HOME"}
                     $bgc={"black"}
                     color={"#C9F254"}
-                    bd={"1px solid "}
+                    // bd={"1px solid #C9F254"}
                 />
                 <LogoBox>
                     <img src={logoImg} width={270} alt="logo" />
