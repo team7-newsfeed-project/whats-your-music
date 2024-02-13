@@ -64,6 +64,7 @@ const PostForm = () => {
             videoSrc,
             email,
         };
+        console.log(newPost);
 
         try {
             const docRef = await addDoc(collection(db, "posts"), newPost);
