@@ -18,42 +18,27 @@ export const ImageNdInfo = styled.article`
     align-items: center;
     justify-content: center;
 
-    padding: ${(style) =>
-        style.pd
-            ? style.pd
-                  .split(", ")
-                  .map((value) => `${value}rem`)
-                  .join(" ")
-            : "0.4rem 1rem"};
-    margin: ${(style) =>
-        style.mg
-            ? style.mg
-                  .split(", ")
-                  .map((value) => `${value}rem`)
-                  .join(" ")
-            : "0rem 0rem"};
+    width: 100%;
 
-    padding: 48px 154px;
+    padding: 48px 0px;
     gap: 30px;
 `;
 
-export const ProfileInfoarticle = styled.article`
-    background-color: #333;
+export const ProfileInfoarticle = styled.section`
     display: flex;
     flex-direction: column;
 
-    min-width: 300px;
+    min-width: 708px;
     max-width: 100%;
-    width: 708px;
     height: 296px;
 
-    gap: 10px;
+    gap: 20px;
 `;
 
 export const ProfileContentsDiv = styled.div`
     display: flex;
     flex-direction: column;
-    background-color: #a07979;
+    /* height: 100%; */
 
     gap: 20px;
 `;
@@ -64,13 +49,15 @@ export const ProfileNicknameDiv = styled.div`
     justify-content: space-between;
 
     > div {
-        background-color: black;
+        background-color: var(--subColor3);
         display: flex;
         align-items: center;
 
-        min-width: 50px;
-        width: 300px;
+        min-width: 110px;
+        width: 350px;
         height: 56px;
+
+        border-radius: 1rem;
 
         padding: 5px 10px;
 
@@ -79,6 +66,14 @@ export const ProfileNicknameDiv = styled.div`
     }
 `;
 
+export const ProfileCommentDiv = styled.div`
+    background-color: var(--subColor3);
+    height: 150px;
+    padding: 10px;
+    border-radius: 1rem;
+`;
+
 export const ProfileEditor = styled.div`
-    background-color: #fff;
+    display: flex;
+    justify-content: right;
 `;

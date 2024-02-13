@@ -95,10 +95,19 @@ const ProfileContents = () => {
                                     </div>
                                     <DangerButton name="⛔ 로그아웃" onClick={onLogout} />
                                 </PC.ProfileNicknameDiv>
-                                <p>{comment}</p>
+                                <PC.ProfileCommentDiv>
+                                    <p>
+                                        <span>{comment}</span>
+                                    </p>
+                                </PC.ProfileCommentDiv>
                             </PC.ProfileContentsDiv>
                             <PC.ProfileEditor>
-                                <Button name="내용 편집" onClick={onEditContents} />
+                                <Button
+                                    name="내용 편집"
+                                    onClick={onEditContents}
+                                    fsize="1.1rem"
+                                    // pd="0, 1"
+                                />
                             </PC.ProfileEditor>
                         </PC.ProfileInfoarticle>
                     ) : (
