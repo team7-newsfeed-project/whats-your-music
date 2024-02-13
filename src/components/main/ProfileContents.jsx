@@ -87,18 +87,18 @@ const ProfileContents = () => {
                 <ProfileImage />
                 <div>
                     {!isEdit ? (
-                        <div>
-                            <div>
+                        <PC.ProfileInfoarticle>
+                            <PC.ProfileContentsDiv>
                                 <div>
                                     <p>{nickname}</p>
-                                    <DangerButton name="⛔ 로그아웃 " onClick={onLogout} />
+                                    <DangerButton name="⛔ 로그아웃" onClick={onLogout} />
                                 </div>
                                 <p>{comment}</p>
-                            </div>
+                            </PC.ProfileContentsDiv>
                             <div>
                                 <Button name="내용 편집" onClick={onEditContents} />
                             </div>
-                        </div>
+                        </PC.ProfileInfoarticle>
                     ) : (
                         <form onSubmit={onEditSave}>
                             <div>

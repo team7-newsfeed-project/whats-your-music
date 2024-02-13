@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const UserImage = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    align-items: center;
+    gap: 1rem;
 `;
 
 export const ProfileThumbnailImg = styled.img`
@@ -11,6 +12,8 @@ export const ProfileThumbnailImg = styled.img`
     height: 230px;
     min-width: 130px;
     min-height: 130px;
+
+    box-shadow: 0rem 0rem 0.4rem 0rem var(--subColor2);
 
     border-radius: 1.8rem;
     object-fit: cover;
@@ -40,16 +43,16 @@ export const ProfileUpLoad = styled.input`
 export const ProfileUpLoadBtnLabel = styled.label`
     background-color: var(--mainColor);
     width: 100%;
-    padding: 0.6rem 0rem;
 
     margin: 0rem 0rem;
+    padding: 0.7rem 5.7rem;
 
     border: 1px solid var(--subColor2);
     border-radius: 0.8rem;
 
     text-align: center;
     color: white;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
 
     cursor: pointer;
     &:hover {

@@ -88,23 +88,18 @@ const ProfileImage = () => {
                         등록
                     </Pi.ProfileUpLoadBtnLabel>
                     <Pi.ProfileImageEditDiv>
-                        <Button
-                            onClick={handleUpload}
-                            name="수정 완료"
-                            fsize="1.2rem"
-                            pd="0, 0.8"
-                        />
+                        <Button onClick={handleUpload} name="수정 완료" fsize="1.1rem" pd="0, 1" />
                         <DangerButton
                             onClick={onEditCancel}
                             name="수정 취소"
-                            fsize="1.2rem"
-                            pd="0, 0.8"
+                            fsize="1.1rem"
+                            pd="0, 1"
                         />
                     </Pi.ProfileImageEditDiv>
                 </Pi.ProfileImageBtnsDiv>
             ) : (
                 <div onClick={onEditImg}>
-                    <Button name="이미지 편집" pd="0.4, 1" fsize="1rem" />
+                    <Button name="이미지 편집" pd="0.6, 3.9" fsize="1.2rem" />
                 </div>
             )}
             {/* </Pi.ProfileBtnWrapDiv> */}

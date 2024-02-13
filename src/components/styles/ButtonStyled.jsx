@@ -31,7 +31,7 @@ export const NormalButton = styled.button`
     margin-right: ${(style) => (style.mr ? `${style.mr}rem`.join(" ") : "0rem")};
     margin-bottom: ${(style) => (style.mb ? `${style.mb}rem`.join(" ") : "0rem")};
 
-    border: 1px solid ${(style) => style.bdc || "var(--subColor2)"};
+    /* border: 1px solid ${(style) => style.bdc || "var(--subColor2)"}; */
     border-radius: ${(style) =>
         style.radius || (style.bradius && style.$bradius.includes("rem"))
             ? style.radius
@@ -40,7 +40,8 @@ export const NormalButton = styled.button`
             : "0.8rem"};
 
     /* 20rem, 10rem, 3rem, 0.4rem 등등 */
-
+    box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor2);
+    transition: all 0.3s;
     color: ${(style) => style.color || "white"};
     font-size: ${(style) => style.fsize || "1.2rem"};
 
@@ -73,13 +74,16 @@ export const DangerButton = styled.button`
     margin-bottom: ${(style) => (style.mb ? `${style.mb}rem`.join(" ") : "0rem")};
 
     color: ${(style) => style.color || "white"};
-    border: 1px solid ${(style) => style.bdc || "var(--subColor1)"};
+    /* border: 1px solid ${(style) => style.bdc || "var(--subColor1)"}; */
     border-radius: ${(style) =>
         style.radius || (style.bradius && style.bradius.includes("rem"))
             ? style.radius
             : style.radius
             ? style.radius + "rem"
             : "0.8rem"};
+
+    box-shadow: 0rem 0rem 0.3rem 0px var(--subColor1);
+    transition: all 0.3s;
 
     font-size: ${(style) => style.fsize || "1.2rem"};
     cursor: pointer;

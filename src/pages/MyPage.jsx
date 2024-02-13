@@ -84,7 +84,7 @@ const MyPage = () => {
             <MP.MyPageSection>
                 <MP.MyPageheadDiv>
                     <MP.MyPageheadWrapDiv>
-                        <MP.HomeLink to="/" pd="1, 1.2" bradius="">
+                        <MP.HomeLink to="/">
                             <MP.HomeBtnP>← HOME</MP.HomeBtnP>
                         </MP.HomeLink>
                         <h3>
