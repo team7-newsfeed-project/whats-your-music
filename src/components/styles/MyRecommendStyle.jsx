@@ -61,7 +61,7 @@ export const CardsWrap = styled.div`
     border-radius: 1.2rem;
     &:hover {
         box-shadow: 0px 0px 3px 0.3px var(--subColor1);
-        transform: scale(1.01, 1.01);
+        transform: scale(1.03, 1.03);
         transition-duration: 0.2s;
     }
 `;
