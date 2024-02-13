@@ -97,7 +97,7 @@ export const VideoSection = styled.section`
     overflow: hidden;
 `;
 export const Iframe = styled.iframe`
-    position: relative; // 상관 x
+    position: relative;
     width: 302px; // 볼륨크기조절이 같이 뜨려면 최소 이정도 넓이 부여해야
     height: 150px;
     border: 1px solid var(--mainColor);

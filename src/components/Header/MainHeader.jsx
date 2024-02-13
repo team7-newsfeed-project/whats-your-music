@@ -18,18 +18,10 @@ const MainHeader = () => {
     const userSetAccount = useSelector((state) => state.userAccount);
     const isUserLoggedIn = userSetAccount.isLoggedIn;
     const userSetImg = userSetAccount.image;
-    // 테스트용 userSetImg -https://cdn.imweb.me/upload/S20221129c3c04fdc67a8b/09e904cb8f26f.png
-    // https://i.pinimg.com/564x/d3/e0/d5/d3e0d50b6e4dd4c47757faedb737d9e4.jpg
-    // const userSetImg = userSetAccount.image;
 
     const defaultImage = useSelector((store) => store.userImage.selectFile);
-    // 이변수를 그냥 스타일컴포넌트에서 그대로 쓸 수 없다. props로 주기
 
     // const imgUpFile = useSelector((store) => store.userImage.imgUpFile); // 올린 이미지 주소?
-
-    // console.log("isLogin:", isUserLoggedIn);
-    // console.log("defaultImage: ", defaultImage);
-    // console.log("userSetImg", userSetImg);
 
     const onActiveCategory = (e) => {
         dispatch(setCategory(e.target.id));
@@ -40,7 +32,6 @@ const MainHeader = () => {
             <LogoImgBox>
                 <img src={logoImg} width={270} alt="logo" />
             </LogoImgBox>
-            {/* <MainNav> */}
             <TabsWrapper>
                 <Tab id="팝" onClick={onActiveCategory} $isActive={activeCategory}>
                     팝
@@ -58,22 +49,14 @@ const MainHeader = () => {
                             {userSetImg ? (
                                 <img src={userSetImg} style={userImgStyles} />
                             ) : (
-                                // borderRadius={10} "..px"등 다 적용안됨.. ㅠ imageStyle={{ borderRadius: 15 }}
-                                // style={{}} 인스타일링 형식으로 안써줘서 생긴문제였음. 해결! and src는 style안에 써주는게 아님 따로 써줘야
                                 <img src={defaultImage} style={userImgStyles} />
                             )}
-                            {/* userAccount.js에서 useerLoginState - image 주소 문자열 넣어보면 잘 뜸 
-                            auth설정해서 더 해보고 이미지border-radius등 조절하기 */}
-                            {/* <UserImg $isImgSet={userSetImg} $defaultImage={defaultImage} /> */}
-                            {/*유저프로필이미지 (없으면 기본이미지인) 가져오기 */}
-                            {/* <UserProfileImgBox $defaultImage={defaultImage}></UserProfileImgBox> */}
                         </Link>
                     </>
                 ) : (
                     <LoginLink to="log_in">로그인</LoginLink>
                 )}
             </LinkWrapper>
-            {/* </MainNav> */}
         </HeaderWrapper>
     );
 };
