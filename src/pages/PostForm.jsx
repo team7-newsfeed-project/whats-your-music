@@ -86,9 +86,9 @@ const PostForm = () => {
                 <Button
                     onClick={() => navigate("/")}
                     name={"← HOME"}
-                    $bgc={"black"}
-                    color={"#C9F254"}
-                    $bd={"1px solid #C9F254"}
+                    //$bgc={"black"}
+                    // color={"#C9F254"}
+                    // $bd={"1px solid #C9F254"}
                 />
                 <LogoBox>
                     <img src={logoImg} width={270} alt="logo" />
@@ -145,6 +145,7 @@ const HeaderBox = styled.header`
     width: 100%;
     height: 100px;
     margin: 0px auto 10px auto;
+    padding: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -153,6 +154,7 @@ const HeaderBox = styled.header`
 const LogoBox = styled.div`
     flex-grow: 1;
     text-align: center;
+    margin-right: 140px;
 `;
 
 const MainWrapper = styled.main`
@@ -221,7 +223,8 @@ const CategoryDisplay = styled.span`
     /* border: 1px solid var(--subColor1); */
     border-radius: 20px;
     padding: 15px;
-    width: 80px;
+    //margin-right: 200px;
+    width: 120px;
     font-size: 16px;
     color: white;
     background-color: var(--mainColor);
@@ -232,6 +235,10 @@ const CategoryDisplay = styled.span`
 
 const FormHeader = styled.div`
     margin-bottom: 20px;
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 `;
 
 const NicknameDisplay = styled.span`

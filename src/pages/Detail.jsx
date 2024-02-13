@@ -104,18 +104,15 @@ const Detail = () => {
                     <CategoryDisplay>{post.category}</CategoryDisplay>
                     <NicknameDisplay>{post.nickname}</NicknameDisplay>
                 </FormHeader>
-                <StyledTitle>
-                    {isEditing ? (
-                        <StyledInput
-                            type="text"
-                            value={post.title}
-                            onChange={(e) => setPost({ ...post, title: e.target.value })}
-                        />
-                    ) : (
-                        post.title
-                    )}
-                </StyledTitle>
-                {/* <StyledTitle> */}
+                {isEditing ? (
+                    <StyledInput
+                        type="text"
+                        value={post.title}
+                        onChange={(e) => setPost({ ...post, title: e.target.value })}
+                    />
+                ) : (
+                    <StyledTitle>{post.title}</StyledTitle>
+                )}
                 {isEditing ? (
                     <StyledInput
                         type="text"
@@ -125,17 +122,14 @@ const Detail = () => {
                 ) : (
                     <RecommendPostVideoSection videoSrc={post.videoSrc} type="detail" />
                 )}
-                {/* </StyledTitle> */}
-                <StyledContent>
-                    {isEditing ? (
-                        <StyledTextarea
-                            value={post.content}
-                            onChange={(e) => setPost({ ...post, content: e.target.value })}
-                        />
-                    ) : (
-                        post.content
-                    )}
-                </StyledContent>
+                {isEditing ? (
+                    <StyledTextarea
+                        value={post.content}
+                        onChange={(e) => setPost({ ...post, content: e.target.value })}
+                    />
+                ) : (
+                    <StyledContent>{post.content}</StyledContent>
+                )}
                 <div>
                     <DateTime>{formattedDate}</DateTime>
                     {isAuthor && (
@@ -144,7 +138,11 @@ const Detail = () => {
                                 name={isEditing ? "수정완료" : "수정"}
                                 onClick={isEditing ? handleSubmit : handleEditClick}
                             />
-                            <DangerButton name="삭제" onClick={deletePostHandler} />
+                            <DangerButton
+                                name="삭제"
+                                onClick={deletePostHandler}
+                                style={{ marginLeft: "10px" }}
+                            />
                         </>
                     )}
                 </div>
@@ -161,6 +159,7 @@ const HeaderBox = styled.header`
     width: 100%;
     height: 100px;
     margin: 0px auto 10px auto;
+    padding: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -169,6 +168,7 @@ const HeaderBox = styled.header`
 const LogoBox = styled.div`
     flex-grow: 1;
     text-align: center;
+    margin-right: 140px;
 `;
 
 const MainWrapper = styled.main`
@@ -181,7 +181,7 @@ const MainWrapper = styled.main`
     width: 100%;
     /* min-height: 550px; */
     /* margin-bottom: 20px; */
-    min-height: 600px;
+    min-height: 900px;
     margin-bottom: 10px;
 `;
 
@@ -210,6 +210,10 @@ const StyledContent = styled.div`
 
 const FormHeader = styled.div`
     margin-bottom: 20px;
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 `;
 
 const NicknameDisplay = styled.span`
@@ -220,7 +224,7 @@ const CategoryDisplay = styled.span`
     /* border: 1px solid var(--subColor1); */
     border-radius: 20px;
     padding: 15px;
-    width: 80px;
+    width: 120px;
     font-size: 16px;
     color: white;
     background-color: var(--mainColor);
