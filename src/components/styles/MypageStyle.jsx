@@ -95,15 +95,3 @@ export const HeaderLogo = styled.img`
 export const MyPageText = styled.p`
     font-size: 1.2rem;
 `;
-
-export const ImageNdInfo = styled.article`
-    background-color: var(--mainColor);
-
-    padding: 44px;
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    gap: 30px;
-`;

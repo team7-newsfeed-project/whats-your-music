@@ -96,9 +96,7 @@ const MyPage = () => {
                     </MP.MyPageheadWrapDiv>
                 </MP.MyPageheadDiv>
 
-                <MP.ImageNdInfo>
-                    <ProfileContents />
-                </MP.ImageNdInfo>
+                <ProfileContents />
 
                 <MyRecommend />
             </MP.MyPageSection>

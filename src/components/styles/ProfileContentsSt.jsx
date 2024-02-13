@@ -2,29 +2,25 @@ import styled from "styled-components";
 
 export const ProfileContentsSection = styled.section`
     min-width: 400px;
-    max-width: 1020px;
+    max-width: 100%;
 
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
     background-color: #8ac78a;
 
     gap: 10px;
 `;
+export const ImageNdInfo = styled.article`
+    /* background-color: var(--mainColor); */
+    background-color: #fff;
 
-export const ProfileThumbnailImg = styled.img`
-    width: 230px;
-    height: 230px;
-    min-width: 130px;
-    min-height: 130px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 
-    object-fit: cover;
+    padding: 48px 154px;
+    gap: 30px;
 `;
-
-export const UserImage = styled.div``;
-
-export const ProfileUpLoad = styled.input`
-    display: none;
-    background-color: red;
-`;
-
-export const ProfileUpLoadBtnLabel = styled.label``;

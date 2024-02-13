@@ -83,54 +83,56 @@ const ProfileContents = () => {
     };
     return (
         <PC.ProfileContentsSection>
-            <ProfileImage />
-            <div>
-                {!isEdit ? (
-                    <div>
+            <PC.ImageNdInfo>
+                <ProfileImage />
+                <div>
+                    {!isEdit ? (
                         <div>
                             <div>
-                                <p>{nickname}</p>
-                                <DangerButton name="⛔ 로그아웃 " onClick={onLogout} />
+                                <div>
+                                    <p>{nickname}</p>
+                                    <DangerButton name="⛔ 로그아웃 " onClick={onLogout} />
+                                </div>
+                                <p>{comment}</p>
                             </div>
-                            <p>{comment}</p>
+                            <div>
+                                <Button name="내용 편집" onClick={onEditContents} />
+                            </div>
                         </div>
-                        <div>
-                            <Button name="내용 편집" onClick={onEditContents} />
-                        </div>
-                    </div>
-                ) : (
-                    <form onSubmit={onEditSave}>
-                        <div>
-                            <input
-                                name="nickname"
-                                value={editValueNickname}
-                                onChange={onEditValueChange}
-                                placeholder={
-                                    editValueNickname === ""
-                                        ? "닉네임을 적어주세요"
-                                        : editValueNickname
-                                }
-                            />
-                            <textarea
-                                name="comment"
-                                cols="30"
-                                rows="10"
-                                value={editValueComment}
-                                onChange={onEditValueChange}
-                                placeholder={
-                                    editValueComment === ""
-                                        ? "자신을 소개해주세요"
-                                        : editValueComment
-                                }
-                            ></textarea>
-                        </div>
-                        <div>
-                            <Button name="수정완료" />
-                            <DangerButton name="수정취소" onClick={onEditCancel} />
-                        </div>
-                    </form>
-                )}
-            </div>
+                    ) : (
+                        <form onSubmit={onEditSave}>
+                            <div>
+                                <input
+                                    name="nickname"
+                                    value={editValueNickname}
+                                    onChange={onEditValueChange}
+                                    placeholder={
+                                        editValueNickname === ""
+                                            ? "닉네임을 적어주세요"
+                                            : editValueNickname
+                                    }
+                                />
+                                <textarea
+                                    name="comment"
+                                    cols="30"
+                                    rows="10"
+                                    value={editValueComment}
+                                    onChange={onEditValueChange}
+                                    placeholder={
+                                        editValueComment === ""
+                                            ? "자신을 소개해주세요"
+                                            : editValueComment
+                                    }
+                                ></textarea>
+                            </div>
+                            <div>
+                                <Button name="수정완료" />
+                                <DangerButton name="수정취소" onClick={onEditCancel} />
+                            </div>
+                        </form>
+                    )}
+                </div>
+            </PC.ImageNdInfo>
         </PC.ProfileContentsSection>
     );
 };
