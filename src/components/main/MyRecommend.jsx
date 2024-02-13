@@ -1,13 +1,34 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import RecommendPostVideoSection from "./RecommendPostVideoSection";
 import * as MR from "components/styles/MyRecommendStyle";
 
 const MyRecommend = () => {
     const myRecommends = useSelector((store) => store.userRecommend);
     const { email } = useSelector((store) => store.userAccount);
     const filterMyRecommends = myRecommends.filter((boardItem) => boardItem.email === email);
+    const youtubeIdRef = useRef("");
+    const setPosts = useSelector((state) => state.posts);
+    const activeCategory = useSelector((state) => state.category);
+    const filteredPosts = setPosts.filter((post) => post.category === activeCategory);
+    const { videoSrc } = filteredPosts.map((post) => post);
+    if (videoSrc) {
+        if (videoSrc.includes("youtube.com/live")) {
+            // 유튭 라이브영상 (공유)주소의 경우
+            const youtubeId = videoSrc.substring(29, 40);
+            // console.log("라이브영상 (공유)주소:", youtubeId);
+            youtubeIdRef.current = youtubeId;
+        } else if (videoSrc.includes("youtube.com/watch")) {
+            // 일반 유튭주소의 경우 (공유주소아닌)
+            const youtubeId = videoSrc.substring(32, 43);
+            // console.log("일반유튭주소:", youtubeId);
+            youtubeIdRef.current = youtubeId;
+        } else {
+            // 일반 공유 주소 : ..youtu.be/..
+            const youtubeId = videoSrc.substring(17, 28);
+            youtubeIdRef.current = youtubeId;
+        }
+    }
 
     return (
         <>
@@ -37,38 +58,52 @@ const MyRecommend = () => {
                                 <Link to={`/detail/${id}`} key={id}>
                                     <MR.CardsWrap>
                                         <MR.RecoommendVideoWrap>
-                                            <div>
-                                                <RecommendPostVideoSection videoSrc={videoSrc} />
-                                            </div>
+                                            <MR.VideoSection>
+                                                <MR.Iframe
+                                                    src={`https://www.youtube.com/embed/${youtubeIdRef.current}?autoplay=0&mute=0;&loop=1`}
+                                                    title="youtube-video-player"
+                                                    frameBorder="0"
+                                                    allowFullScreen
+                                                    // $type={type}
+                                                ></MR.Iframe>
+                                            </MR.VideoSection>
                                         </MR.RecoommendVideoWrap>
 
-                                        <div>
-                                            <div>
-                                                <p>{title}</p>
-                                                <p>{content}</p>
-                                            </div>
-                                            <ul>
-                                                <li>
-                                                    {date.toLocaleString("ko-KR", {
-                                                        year: "2-digit", // 혹은 numeric
+                                        <MR.RecommendContentsDiv>
+                                            <MR.RecommendTitleNdContentDiv>
+                                                <MR.RecommendTitleP>
+                                                    <MR.RecommendTitle>{title}</MR.RecommendTitle>
+                                                </MR.RecommendTitleP>
+                                                <MR.RecommendContent>
+                                                    <span>{content}</span>
+                                                </MR.RecommendContent>
+                                            </MR.RecommendTitleNdContentDiv>
+                                            <MR.DateNdNicknameUl>
+                                                <MR.RecommendDateColorLi>
+                                                    {new Date(date).toLocaleString("ko-KR", {
+                                                        year: "numeric",
                                                         month: "numeric",
                                                         day: "numeric",
+                                                        hour: "numeric",
+                                                        minute: "numeric",
                                                     })}
-                                                </li>
+                                                    &emsp;│
+                                                </MR.RecommendDateColorLi>
 
                                                 <li>
-                                                    <p>
-                                                        <span>{nickname}</span>
-                                                    </p>
+                                                    <MR.NicknameIncludesSpanP>
+                                                        <MR.DateNdNicknameSpan>
+                                                            &emsp;{nickname}
+                                                        </MR.DateNdNicknameSpan>
+                                                    </MR.NicknameIncludesSpanP>
                                                 </li>
-                                            </ul>
-                                        </div>
+                                            </MR.DateNdNicknameUl>
+                                        </MR.RecommendContentsDiv>
                                     </MR.CardsWrap>
                                 </Link>
                             );
                         })}
                     </MR.RecommendContentsWrap>
-                    <article></article>
                 </MR.RecommendSection>
             )}
         </>

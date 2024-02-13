@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const RecommendSection = styled.section`
     background-color: var(--mainColor);
@@ -7,6 +7,8 @@ export const RecommendSection = styled.section`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    padding: 1rem;
 
     gap: 40px;
 `;
@@ -19,7 +21,7 @@ export const MyRecommentMusicDiv = styled.div`
 
     width: 100%;
 
-    padding: 30px 0px;
+    padding: 20px 0px;
 
     font-size: 1.4rem;
     gap: 20px;
@@ -27,13 +29,14 @@ export const MyRecommentMusicDiv = styled.div`
 
 export const RecommendContentsWrap = styled.article`
     display: grid;
-    grid-template-columns: repeat(2, minmax(400px, 2fr));
+    grid-template-columns: repeat(2, minmax(500px, 2fr));
     grid-auto-rows: auto;
+    flex-direction: row;
 
     gap: 40px;
 
     @media (max-width: 768px) {
-        grid-template-columns: repeat(1, minmax(500px, 1fr)); /* 화면이 작을 때 1줄로 변경 */
+        grid-template-columns: repeat(1, minmax(300px, 2fr)); /* 화면이 작을 때 1줄로 변경 */
     }
 `;
 
@@ -44,17 +47,128 @@ export const ListText = styled.p`
 `;
 
 export const RecoommendVideoWrap = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 302px;
+    height: auto;
+    border-radius: 20px;
 `;
 
 export const CardsWrap = styled.div`
     background-color: var(--subColor3);
     grid-row: span min-content;
+    display: flex;
+
     padding: 1rem;
 
     border-radius: 1.2rem;
+`;
+
+export const RecommendContentsDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: 0.4rem 1rem;
+    border-radius: 1.2rem;
+    width: 100%;
+    gap: 10px;
+`;
+
+export const RecommendTitleP = styled.p`
+    width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    @media (max-width: 768px) {
+        width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+`;
+
+export const RecommendTitle = styled.span`
+    color: var(--subColor2);
+    font-size: 1.4rem;
+`;
+
+export const VideoSection = styled.section`
+    overflow: hidden;
+`;
+export const Iframe = styled.iframe`
+    position: relative; // 상관 x
+    width: 302px; // 볼륨크기조절이 같이 뜨려면 최소 이정도 넓이 부여해야
+    height: 150px;
+    border: 1px solid var(--mainColor);
+    border-radius: 1rem;
+    ${(props) => {
+        if (props.$type === "detail") {
+            return css`
+                width: 720px;
+                height: 400px;
+            `;
+        }
+    }}
+`;
+
+export const RecommendTitleNdContentDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+
+    /* margin-bottom: 10px; */
+    gap: 10px;
+`;
+
+export const RecommendContent = styled.p`
+    width: 300px;
+
+    > span {
+        height: 80px;
+        /* text-overflow: ellipsis;
+        white-space: nowrap; */
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* 원하는 행 수 */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+
+        font-size: 1.2rem;
+        @media (max-width: 768px) {
+            width: 220px;
+            height: 80px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3; /* 원하는 행 수 */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    }
+`;
+
+export const DateNdNicknameUl = styled.ul`
+    display: flex;
+`;
+
+export const RecommendDateColorLi = styled.li`
+    color: grey;
+    @media (max-width: 768px) {
+        width: 110px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+`;
+
+export const NicknameIncludesSpanP = styled.p`
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    @media (max-width: 768px) {
+        width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+`;
+
+export const DateNdNicknameSpan = styled.span`
+    color: var(--subColor1);
+
+    font-size: 1.1rem;
+    text-align: center;
 `;
