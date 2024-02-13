@@ -104,7 +104,6 @@ const Detail = () => {
                     <CategoryDisplay>{post.category}</CategoryDisplay>
                     <NicknameDisplay>{post.nickname}</NicknameDisplay>
                 </FormHeader>
-                {/* <StyledTitle> */}
                 {isEditing ? (
                     <StyledInput
                         type="text"
@@ -114,8 +113,6 @@ const Detail = () => {
                 ) : (
                     <StyledTitle>{post.title}</StyledTitle>
                 )}
-                {/* </StyledTitle> */}
-                {/* <StyledTitle> */}
                 {isEditing ? (
                     <StyledInput
                         type="text"
@@ -125,8 +122,6 @@ const Detail = () => {
                 ) : (
                     <RecommendPostVideoSection videoSrc={post.videoSrc} type="detail" />
                 )}
-                {/* </StyledTitle> */}
-                {/* <StyledContent> */}
                 {isEditing ? (
                     <StyledTextarea
                         value={post.content}
@@ -135,7 +130,6 @@ const Detail = () => {
                 ) : (
                     <StyledContent>{post.content}</StyledContent>
                 )}
-                {/* </StyledContent> */}
                 <div>
                     <DateTime>{formattedDate}</DateTime>
                     {isAuthor && (
