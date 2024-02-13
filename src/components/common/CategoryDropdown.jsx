@@ -24,4 +24,10 @@ const SelectBox = styled.select`
     outline: none;
     appearance: none;
     cursor: pointer;
+    box-shadow: 0px 0px 3px 1px var(--subColor1);
+    &:hover {
+        background-color: var(--subColor1);
+        color: var(--mainColor);
+        transition: all 0.3s;
+    }
 `;

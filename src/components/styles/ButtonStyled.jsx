@@ -46,7 +46,7 @@ export const NormalButton = styled.button`
     color: ${(style) => style.color || "white"};
     font-size: ${(style) => style.fsize || "1.2rem"};
 
-    box-shadow: 0px 0px 3px 1px ${(style) => style.bgc};
+    box-shadow: 0px 0px 3px 1px var(--subColor2);
 
     cursor: pointer;
     &:hover {
