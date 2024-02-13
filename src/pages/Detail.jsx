@@ -89,7 +89,7 @@ const Detail = () => {
         <LayoutStyle>
             <HeaderBox>
                 <Button
-                    onClick={() => navigate("/")}
+                    onClick={() => navigate(-1)}
                     name={"← HOME"}
                     $bgc={"black"}
                     color={"#C9F254"}

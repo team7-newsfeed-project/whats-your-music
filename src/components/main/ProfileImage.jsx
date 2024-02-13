@@ -81,7 +81,6 @@ const ProfileImage = () => {
                 id="ImgfileChoice"
                 onChange={addImgFile}
             />
-            {/* <Pi.ProfileBtnWrapDiv> */}
             {isEdit ? (
                 <Pi.ProfileImageBtnsDiv>
                     <Pi.ProfileUpLoadBtnLabel htmlFor="ImgfileChoice">
@@ -102,7 +101,6 @@ const ProfileImage = () => {
                     <Button name="이미지 편집" pd="0.6, 3.9" fsize="1.2rem" />
                 </div>
             )}
-            {/* </Pi.ProfileBtnWrapDiv> */}
         </Pi.UserImage>
     );
 };
