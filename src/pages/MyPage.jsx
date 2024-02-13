@@ -84,7 +84,7 @@ const MyPage = () => {
             <MP.MyPageSection>
                 <MP.MyPageheadDiv>
                     <MP.MyPageheadWrapDiv>
-                        <MP.HomeLink to="/" pd="1, 1.2" bradius="">
+                        <MP.HomeLink to="/">
                             <MP.HomeBtnP>← HOME</MP.HomeBtnP>
                         </MP.HomeLink>
                         <h3>
@@ -96,9 +96,7 @@ const MyPage = () => {
                     </MP.MyPageheadWrapDiv>
                 </MP.MyPageheadDiv>
 
-                <MP.ImageNdInfo>
-                    <ProfileContents />
-                </MP.ImageNdInfo>
+                <ProfileContents />
 
                 <MyRecommend />
             </MP.MyPageSection>

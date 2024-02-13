@@ -9,7 +9,7 @@ import { setInitValue } from "store/modules/userContents";
 import Button from "components/common/Button";
 import DangerButton from "components/common/DangerButton";
 import ProfileImage from "./ProfileImage";
-import * as PC from "components/styles/ProfileContentsSt";
+import * as PC from "components/styles/ProfileContentsStyle";
 
 const ProfileContents = () => {
     const dispatch = useDispatch();
@@ -83,54 +83,71 @@ const ProfileContents = () => {
     };
     return (
         <PC.ProfileContentsSection>
-            <ProfileImage />
-            <div>
-                {!isEdit ? (
-                    <div>
-                        <div>
-                            <div>
-                                <p>{nickname}</p>
-                                <DangerButton name="⛔ 로그아웃 " onClick={onLogout} />
-                            </div>
-                            <p>{comment}</p>
-                        </div>
-                        <div>
-                            <Button name="내용 편집" onClick={onEditContents} />
-                        </div>
-                    </div>
-                ) : (
-                    <form onSubmit={onEditSave}>
-                        <div>
-                            <input
-                                name="nickname"
-                                value={editValueNickname}
-                                onChange={onEditValueChange}
-                                placeholder={
-                                    editValueNickname === ""
-                                        ? "닉네임을 적어주세요"
-                                        : editValueNickname
-                                }
-                            />
-                            <textarea
-                                name="comment"
-                                cols="30"
-                                rows="10"
-                                value={editValueComment}
-                                onChange={onEditValueChange}
-                                placeholder={
-                                    editValueComment === ""
-                                        ? "자신을 소개해주세요"
-                                        : editValueComment
-                                }
-                            ></textarea>
-                        </div>
-                        <div>
-                            <Button name="수정완료" />
-                            <DangerButton name="수정취소" onClick={onEditCancel} />
-                        </div>
-                    </form>
-                )}
-            </div>
+            <PC.ImageNdInfo>
+                <ProfileImage />
+                <div>
+                    {!isEdit ? (
+                        <PC.ProfileInfoarticle>
+                            <PC.ProfileContentsDiv>
+                                <PC.ProfileNicknameDiv>
+                                    <div>
+                                        <p>{nickname}</p>
+                                    </div>
+                                    <DangerButton name="⛔ 로그아웃" onClick={onLogout} />
+                                </PC.ProfileNicknameDiv>
+                                <PC.ProfileCommentDiv>
+                                    <p>
+                                        <span>{comment}</span>
+                                    </p>
+                                </PC.ProfileCommentDiv>
+                            </PC.ProfileContentsDiv>
+                            <PC.ProfileEditor>
+                                <Button
+                                    name="내용 편집"
+                                    onClick={onEditContents}
+                                    fsize="1.1rem"
+                                    pd="0.6, 1"
+                                />
+                            </PC.ProfileEditor>
+                        </PC.ProfileInfoarticle>
+                    ) : (
+                        <form onSubmit={onEditSave}>
+                            <PC.ProfileEditDiv>
+                                <PC.ProfileEditInputDiv>
+                                    <PC.ProfileEditInput
+                                        name="nickname"
+                                        value={editValueNickname}
+                                        onChange={onEditValueChange}
+                                        maxLength={8}
+                                        placeholder={
+                                            editValueNickname === ""
+                                                ? "닉네임을 적어주세요 (8글자 이내)"
+                                                : editValueNickname
+                                        }
+                                    />
+                                </PC.ProfileEditInputDiv>
+                                <PC.ProfileEditTextarea
+                                    name="comment"
+                                    cols="30"
+                                    rows="10"
+                                    value={editValueComment}
+                                    onChange={onEditValueChange}
+                                    maxLength={50}
+                                    placeholder={
+                                        editValueComment === ""
+                                            ? "자신을 소개해주세요 (50글자 이내)"
+                                            : editValueComment
+                                    }
+                                ></PC.ProfileEditTextarea>
+                                <PC.EditDoneDiv>
+                                    <Button name="수정완료" />
+                                    <DangerButton name="수정취소" onClick={onEditCancel} />
+                                </PC.EditDoneDiv>
+                            </PC.ProfileEditDiv>
+                        </form>
+                    )}
+                </div>
+            </PC.ImageNdInfo>
         </PC.ProfileContentsSection>
     );
 };
