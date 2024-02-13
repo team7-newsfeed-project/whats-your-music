@@ -35,7 +35,7 @@ const MyPage = () => {
                     user = doc.data();
                     const image = user.image;
                     const nickname = user.nickname;
-                    const comment = user.comment;
+                    const comment = user.comment || "";
 
                     dispatch(setAccount({ image, nickname, comment }));
                     dispatch(setThumnailImg(image));
