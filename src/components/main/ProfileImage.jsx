@@ -57,7 +57,7 @@ const ProfileImage = () => {
         if (imgFile) {
             dispatch(setSelectFile(imgFile));
             const reader = new FileReader();
-            reader.readAsDataURL(imgFile); //url 뽑아서
+            reader.readAsDataURL(imgFile);
 
             reader.onloadend = () => {
                 dispatch(setThumnailImg(reader.result));
