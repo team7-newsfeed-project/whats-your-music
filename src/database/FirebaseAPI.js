@@ -38,10 +38,12 @@ export const setUserInfo = async (reduxUser, newAccount) => {
 };
 
 export const do3rdPartyLogIn = async ({ email, nickname }) => {
-    const user = await getUserInfo(email);
-    if (user) {
-        return;
-    } else {
+    let user = await getUserInfo(email);
+
+    if (!user) {
         register({ email, nickname });
+        user = await getUserInfo(email);
     }
+
+    return user;
 };

@@ -78,8 +78,10 @@ const LogIn = () => {
             return;
         }
 
-        await do3rdPartyLogIn({ email: user.email, nickname: user.displayName });
-        const firebaseUser = await getUserInfo(email);
+        const firebaseUser = await do3rdPartyLogIn({
+            email: user.email,
+            nickname: user.displayName,
+        });
         const currentUser = await setUserInfo(firebaseUser, { isLoggedIn: true });
         dispatch(setAccount(currentUser));
         alert("로그인이 되었습니다.");
@@ -104,8 +106,7 @@ const LogIn = () => {
 
         email = user.reloadUserInfo.providerUserInfo[0].email;
         nickname = user.reloadUserInfo.providerUserInfo[0].screenName;
-        await do3rdPartyLogIn({ email, nickname });
-        const firebaseUser = await getUserInfo(email);
+        const firebaseUser = await do3rdPartyLogIn({ email, nickname });
         const currentUser = await setUserInfo(firebaseUser, { isLoggedIn: true });
         dispatch(setAccount(currentUser));
         alert("로그인이 되었습니다.");
