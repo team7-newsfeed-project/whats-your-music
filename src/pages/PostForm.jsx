@@ -222,4 +222,5 @@ const FormHeader = styled.div`
 
 const NicknameDisplay = styled.span`
     font-size: 20px;
+    /* margin: 1px; */
 `;
