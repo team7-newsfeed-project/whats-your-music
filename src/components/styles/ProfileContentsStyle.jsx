@@ -71,6 +71,8 @@ export const ProfileCommentDiv = styled.div`
     height: 150px;
     padding: 10px;
     border-radius: 1rem;
+
+    font-size: 1.2rem;
 `;
 
 export const ProfileEditor = styled.div`

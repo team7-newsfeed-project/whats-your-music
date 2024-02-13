@@ -12,7 +12,6 @@ import ProfileImage from "./ProfileImage";
 import * as PC from "components/styles/ProfileContentsStyle";
 
 const ProfileContents = () => {
-    const editNicknameRef = useRef();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const myPageUserInfo = useSelector((store) => store.userAccount);
@@ -73,10 +72,17 @@ const ProfileContents = () => {
 
     const onLogout = async () => {
         try {
-            await signOut(auth);
-            dispatch(setUserLogout());
-            alert("로그아웃되셨습니다!");
-            navigate("/");
+            const checkSignOut = window.confirm("정말 로그아웃을 하시겠습니까?");
+            if (checkSignOut === true) {
+                await signOut(auth);
+                dispatch(setUserLogout());
+                alert("로그아웃이 완료됐습니다!");
+                navigate("/");
+            } else {
+                alert("로그아웃을 취소하셨습니다.");
+                setIsEdit(false);
+                return;
+            }
         } catch (error) {
             console.log(error);
             alert("로그아웃을 다시 한 번 시도해 주세용");
@@ -118,7 +124,6 @@ const ProfileContents = () => {
                                     <PC.ProfileEditInput
                                         name="nickname"
                                         value={editValueNickname}
-                                        ref={editNicknameRef}
                                         onChange={onEditValueChange}
                                         maxLength={8}
                                         placeholder={

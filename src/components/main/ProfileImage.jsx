@@ -59,7 +59,7 @@ const ProfileImage = () => {
         }
         dispatch(setThumnailImg(downloadURL));
         dispatch(setAccount({ image: downloadURL }));
-
+        // 새로운 사진 업데이트 후 이미지 수정 종료
         setEdit(false);
     };
 
