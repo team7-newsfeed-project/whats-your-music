@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { LayoutStyle } from "components/styles/LayoutStyle";
-import logoImg from "assets/whatsyourmusicLogo.png";
+import logoImg from "assets/whatsyourmusic_logo.png";
 import Button from "components/common/Button";
 import { useNavigate } from "react-router-dom";
 import Footer from "components/Footer/Footer";
@@ -51,11 +51,14 @@ const PostForm = () => {
         const newPost = {
             category: selectedCategory,
             content,
-            date: new Date().toLocaleDateString("ko-KR", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-            }),
+            date: new Date().toISOString(),
+            //     .toLocaleDateString("ko-KR", {
+            //     year: "numeric",
+            //     month: "numeric",
+            //     day: "numeric",
+            //     hour: "numeric",
+            //     minute: "numeric",
+            // }),
             nickname: userNickname,
             title,
             videoSrc,
@@ -93,7 +96,7 @@ const PostForm = () => {
                     $bd={"1px solid #C9F254"}
                 />
                 <LogoBox>
-                    <img src={logoImg} width={300} alt="logo" />
+                    <img src={logoImg} width={270} alt="logo" />
                 </LogoBox>
             </HeaderBox>
             <MainWrapper>
@@ -135,8 +138,8 @@ const HeaderBox = styled.header`
     background-color: var(--mainColor);
     width: 100%;
     height: 100px;
-    margin: 20px;
-    border-radius: 20px;
+    /* margin: 20px; */
+    margin: 0px auto 10px auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -155,9 +158,8 @@ const MainWrapper = styled.main`
     gap: 10px;
     background-color: var(--mainColor);
     width: 100%;
-    min-height: 550px;
-    border-radius: 20px;
-    margin-bottom: 20px;
+    min-height: 600px;
+    margin-bottom: 10px;
 `;
 
 const StyledInput = styled.input`
