@@ -1,29 +1,42 @@
-import React, { useState } from "react";
-import ProfileImage from "./ProfileImage";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { setUserInfo } from "database/FirebaseAPI";
+import { auth } from "database/firebase";
+import { setAccount, setUserLogout } from "store/modules/userAccount";
+import { setInitValue } from "store/modules/userContents";
 import Button from "components/common/Button";
 import DangerButton from "components/common/DangerButton";
-import { useDispatch, useSelector } from "react-redux";
-import { setAccount } from "store/modules/userAccount";
-import { setEditValue } from "store/modules/userContents";
+import ProfileImage from "./ProfileImage";
+import * as PC from "components/styles/ProfileContentsStyle";
 
-const ProfileContents = ({ userUid }) => {
+const ProfileContents = () => {
+    const editNicknameRef = useRef();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const myPageUserInfo = useSelector((store) => store.userAccount);
     const { nickname, comment } = useSelector((store) => store.userContents.initUserInfo);
-    const editValue = useSelector((store) => store.userContents.editValue);
-    console.log(" nickname, comment,editValue=>", nickname, comment, editValue);
+    const [editValue, setEditValue] = useState({
+        nickname,
+        comment,
+    });
     const [isEdit, setIsEdit] = useState(false);
-    // const [editValue, setEditValue] = useState({
-    //     userUid: userUid,
-    //     nickname: "",
-    //     comment: "",
-    // });
     const editValueNickname = editValue.nickname;
     const editValueComment = editValue.comment;
+
     const onEditValueChange = (e) => {
         e.preventDefault();
         const { name, value } = e.target;
         setEditValue({ ...editValue, [name]: value });
     };
+
+    // useEffect(() => {
+    //     if (!isEdit) {
+    //         editNicknameRef.current.focus();
+    //     }
+    // }, [isEdit]);
+
     const onEditContents = (e) => {
         e.preventDefault();
         setIsEdit(true);
@@ -42,83 +55,108 @@ const ProfileContents = ({ userUid }) => {
             alert("수정된 내용이 없습니다");
             return;
         }
+
         if (editSaveCheck === false) {
             alert("수정을 취소하셨습니다.");
             setIsEdit(false);
             return;
         }
 
-        // const editData = letterValue.map((letter) => {
-        //     if (letter.id === id) {
-        //         return {
-        //             ...letter,
-        //             content: editValueContent,
-        //         };
-        //     }
-        //     return letter;
-        // });
+        dispatch(setInitValue(editValue));
+        dispatch(setAccount(editValue));
 
-        console.log();
-        dispatch(setEditValue({ ...editValue, userUid }));
-        // dispatch(setEditValue(editValue));
-        dispatch(setAccount({ ...editValue, userUid }));
+        const userAccountEdit = async () => {
+            await setUserInfo(myPageUserInfo, editValue);
+        };
+        userAccountEdit();
         setIsEdit(false);
     };
+
     const onEditCancel = (e) => {
         e.preventDefault();
         setIsEdit(false);
     };
 
+    const onLogout = async () => {
+        try {
+            await signOut(auth);
+            dispatch(setUserLogout());
+            alert("로그아웃되셨습니다!");
+            navigate("/");
+        } catch (error) {
+            console.log(error);
+            alert("로그아웃을 다시 한 번 시도해 주세용");
+        }
+    };
     return (
-        <div>
-            <ProfileImage />
-            <div>
-                {!isEdit ? (
-                    <div>
-                        <p>닉네임 : {nickname}</p>
-                        <p>소개 : {comment}</p>
-                    </div>
-                ) : (
-                    <form>
-                        <div>
-                            <input
-                                name="nickname"
-                                value={editValueNickname}
-                                onChange={onEditValueChange}
-                                placeholder={
-                                    editValueNickname === ""
-                                        ? "닉네임을 적어주세요"
-                                        : editValueNickname
-                                }
-                            />
-                            <textarea
-                                name="comment"
-                                cols="30"
-                                rows="10"
-                                value={editValueComment}
-                                onChange={onEditValueChange}
-                                placeholder={
-                                    editValueComment === ""
-                                        ? "자신을 소개해주세요"
-                                        : editValueComment
-                                }
-                            ></textarea>
-                            <p></p>
-                        </div>
-                    </form>
-                )}
-                {!isEdit ? (
-                    <div>
-                        <Button name="내용 편집" onClick={onEditContents} />
-                    </div>
-                ) : (
-                    <div>
-                        <Button name="수정완료" onClick={onEditSave} />
-                        <DangerButton name="수정취소" onClick={onEditCancel} />
-                    </div>
-                )}
-            </div>
-        </div>
+        <PC.ProfileContentsSection>
+            <PC.ImageNdInfo>
+                <ProfileImage />
+                <div>
+                    {!isEdit ? (
+                        <PC.ProfileInfoarticle>
+                            <PC.ProfileContentsDiv>
+                                <PC.ProfileNicknameDiv>
+                                    <div>
+                                        <p>{nickname}</p>
+                                    </div>
+                                    <DangerButton name="⛔ 로그아웃" onClick={onLogout} />
+                                </PC.ProfileNicknameDiv>
+                                <PC.ProfileCommentDiv>
+                                    <p>
+                                        <span>{comment}</span>
+                                    </p>
+                                </PC.ProfileCommentDiv>
+                            </PC.ProfileContentsDiv>
+                            <PC.ProfileEditor>
+                                <Button
+                                    name="내용 편집"
+                                    onClick={onEditContents}
+                                    fsize="1.1rem"
+                                    pd="0.6, 1"
+                                />
+                            </PC.ProfileEditor>
+                        </PC.ProfileInfoarticle>
+                    ) : (
+                        <form onSubmit={onEditSave}>
+                            <PC.ProfileEditDiv>
+                                <PC.ProfileEditInputDiv>
+                                    <PC.ProfileEditInput
+                                        name="nickname"
+                                        value={editValueNickname}
+                                        ref={editNicknameRef}
+                                        onChange={onEditValueChange}
+                                        maxLength={8}
+                                        placeholder={
+                                            editValueNickname === ""
+                                                ? "닉네임을 적어주세요 (8글자 이내)"
+                                                : editValueNickname
+                                        }
+                                    />
+                                </PC.ProfileEditInputDiv>
+                                <PC.ProfileEditTextarea
+                                    name="comment"
+                                    cols="30"
+                                    rows="10"
+                                    value={editValueComment}
+                                    onChange={onEditValueChange}
+                                    maxLength={100}
+                                    placeholder={
+                                        editValueComment === ""
+                                            ? "자신을 소개해주세요 (100글자 이내)"
+                                            : editValueComment
+                                    }
+                                ></PC.ProfileEditTextarea>
+                                <PC.EditDoneDiv>
+                                    <Button name="수정완료" />
+                                    <DangerButton name="수정취소" onClick={onEditCancel} />
+                                </PC.EditDoneDiv>
+                            </PC.ProfileEditDiv>
+                        </form>
+                    )}
+                </div>
+            </PC.ImageNdInfo>
+        </PC.ProfileContentsSection>
     );
 };
 

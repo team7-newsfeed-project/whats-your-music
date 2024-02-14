@@ -45,7 +45,7 @@ const RecommendPostItem = ({ post }) => {
                     <PostTitle>{title}</PostTitle>
                     <PostContent>{content}</PostContent>
                     <DateNameTextBox>
-                        <PostTime>{formattedDate}</PostTime>
+                        <PostTime>{formattedDate} &emsp;│</PostTime>
                         <PostNickname>{nickname}</PostNickname>
                     </DateNameTextBox>
                 </PostTextBox>
@@ -73,6 +73,7 @@ const MainArticle = styled.article`
         transition: all 0.2s;
         transform: scale(1.01);
     }
+    cursor: pointer;
 `;
 
 const PostTextBox = styled.div`

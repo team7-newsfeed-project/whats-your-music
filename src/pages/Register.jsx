@@ -62,8 +62,8 @@ const Register = () => {
     };
 
     return (
-        <>
-            <HomeBtn onClick={() => navigate("/")}>&larr;home</HomeBtn>
+        <RegisterWrapper>
+            <HomeBtn onClick={() => navigate("/")}>&larr; HOME</HomeBtn>
             <RegisterForm onSubmit={onRegister}>
                 <Title>회원가입</Title>
                 <InputFiled
@@ -106,39 +106,52 @@ const Register = () => {
                     bdc="--subColor1"
                 />
             </RegisterForm>
-        </>
+        </RegisterWrapper>
     );
 };
 
 export default Register;
 
+const RegisterWrapper = styled.div`
+    background-color: var(--mainColor);
+    min-height: 870px;
+`;
+
 const RegisterForm = styled.form`
     display: flex;
     flex-direction: column;
-    margin: auto;
+    margin: 130px auto auto auto;
     gap: 20px;
     width: 500px;
 `;
 
 const HomeBtn = styled.button`
     font-size: 20px;
-    border: 1px solid var(--subColor2);
-    background-color: var(--subColor3);
+    /* border: 1px solid var(--subColor2); */
+    border: 0;
+    background-color: var(--mainColor);
     color: var(--subColor2);
+    box-shadow: 0px 0px 3px 1px var(--subColor2);
     border-radius: 15px;
-    width: 90px;
+    width: 100px;
     padding: 5px;
     margin-top: 10px;
     margin-left: 10px;
     cursor: pointer;
+    &:hover {
+        background-color: var(--subColor2);
+        color: var(--mainColor);
+        transition: all 0.3s;
+    }
 `;
 
 const Title = styled.p`
     font-size: 20px;
     color: var(--subColor1);
     width: 200px;
-    margin: 0 auto;
+    margin: 0 auto 30px auto;
     text-align: center;
+    letter-spacing: 0.5rem;
 `;
 
 const InputFiled = styled.input`

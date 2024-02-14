@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-const RecommendPostVideoSection = ({ videoSrc }) => {
+const RecommendPostVideoSection = ({ videoSrc, type }) => {
     const youtubeIdRef = useRef("");
     if (videoSrc) {
         if (videoSrc.includes("youtube.com/live")) {
@@ -20,7 +20,6 @@ const RecommendPostVideoSection = ({ videoSrc }) => {
             youtubeIdRef.current = youtubeId;
         }
     }
-    // console.log("youtubeIdRef ", youtubeIdRef);
     return (
         <VideoSection>
             <Iframe
@@ -30,6 +29,7 @@ const RecommendPostVideoSection = ({ videoSrc }) => {
                 title="youtube-video-player"
                 frameBorder="0"
                 allowFullScreen
+                $type={type}
             ></Iframe>
         </VideoSection>
     );
@@ -41,8 +41,6 @@ const VideoSection = styled.section`
     /* margin-top: 20px; */
     margin-left: 20px;
     overflow: hidden;
-    /* width: 100%; */
-    /* height: 100%; */
 `;
 
 const Iframe = styled.iframe`
@@ -53,5 +51,12 @@ const Iframe = styled.iframe`
     height: 150px;
     border: 1px solid var(--mainColor);
     border-radius: 15px;
-    /* margin-top: 30px; */
+    ${(props) => {
+        if (props.$type === "detail") {
+            return css`
+                width: 720px;
+                height: 400px;
+            `;
+        }
+    }}
 `;

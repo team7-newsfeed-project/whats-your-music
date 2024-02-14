@@ -10,6 +10,7 @@ import { db } from "database/firebase";
 import DangerButton from "components/common/DangerButton";
 import { useSelector, useDispatch } from "react-redux";
 import { deletePost, editPost } from "store/modules/posts";
+import RecommendPostVideoSection from "components/main/RecommendPostVideoSection";
 
 const Detail = () => {
     const navigate = useNavigate();
@@ -76,18 +77,26 @@ const Detail = () => {
         setIsEditing(false);
     };
 
+    const formattedDate = new Date(post.date).toLocaleDateString("ko-KR", {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+    });
+
     return (
         <LayoutStyle>
             <HeaderBox>
                 <Button
-                    onClick={() => navigate("/")}
+                    onClick={() => navigate(-1)}
                     name={"← HOME"}
                     $bgc={"black"}
                     color={"#C9F254"}
-                    $bd={"1px solid #C9F254"}
+                    bd={"1px solid "}
                 />
                 <LogoBox>
-                    <img src={logoImg} width={300} alt="logo" />
+                    <img src={logoImg} width={270} alt="logo" />
                 </LogoBox>
             </HeaderBox>
             <MainWrapper>
@@ -95,47 +104,45 @@ const Detail = () => {
                     <CategoryDisplay>{post.category}</CategoryDisplay>
                     <NicknameDisplay>{post.nickname}</NicknameDisplay>
                 </FormHeader>
-                <StyledTitle>
-                    {isEditing ? (
-                        <StyledInput
-                            type="text"
-                            value={post.title}
-                            onChange={(e) => setPost({ ...post, title: e.target.value })}
-                        />
-                    ) : (
-                        post.title
-                    )}
-                </StyledTitle>
-                <StyledTitle>
-                    {isEditing ? (
-                        <StyledInput
-                            type="text"
-                            value={post.videoSrc}
-                            onChange={(e) => setPost({ ...post, videoSrc: e.target.value })}
-                        />
-                    ) : (
-                        post.videoSrc
-                    )}
-                </StyledTitle>
-                <StyledContent>
-                    {isEditing ? (
-                        <StyledTextarea
-                            value={post.content}
-                            onChange={(e) => setPost({ ...post, content: e.target.value })}
-                        />
-                    ) : (
-                        post.content
-                    )}
-                </StyledContent>
+                {isEditing ? (
+                    <StyledInput
+                        type="text"
+                        value={post.title}
+                        onChange={(e) => setPost({ ...post, title: e.target.value })}
+                    />
+                ) : (
+                    <StyledTitle>{post.title}</StyledTitle>
+                )}
+                {isEditing ? (
+                    <StyledInput
+                        type="text"
+                        value={post.videoSrc}
+                        onChange={(e) => setPost({ ...post, videoSrc: e.target.value })}
+                    />
+                ) : (
+                    <RecommendPostVideoSection videoSrc={post.videoSrc} type="detail" />
+                )}
+                {isEditing ? (
+                    <StyledTextarea
+                        value={post.content}
+                        onChange={(e) => setPost({ ...post, content: e.target.value })}
+                    />
+                ) : (
+                    <StyledContent>{post.content}</StyledContent>
+                )}
                 <div>
-                    <DateTime>{post.date}</DateTime>
+                    <DateTime>{formattedDate}</DateTime>
                     {isAuthor && (
                         <>
                             <Button
                                 name={isEditing ? "수정완료" : "수정"}
                                 onClick={isEditing ? handleSubmit : handleEditClick}
                             />
-                            <DangerButton name="삭제" onClick={deletePostHandler} />
+                            <DangerButton
+                                name="삭제"
+                                onClick={deletePostHandler}
+                                style={{ marginLeft: "10px" }}
+                            />
                         </>
                     )}
                 </div>
@@ -152,6 +159,7 @@ const HeaderBox = styled.header`
     width: 100%;
     height: 100px;
     margin: 0px auto 10px auto;
+    padding: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -160,6 +168,7 @@ const HeaderBox = styled.header`
 const LogoBox = styled.div`
     flex-grow: 1;
     text-align: center;
+    margin-right: 140px;
 `;
 
 const MainWrapper = styled.main`
@@ -172,7 +181,7 @@ const MainWrapper = styled.main`
     width: 100%;
     /* min-height: 550px; */
     /* margin-bottom: 20px; */
-    min-height: 600px;
+    min-height: 900px;
     margin-bottom: 10px;
 `;
 
@@ -201,6 +210,10 @@ const StyledContent = styled.div`
 
 const FormHeader = styled.div`
     margin-bottom: 20px;
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 `;
 
 const NicknameDisplay = styled.span`
@@ -208,15 +221,16 @@ const NicknameDisplay = styled.span`
 `;
 
 const CategoryDisplay = styled.span`
-    border: 1px solid var(--subColor1);
+    /* border: 1px solid var(--subColor1); */
     border-radius: 20px;
     padding: 15px;
-    width: 80px;
+    width: 120px;
     font-size: 16px;
     color: white;
     background-color: var(--mainColor);
     outline: none;
     appearance: none;
+    box-shadow: 0px 0px 3px 2px var(--subColor1);
 `;
 
 const DateTime = styled.span`

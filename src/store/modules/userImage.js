@@ -22,7 +22,7 @@ export const setThumnailImg = (thumnailImg) => {
 };
 
 // 초기 상태값
-const initialState = { user: {}, selectFile: defaultImage, thumnailImg: defaultImage };
+const initialState = { selectFile: defaultImage, thumnailImg: defaultImage };
 
 // 리듀서
 const userImage = (state = initialState, action) => {
