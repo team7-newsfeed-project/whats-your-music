@@ -12,6 +12,7 @@ import { getUserInfo, do3rdPartyLogIn, setUserInfo } from "database/FirebaseAPI"
 import { useDispatch, useSelector } from "react-redux";
 import Button from "components/common/Button";
 import { setAccount } from "store/modules/userAccount";
+import logoImage from "assets/whatsyourmusic_logo.png";
 
 const LogIn = () => {
     const navigate = useNavigate();
@@ -117,7 +118,8 @@ const LogIn = () => {
         <>
             <HomeBtn onClick={() => navigate("/")}>&larr;home</HomeBtn>
             <LogInForm onSubmit={(event) => onLogIn(event)}>
-                <Logo>WHAT'S YOUR MUSIC?</Logo>
+                {/* <Logo>WHAT'S YOUR MUSIC?</Logo> */}
+                <img src={logoImage} alt="이미지가 없습니다."></img>
                 <Title>LOGIN</Title>
                 <InputFiled
                     type="text"
