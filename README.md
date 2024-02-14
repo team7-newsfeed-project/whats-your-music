@@ -271,7 +271,8 @@ $ yarn run start
 - [ ] 무한스크롤 기능
 - [x] 더보기 기능
 - [ ] memo, useMemo, useCallback 을 이용한 렌더링 최적화 적용
-- [ ] Vercel 에 배포한 뒤 커스텀 도메인 적용 (500원 정도하는 저렴한 도메인 권장)
+- [x] Vercel 에 배포한 뒤 커스텀 도메인 적용 (500원 정도하는 저렴한 도메인 권장)
+    - [https://www.whats-your-music.store/](https://www.whats-your-music.store/)
 - [ ] 검색기능
 
 <br />
