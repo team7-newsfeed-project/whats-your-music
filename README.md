@@ -24,7 +24,6 @@
 
   - 기능담당
 
-  - 기능소개
 
 **# 트러블슈팅**
 
@@ -74,7 +73,7 @@
 
 ## 프로젝트 "what`s your music(너의 뮤직은)"
 
-
+**배포 도메인** : [https://www.whats-your-music.store/](https://www.whats-your-music.store/)
 
 **프로젝트 명** : what`s your music(너의 뮤직은)
 
