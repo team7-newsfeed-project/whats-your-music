@@ -28,6 +28,12 @@
 
 **# 트러블슈팅**
 
+## 프로젝트 팀 발표 PPT링크
+
+<br />
+
+🎷[What's your music(너의 음악은?)](https://www.miricanvas.com/v/12vtts4)🎸 클릭하면 이동해요!
+
 
 
 <br />
