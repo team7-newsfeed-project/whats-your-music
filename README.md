@@ -99,9 +99,9 @@
 
 <br />
 
+<br />
 
-
-### **Project Rules**
+### **🚦Project Rules**
 
 ### **개발 환경**
 
@@ -163,6 +163,7 @@
 - 모든 커밋 메세지는 { **[타입/#이슈번호] 메세지** } 로 작성합니다.
 - ex) [Feat/#1] add splash screen
 
+<br />
 
 **프로젝트 운영 방식 및 Rules 예시**
 
