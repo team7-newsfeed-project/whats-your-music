@@ -242,4 +242,22 @@ $ yarn run start
 
 - [x] Git을 최대한 활용해보기!
   - Pull Request 활용하기!
+
+  - <p><img src="https://lh7-us.googleusercontent.com/FcsN5MzAC5-foELcQWuYtIdY22K5RVrNTcg6NpHjr6ZCHniiX-64VJubCemRIIj21M9QdjZugLc2JgZ6UDJpqz_eJouAeM136VlwW9JgtAnupov7izrzjYkdHZJR_CAIZs5fIb1v52HPSWOwxLJe2u8" align="center" width="50%" height="50%" ></p>
+
+    
+
+    <p><img src="https://lh7-us.googleusercontent.com/JGbWkAxgJQ7Zj67c-AX1NVuoW8b8WJKphCo-pM-6-hzie2gvaBwMDn-eEYZZZfCT8PFwAG_ESfteDHIjheI8GI6dzkH9P4voJfZH1hEfCU4Gij1_ZJLu0e5iaA0AqS8dcoCIL9cV53muJf2c_jrfziM" align="center" width="50%" height="50%" ></p>
+
+ 
+  
   - Branch 만들어 작업하기
+
+  <p><img src="https://lh7-us.googleusercontent.com/xhdcTByYIBgiz0vsW2XL0SGaOhmzceLBsAl-seKnruy1dljCH5MIG4kUM71UzkJmO3K4LUWPu4AHAu06651rS0Xm56l26UwJjxckNOs1luHvBHOlOw07XkByu200iF9Z-4uXjtc7aVGu8DFdLZ5nmVI" align="center" width="30%" height="30%" ></p>
+
+
+
+<br />
+
+
+
