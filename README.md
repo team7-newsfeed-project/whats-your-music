@@ -82,6 +82,7 @@
 **프로젝트 소개** : What's your Music 은 음악을 좋아하는 사람들의 정보 교환 및 음악 추천을 위한 커뮤니티입니다.
 
 **프로젝트 목표** : 팝, 클래식, 재즈 등 카테고리 별로 음악 정보 및 추천 음악을 유저들이 직접 올릴 수 있는 서비스.
+
 <br />
 
 ### 🚦 Project Rules
@@ -95,20 +96,7 @@
 - **DB**:  Firebase 
 - **Communication** : figma, slack, notion, zep
 
-
-
 <br />
-
-<br />
-
-### **🚦Project Rules**
-
-### **개발 환경**
-
-- **editor** : Visual Studio Code
-- **environment** : git, github
-- **development** : Javascript, react18.2.0, CSS3, HTML5
-- **library** : redux, react-router-dom, style-components, firebase
 
 ### **Code Convention**
 
@@ -128,7 +116,7 @@
 
 - issue 이름 : **[타입] - 설명 ( ex. [Feat] - search 기능 구현 )**
 
-  
+<br />  
 
 **개인 작업하기**
 
@@ -140,9 +128,10 @@
 - 팀원들의 코드리뷰를 받았으면 merge 합니다.
 - 꼭! 브랜치를 헷갈리지 않도록 합시다. 이슈번호 확인!
 
-
+<br />
 
 ### **Commit Convention**
+
 
 **commit type**
 
@@ -155,6 +144,8 @@
 - Refactor: 코드 리팩토링
 - Test : 테스트 코드, 리팩토링 코드 추가
 - Setting: 프로젝트 세팅
+
+<br />
 
 **commit message**
 
@@ -188,7 +179,7 @@
 
 ```bash
 $ git clone https://github.com/team7-newsfeed-project/whats-your-music.git
-$ cd JS-team11-project
+$ cd whats-your-music
 $ yarn install
 $ yarn run start
 ```
