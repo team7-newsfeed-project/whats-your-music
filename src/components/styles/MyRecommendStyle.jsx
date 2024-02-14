@@ -93,49 +93,30 @@ export const RecommendTitle = styled.span`
     font-size: 1.4rem;
 `;
 
-export const VideoSection = styled.section`
-    overflow: hidden;
-`;
-export const Iframe = styled.iframe`
-    position: relative; // 상관 x
-    width: 302px; // 볼륨크기조절이 같이 뜨려면 최소 이정도 넓이 부여해야
-    height: 150px;
-    border: 1px solid var(--mainColor);
-    border-radius: 1rem;
-    ${(props) => {
-        if (props.$type === "detail") {
-            return css`
-                width: 720px;
-                height: 400px;
-            `;
-        }
-    }}
-`;
-
 export const RecommendTitleNdContentDiv = styled.div`
     display: flex;
     flex-direction: column;
 
-    /* margin-bottom: 10px; */
-    gap: 10px;
+    margin-top: 18px;
+
+    gap: 12px;
 `;
 
-export const RecommendContent = styled.p`
+export const RecommendContentP = styled.p`
     width: 300px;
 
     > span {
-        height: 80px;
-        /* text-overflow: ellipsis;
-        white-space: nowrap; */
+        height: 36px;
         display: -webkit-box;
         -webkit-line-clamp: 3; /* 원하는 행 수 */
         -webkit-box-orient: vertical;
         overflow: hidden;
+        line-height: 1.2rem;
 
         font-size: 1.2rem;
         @media (max-width: 768px) {
             width: 220px;
-            height: 80px;
+            height: 36px;
             display: -webkit-box;
             -webkit-line-clamp: 3; /* 원하는 행 수 */
             -webkit-box-orient: vertical;
@@ -146,6 +127,7 @@ export const RecommendContent = styled.p`
 
 export const DateNdNicknameUl = styled.ul`
     display: flex;
+    margin-top: 6px;
 `;
 
 export const RecommendDateColorLi = styled.li`

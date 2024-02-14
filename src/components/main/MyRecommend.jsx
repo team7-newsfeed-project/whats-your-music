@@ -1,34 +1,13 @@
 import React, { useRef } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import * as MR from "components/styles/MyRecommendStyle";
+import RecommendPostVideoSection from "./RecommendPostVideoSection";
 
 const MyRecommend = () => {
     const myRecommends = useSelector((store) => store.userRecommend);
     const { email } = useSelector((store) => store.userAccount);
     const filterMyRecommends = myRecommends.filter((boardItem) => boardItem.email === email);
-    const youtubeIdRef = useRef("");
-    const setPosts = useSelector((state) => state.posts);
-    const activeCategory = useSelector((state) => state.category);
-    const filteredPosts = setPosts.filter((post) => post.category === activeCategory);
-    const { videoSrc } = filteredPosts.map((post) => post);
-    if (videoSrc) {
-        if (videoSrc.includes("youtube.com/live")) {
-            // 유튭 라이브영상 (공유)주소의 경우
-            const youtubeId = videoSrc.substring(29, 40);
-            // console.log("라이브영상 (공유)주소:", youtubeId);
-            youtubeIdRef.current = youtubeId;
-        } else if (videoSrc.includes("youtube.com/watch")) {
-            // 일반 유튭주소의 경우 (공유주소아닌)
-            const youtubeId = videoSrc.substring(32, 43);
-            // console.log("일반유튭주소:", youtubeId);
-            youtubeIdRef.current = youtubeId;
-        } else {
-            // 일반 공유 주소 : ..youtu.be/..
-            const youtubeId = videoSrc.substring(17, 28);
-            youtubeIdRef.current = youtubeId;
-        }
-    }
 
     return (
         <>
@@ -58,15 +37,10 @@ const MyRecommend = () => {
                                 <Link to={`/detail/${id}`} key={id}>
                                     <MR.CardsWrap>
                                         <MR.RecoommendVideoWrap>
-                                            <MR.VideoSection>
-                                                <MR.Iframe
-                                                    src={`https://www.youtube.com/embed/${youtubeIdRef.current}?autoplay=0&mute=0;&loop=1`}
-                                                    title="youtube-video-player"
-                                                    frameBorder="0"
-                                                    allowFullScreen
-                                                    // $type={type}
-                                                ></MR.Iframe>
-                                            </MR.VideoSection>
+                                            <RecommendPostVideoSection
+                                                videoSrc={videoSrc}
+                                                type="RecoMusic"
+                                            ></RecommendPostVideoSection>
                                         </MR.RecoommendVideoWrap>
 
                                         <MR.RecommendContentsDiv>
@@ -74,9 +48,9 @@ const MyRecommend = () => {
                                                 <MR.RecommendTitleP>
                                                     <MR.RecommendTitle>{title}</MR.RecommendTitle>
                                                 </MR.RecommendTitleP>
-                                                <MR.RecommendContent>
+                                                <MR.RecommendContentP>
                                                     <span>{content}</span>
-                                                </MR.RecommendContent>
+                                                </MR.RecommendContentP>
                                             </MR.RecommendTitleNdContentDiv>
                                             <MR.DateNdNicknameUl>
                                                 <MR.RecommendDateColorLi>
@@ -111,3 +85,15 @@ const MyRecommend = () => {
 };
 
 export default MyRecommend;
+
+{
+    /* <MR.VideoSection>
+                                                <MR.Iframe
+                                                    src={`https://www.youtube.com/embed/${youtubeIdRef.current}?autoplay=0&mute=0;&loop=1`}
+                                                    title="youtube-video-player"
+                                                    frameBorder="0"
+                                                    allowFullScreen
+                                                    // $type={type}
+                                                ></MR.Iframe>
+                                            </MR.VideoSection> */
+}

@@ -127,7 +127,6 @@ const RegisterForm = styled.form`
 
 const HomeBtn = styled.button`
     font-size: 20px;
-    /* border: 1px solid var(--subColor2); */
     border: 0;
     background-color: var(--mainColor);
     color: var(--subColor2);

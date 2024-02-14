@@ -93,7 +93,7 @@ const Detail = () => {
                     name={"← HOME"}
                     $bgc={"black"}
                     color={"#C9F254"}
-                    bd={"1px solid "}
+                    // bd={"1px solid #C9F254"}
                 />
                 <LogoBox>
                     <img src={logoImg} width={270} alt="logo" />
@@ -179,8 +179,6 @@ const MainWrapper = styled.main`
     gap: 10px;
     background-color: var(--mainColor);
     width: 100%;
-    /* min-height: 550px; */
-    /* margin-bottom: 20px; */
     min-height: 900px;
     margin-bottom: 10px;
 `;
@@ -221,7 +219,6 @@ const NicknameDisplay = styled.span`
 `;
 
 const CategoryDisplay = styled.span`
-    /* border: 1px solid var(--subColor1); */
     border-radius: 20px;
     padding: 15px;
     width: 120px;
