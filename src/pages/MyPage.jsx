@@ -13,11 +13,14 @@ import Layout from "components/layout/Layout";
 import ProfileContents from "components/main/ProfileContents";
 import MyRecommend from "components/main/MyRecommend";
 import * as MP from "components/styles/MypageStyle";
+import { setPost } from "store/modules/posts";
 
 const MyPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const defaultImage = useSelector((store) => store.userImage.selectFile);
     const { email } = useSelector((store) => store.userAccount);
+    const { isLoggedIn } = useSelector((store) => store.userAccount);
 
     useEffect(() => {
         if (!email) {
@@ -36,8 +39,16 @@ const MyPage = () => {
                     const nickname = user.nickname;
                     const comment = user.comment || "";
 
+                    if (isLoggedIn) {
+                        if (image) {
+                            dispatch(setThumnailImg(image));
+                        } else {
+                            dispatch(setThumnailImg(defaultImage));
+                        }
+                    }
+
                     dispatch(setAccount({ image, nickname, comment }));
-                    dispatch(setThumnailImg(image));
+
                     dispatch(setInitValue({ nickname, comment }));
                     if (!user || user === null || user === undefined) {
                         alert(`로그인 해주세요!`);
@@ -62,6 +73,7 @@ const MyPage = () => {
             querySnapshot.forEach((doc) => {
                 initialPosts.push({ id: doc.id, ...doc.data() });
             });
+            dispatch(setPost(initialPosts));
             dispatch(setMyRecommend(initialPosts));
         };
         myPageRecommendData();
