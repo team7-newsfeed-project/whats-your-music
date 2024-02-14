@@ -247,7 +247,7 @@ $ yarn run start
 
     
 
-    <p><img src="https://lh7-us.googleusercontent.com/JGbWkAxgJQ7Zj67c-AX1NVuoW8b8WJKphCo-pM-6-hzie2gvaBwMDn-eEYZZZfCT8PFwAG_ESfteDHIjheI8GI6dzkH9P4voJfZH1hEfCU4Gij1_ZJLu0e5iaA0AqS8dcoCIL9cV53muJf2c_jrfziM" align="center" width="50%" height="50%" ></p>
+    <p><img src="https://github.com/team7-newsfeed-project/whats-your-music/assets/152264010/8efba6e4-acd0-4399-afd2-9a82c23ce0b7" align="center" width="50%" height="50%" ></p>
 
  
   
