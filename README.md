@@ -92,7 +92,7 @@
 - **Environment :** Visual Studio Code, git, github
 - **Language :**  Javascript
 - **Framwork** : React 
-- **Library** : redux, react-router-dom, style-components,
+- **Library** : redux, react-router-dom, style-components,serve
 - **DB**:  Firebase 
 - **Communication** : figma, slack, notion, zep
 
