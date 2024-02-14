@@ -71,7 +71,7 @@
 
 
 
-## 프로젝트 "what`s your music(너의 뮤직은)"
+## 프로젝트 "🎷what`s your music(너의 뮤직은)🎸" 
 
 **배포 도메인** : [https://www.whats-your-music.store/](https://www.whats-your-music.store/)
 
