@@ -187,13 +187,16 @@ $ yarn run start
 
 <br />
 
-| 컬러 가이드와 메인 페이지                                    | 로그인과 로그아웃 페이지                                     |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
+
+|                  컬러 가이드와 메인 페이지                   |                   로그인과 로그아웃 페이지                   |
+| :----------------------------------------------------------: | :----------------------------------------------------------: |
 | <p><img src="https://lh7-us.googleusercontent.com/VgY1eM7_4dWYlMR1W_JBWAwueohR3LvW953j5jdpNyYVtMZfC5VA1TD-IEhIx2yzkKsVxn40aFH1qs1nuG9dyLYAlT8_YAE4UcWqEUkxSlQXg1FgGCS8RVJonSysnojs7gPgnumkM8ruTuE9jWw5axQ" align="center" width="100%" height="100%" ></p> | <p><img src="https://lh7-us.googleusercontent.com/6L7d0fxl_fVWZgNJ-VKkDroyp1CPonJqmEBefGjYdrBoeETHaI8b8Eou5VgAE5zlWSyn06hqVj-lHwPPGR11bd906HCh-rWgrhkgZda281jqfCpUDLKRKOIymPbhIjI4BtQHjJm4LXGncuOhAaPcyAo" width="100%" height="100%"><p> |
-| 글 등록                                                      | 글 자세히 보기 (추천 게시판)                                 |
+|                           글 등록                            |                 글 자세히 보기 (추천 게시판)                 |
 | <p><img src="https://lh7-us.googleusercontent.com/7MtJRawJ78CFf127F92FKekFwZd3AcdnX0B0lJOVzjiOTYAg5vG_Dh1ptBPfKK4U4PizLdbvW5WUW21BIscBqywUw1j1BUB_mZ6MrpaU-cBjt8QISk8NUYcLAy4SWSJiZ13Egvz_EjJml5DE2innhNU" width="100%" height="100%"><p> | <p><img src="https://lh7-us.googleusercontent.com/iFtvfv0F5b1rHDNj_a_8flfohEuSHN7LoIlmKZ4I4gGI2QhtHhfYie5SIVDQQsd_PlH47JZ2IqcXw1iAFzxQ8SAEWjLHSq9I4MkIQ0-j0CxYaG3lANs2jPOItXQpghpYPugHnkiXGXLaVqXR0Hh2z5s" width="100%" height="100%"><p> |
-| 글 자세히 보기 수정하기 (추천 게시판)                        | 마이페이지                                                   |
+|            글 자세히 보기 수정하기 (추천 게시판)             |                          마이페이지                          |
 | <p><img src="https://lh7-us.googleusercontent.com/hdhOEOW98PcMCqvOh1ja3FleaheB9khwM2P3riiNLzGhJJRLycTgsx4ixaxydJWtZvcomCaE7lJCUSJrFSUIYmXXhepGqcsnem2ENwQJ_-F_zzoAwzgVN8kTyQcZ_RWyrFkVq0z--Rdjs9ltyvdfJ-M" width="100%" height="100%"><p> | <p><img src="https://lh7-us.googleusercontent.com/uzhjy9oIYAhZu54i9KX8HpnnT2lvBd7UgiiiVZzkPkHOJsfbFdwfPGQDTIoXXaZg2QD6x1DpuGQKnG7GFTLM1kMOSKAA38YzCfAAsijm1bTmNpZl4nCMFHvy3x9lYwyR-3T0_kAiiFkbJppUgbJo5V0" width="100%" height="100%"><p> |
+
+
 
 
 
