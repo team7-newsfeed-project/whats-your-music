@@ -163,6 +163,17 @@
 - 모든 커밋 메세지는 { **[타입/#이슈번호] 메세지** } 로 작성합니다.
 - ex) [Feat/#1] add splash screen
 
+
+**프로젝트 운영 방식 및 Rules 예시**
+
+| 프로젝트 운영 방식                                   | 예시                                                        |
+| ---------------------------------------------------- | ----------------------------------------------------------- |
+| commit 전 깃 허브 페이지 이슈 생성 후 이슈 번호 생성 | github page - new issue - ( # 번호 ) 얻어오기               |
+| terminal commit 시 얻어온 이슈번호 넣어 커밋하기     | git commit -m [feat/#1] 초기 설정 완료                      |
+| .prettierrc 를 통한 환경 통일                        | "singleQuote": false, "tabWidth": 4, "printWidth": 100 .... |
+
+
+
 <br />
 
 <br />
@@ -256,7 +267,7 @@ $ yarn run start
   - Branch 만들어 작업하기
 
   <p><img src="https://lh7-us.googleusercontent.com/xhdcTByYIBgiz0vsW2XL0SGaOhmzceLBsAl-seKnruy1dljCH5MIG4kUM71UzkJmO3K4LUWPu4AHAu06651rS0Xm56l26UwJjxckNOs1luHvBHOlOw07XkByu200iF9Z-4uXjtc7aVGu8DFdLZ5nmVI" align="center" width="30%" height="30%" ></p>
-
+  
 
 
 <br />
