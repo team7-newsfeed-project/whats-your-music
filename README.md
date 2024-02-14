@@ -308,7 +308,7 @@ $ yarn run start
 <div>
   <p><img src="https://github.com/team7-newsfeed-project/whats-your-music/assets/152264010/0536081e-882b-4d5c-a338-83755724814c" width="150px" align="left"/><p>
   <p><img src="https://github.com/team7-newsfeed-project/whats-your-music/assets/152264010/b1ca8fc4-8199-4121-b4ba-55d3f9ccf460" width="150px" align="left"/><p>
-  <p><img src="https://github.com/team7-newsfeed-project/whats-your-music/assets/152264010/de159255-5f19-42ce-87ca-c1f272701be5" width="150px" align="left"/><p>
+  <p><img src="https://github.com/team7-newsfeed-project/whats-your-music/assets/152264010/f267521e-8486-43e4-b2d9-806fd739b84b" width="150px" align="left"/><p>
   <p><img src="https://github.com/team7-newsfeed-project/whats-your-music/assets/152264010/048a3ecf-0e04-4edc-ade6-da9a159c67e1" width="150px" align="left"/><p>
   <p><img src="https://github.com/team7-newsfeed-project/whats-your-music/assets/152264010/dfed4873-5374-47ff-a011-2ee94e9bf244" width="150px" align="left"/><p>
 </div>
