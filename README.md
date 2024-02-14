@@ -2,7 +2,7 @@
 
 ### < 목차 >
 
-**# 프로젝트 팀 "N을 품은 S"소개**
+**# 프로젝트 팀 "🌞N을 품은 S🌝"소개**
 
 - 팀원소개
 
@@ -31,7 +31,7 @@
 
 <br />
 
-## 프로젝트 팀 "N을 품은 S" 소개
+## 프로젝트 팀 "🌞N을 품은 S🌝" 소개
 
 <br />
 
@@ -44,7 +44,7 @@
 |                             ISTJ                             |                             INFJ                             |                             INFJ                             |                          Enfj, Infp                          |
 | <p><img src="https://lh7-us.googleusercontent.com/PPN7d0d5c2iPpzSRhGZt6NVCwwQP2FJRLmsvZcO0rE5YkuFH6mPMYzHLljEt2wf0JcKGKJ0DKQMwHckPyrOws9M_Nr76JXsxNRr7bcdIWnqM-N1Mgp2uh7Y5GshOMHvrRVmkXcspfYPeVScQzDQCaBM" width="380px" height="150px"/></p> | <p><img src="https://ca.slack-edge.com/T06B9PCLY1E-U06B4G4S0P3-7aba083ae42a-512" width="340px" height="150px"/></p> | <p><img src="https://lh7-us.googleusercontent.com/gaHoNwJlfS1-lgSPODe8vspDZeTZALaNk37cGs87wUznYnYG8P_K_0xdp_ElPmYC52P4znqL8TujyQ3u614d6AbE_gKdAQdlKNNuM6Brvqd9hydvoNXTyGj0YU6vmkX2ynYLPEG797LTypKwcemWjiA" width="300px" height="150px"/></p> | <p><img src="https://lh7-us.googleusercontent.com/Ysape_5NRn4N32ZU7oOgrQmrfIAjTdQXKka5lOI6M6JxrEWg48DNhLQEXET56SbLP6f4CEJsn5RpDDoHgM9m6eDLyUolLBdP_xbLnp0gftdJg0hYUrKGwSXXVQxNO02AiSTl_4Wp0nHn9CSfQBblXhM" width="360px" height="150px"/></p> |
 |          [@gggimmmin](https://github.com/gggimmmin)          |       [@Hyeryeon-Seo](https://github.com/Hyeryeon-Seo)       |            [@baram55](https://github.com/baram55)            |          [@r03181231](https://github.com/r03181231)          |
-|                             팀장                             |                             팀원                             |                             팀원                             |                             팀원                             |
+|                             🌝팀장                             |                             🌞팀원                             |                             🌞팀원                             |                             🌞팀원                             |
 |                           FrontEnd                           |                           FrontEnd                           |                           FrontEnd                           |                           FrontEnd                           |
 
 <br />
@@ -53,7 +53,7 @@
 
 
 
-**팀 목표** 
+**🌝팀 목표🌝** 
 
 ---
 
@@ -168,7 +168,7 @@
 <br />
 
 
-## 시작 가이드
+## 🚩시작 가이드
 
 
 
@@ -183,7 +183,7 @@ $ yarn run start
 
 <br />
 
-## 와이어 프레임
+## 🎨 와이어 프레임
 
 <br />
 
@@ -203,7 +203,7 @@ $ yarn run start
 <br />
 <br />
 
-## 프로젝트 화면 구성 및 기능
+## 🖼 프로젝트 화면 구성 및 기능
 
 <br />
 
