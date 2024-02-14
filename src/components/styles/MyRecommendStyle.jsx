@@ -98,7 +98,7 @@ export const RecommendTitleNdContentDiv = styled.div`
     flex-direction: column;
 
     margin-top: 18px;
-    /* margin-bottom: 10px; */
+
     gap: 12px;
 `;
 
