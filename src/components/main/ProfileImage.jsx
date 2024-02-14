@@ -11,11 +11,22 @@ import * as Pi from "components/styles/ProfileImageStyle";
 
 const ProfileImage = () => {
     const dispatch = useDispatch();
-    const { email } = useSelector((store) => store.userAccount);
+    // const { email } = useSelector((store) => store.userAccount);
     const selectFile = useSelector((store) => store.userImage.selectFile);
     const thumnailImg = useSelector((store) => store.userImage.thumnailImg);
     const myPageUser = useSelector((store) => store.userAccount);
     const [isEdit, setEdit] = useState(false);
+    const { email } = useSelector((store) => store.userAccount);
+
+    // useEffect(() => {
+    //     if (isLoggedIn) {
+    //         if (image) {
+    //             dispatch(setThumnailImg(image));
+    //         } else {
+    //             dispatch(setThumnailImg(defaultImage));
+    //         }
+    //     }
+    // }, [dispatch]);
 
     const currEmail = email ? email : null;
     const handleUpload = async () => {
@@ -46,7 +57,7 @@ const ProfileImage = () => {
         } else {
             alert("사진 등록이 완료됐습니다.");
         }
-        dispatch(setThumnailImg(downloadURL));
+        // dispatch(setThumnailImg(downloadURL));
         dispatch(setAccount({ image: downloadURL }));
         // 새로운 사진 업데이트 후 이미지 수정 종료
         setEdit(false);

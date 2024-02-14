@@ -53,5 +53,11 @@ const Iframe = styled.iframe`
                 height: 400px;
             `;
         }
+        if (props.$type === "RecoMusic") {
+            return css`
+                width: 302px;
+                height: 150px;
+            `;
+        }
     }}
 `;
