@@ -102,6 +102,7 @@ const LogIn = () => {
             user = result.user;
         } catch (error) {
             alert("로그인에 실패했습니다.");
+            console.log(error.code, error.message);
             return;
         }
 
